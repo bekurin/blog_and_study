@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Coffee
+  - Employee
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Employee
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 4032582619
+    locked: 0
+  - name: Desk
+    uniqueID: 2402520761
+    locked: 0
+  - name: Character
+    uniqueID: 2053548597
+    locked: 0
+  - name: Chair
+    uniqueID: 3348965069
+    locked: 0
+  - name: Coffee
+    uniqueID: 2893479667
+    locked: 0
