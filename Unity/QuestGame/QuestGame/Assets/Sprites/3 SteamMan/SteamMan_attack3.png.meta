@@ -1,0 +1,353 @@
+fileFormatVersion: 2
+guid: d856f2769a1d21444857ef801265a8b2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7250952601496061039
+    second: SteamMan_attack3_0
+  - first:
+      213: -9002925739282966823
+    second: SteamMan_attack3_1
+  - first:
+      213: 5149447772470054211
+    second: SteamMan_attack3_2
+  - first:
+      213: -8789970980831351822
+    second: SteamMan_attack3_3
+  - first:
+      213: -6809535440850751497
+    second: SteamMan_attack3_4
+  - first:
+      213: 4348424676986546787
+    second: SteamMan_attack3_5
+  - first:
+      213: 3601459814901063435
+    second: SteamMan_attack3_6
+  - first:
+      213: -8015092457185869450
+    second: SteamMan_attack3_7
+  - first:
+      213: 3411692820327363828
+    second: SteamMan_attack3_8
+  - first:
+      213: 1136298920341091913
+    second: SteamMan_attack3_9
+  - first:
+      213: 829934911780238952
+    second: SteamMan_attack3_10
+  - first:
+      213: 1658824294420328361
+    second: SteamMan_attack3_11
+  - first:
+      213: -5121856139588148810
+    second: SteamMan_attack3_12
+  - first:
+      213: 629004912024256236
+    second: SteamMan_attack3_13
+  - first:
+      213: 8321028167390945483
+    second: SteamMan_attack3_14
+  - first:
+      213: 4770262319911321236
+    second: SteamMan_attack3_15
+  - first:
+      213: -8419313256329397864
+    second: SteamMan_attack3_16
+  - first:
+      213: -8768829337085160083
+    second: SteamMan_attack3_17
+  - first:
+      213: -4128520820402342724
+    second: SteamMan_attack3_18
+  - first:
+      213: 7228133228770701011
+    second: SteamMan_attack3_19
+  - first:
+      213: 6217291389419602786
+    second: SteamMan_attack3_20
+  - first:
+      213: -3353955687762910071
+    second: SteamMan_attack3_21
+  - first:
+      213: 523677992857702490
+    second: SteamMan_attack3_22
+  - first:
+      213: -6723342720464235239
+    second: SteamMan_attack3_23
+  - first:
+      213: -640564691552956813
+    second: SteamMan_attack3_24
+  - first:
+      213: 1001731348980682688
+    second: SteamMan_attack3_25
+  - first:
+      213: 7036608140787776744
+    second: SteamMan_attack3_26
+  - first:
+      213: -1180564498977857747
+    second: SteamMan_attack3_27
+  - first:
+      213: 464141358597288321
+    second: SteamMan_attack3_28
+  - first:
+      213: -3271351234530114681
+    second: SteamMan_attack3_29
+  - first:
+      213: -8627867915999216119
+    second: SteamMan_attack3_30
+  - first:
+      213: -5549335405088633688
+    second: SteamMan_attack3_31
+  - first:
+      213: 3656231510542655611
+    second: SteamMan_attack3_32
+  - first:
+      213: 1237218758830761111
+    second: SteamMan_attack3_33
+  - first:
+      213: -8017864782942706859
+    second: SteamMan_attack3_34
+  - first:
+      213: 5168600585219042151
+    second: SteamMan_attack3_35
+  - first:
+      213: -6755503980556162398
+    second: SteamMan_attack3_36
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SteamMan_attack3_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19bf1a0b6017f5b90800000000000000
+      internalID: -7250952601496061039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamMan_attack3_1
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d651da5dbe2f0380800000000000000
+      internalID: -9002925739282966823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamMan_attack3_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34d01835773867740800000000000000
+      internalID: 5149447772470054211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamMan_attack3_3
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fb2e85d6ffb30680800000000000000
+      internalID: -8789970980831351822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamMan_attack3_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ff68a2589baf71a0800000000000000
+      internalID: -6809535440850751497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamMan_attack3_5
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36a635c6435b85c30800000000000000
+      internalID: 4348424676986546787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
