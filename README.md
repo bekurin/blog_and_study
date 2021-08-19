@@ -1,18 +1,3 @@
 # blog-and-study
 
-- ### Django
-- ### React
-  - GoogleClone
-  - InstagramClone
-  - MovieApp
-  - NetfilxClone
-  - TwitterClone
-- ### Spring-Boot
-  - hello-spring
-  - jpashop
-- ### Unity
-  - CatGame
-  - ClickerProject
-  - CombatSystem
-  - QuestGame
-  - ThiefAndGuard
+블로그랑 개인 공부에 사용되었던 코드들을 저장하는 저장소입니다. 
