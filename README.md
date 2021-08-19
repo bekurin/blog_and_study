@@ -1,2 +1,18 @@
-# blog
-블로그에 사용한 코드와 개인적인 공부 코드를 정리하는 저장소입니다.
+# blog-and-study
+
+- ### Django
+- ### React
+  - GoogleClone
+  - InstagramClone
+  - MovieApp
+  - NetfilxClone
+  - TwitterClone
+- ### Spring-Boot
+  - hello-spring
+  - jpashop
+- ### Unity
+  - CatGame
+  - ClickerProject
+  - CombatSystem
+  - QuestGame
+  - ThiefAndGuard
