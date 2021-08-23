@@ -26,13 +26,13 @@ public class OrderApiController {
 
     @GetMapping("/api/v1/orders")
     public List<Order> ordersV1() {
-        List<Order> all = orderRepository.findAllByCriteria(new OrderSearch());
+        List<Order> all = orderRepository.findAll(new OrderSearch());
         return all;
     }
 
     @GetMapping("/api/v2/orders")
     public List<OrderDto> ordersV2() {
-        List<Order> orders = orderRepository.findAllByCriteria(new OrderSearch());
+        List<Order> orders = orderRepository.findAll(new OrderSearch());
         List<OrderDto> result = orders.stream()
                 .map(o -> new OrderDto(o))
                 .collect(Collectors.toList());

@@ -32,7 +32,7 @@ public class OrderSimpleApiController {
     @GetMapping("/api/v1/simple-orders")
     public List<Order> ordersV1() {
         // 양방향 연관 관계에 있는 경우 무한루프에 빠져 원하는 데이터가 나오지 않음
-        List<Order> all = orderRepository.findAllByCriteria(new OrderSearch());
+        List<Order> all = orderRepository.findAll(new OrderSearch());
         return all;
     }
 
@@ -40,7 +40,7 @@ public class OrderSimpleApiController {
     public List<SimpleOrderDto> ordersV2() {
         // ORDER 2개
         // 1 + 회원 N + 배송 N 번의 퀴리 생성
-        List<Order> orders = orderRepository.findAllByCriteria(new OrderSearch());
+        List<Order> orders = orderRepository.findAll(new OrderSearch());
 
         List<SimpleOrderDto> result = orders.stream()
                 .map(o -> new SimpleOrderDto(o))
