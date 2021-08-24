@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02931840-52ce-453a-8063-98c6e84de296" name="Changes" comment="4. 회원 서비스, 리포지토리 개발">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jpashop.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dsd.md" beforeDir="false" />
-    </list>
+    <list default="true" id="02931840-52ce-453a-8063-98c6e84de296" name="Changes" comment="4. 회원 서비스, 리포지토리 개발" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
