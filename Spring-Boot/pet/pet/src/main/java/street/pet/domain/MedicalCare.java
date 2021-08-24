@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Getter
-public class MedicalCare {
+public class MedicalCare extends BaseTimeEntity{
 
     @Id @GeneratedValue
     @Column(name = "medical_care_id")

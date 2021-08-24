@@ -14,7 +14,7 @@ import static javax.persistence.FetchType.LAZY;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Pet {
+public class Pet extends BaseTimeEntity{
 
     @Id @GeneratedValue
     @Column(name = "pet_id")

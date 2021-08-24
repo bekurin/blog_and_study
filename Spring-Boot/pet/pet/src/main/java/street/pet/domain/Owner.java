@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Owner {
+public class Owner extends BaseTimeEntity{
 
     @Id @GeneratedValue
     @Column(name = "owner_id")

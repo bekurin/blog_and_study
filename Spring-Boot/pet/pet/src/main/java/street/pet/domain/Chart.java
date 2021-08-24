@@ -8,7 +8,7 @@ import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
-public class Chart {
+public class Chart extends BaseTimeEntity{
 
     @Id @GeneratedValue
     @Column(name = "hospitalization_id")
@@ -23,6 +23,8 @@ public class Chart {
     private Vet vet;
 
     private String diseaseName;
+
+    private String description;
 
     @Embedded
     private Address address;
