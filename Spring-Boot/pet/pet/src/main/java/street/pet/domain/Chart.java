@@ -1,6 +1,8 @@
 package street.pet.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -8,6 +10,7 @@ import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Chart extends BaseTimeEntity{
 
     @Id @GeneratedValue
@@ -31,4 +34,8 @@ public class Chart extends BaseTimeEntity{
 
     @Enumerated(EnumType.STRING)
     private ChartStatus status; // READY, ADMISSION, DISCHARGE
+
+    public void setPet(Pet pet) {
+        this.pet = pet;
+    }
 }

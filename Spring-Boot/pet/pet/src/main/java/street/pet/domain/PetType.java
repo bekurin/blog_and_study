@@ -21,4 +21,8 @@ public class PetType extends BaseTimeEntity{
 
     @OneToOne(mappedBy = "petType", fetch = LAZY)
     private Pet pet;
+
+    public void setPet(Pet pet) {
+        this.pet = pet;
+    }
 }

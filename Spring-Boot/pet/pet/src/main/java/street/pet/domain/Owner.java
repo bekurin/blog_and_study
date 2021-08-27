@@ -1,6 +1,7 @@
 package street.pet.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,4 +26,14 @@ public class Owner extends BaseTimeEntity{
 
     @OneToMany(mappedBy = "owner")
     private List<Pet> pet = new ArrayList<>();
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Builder
+    public Owner(String name, Address address){
+        this.name = name;
+        this.address = address;
+    }
 }
