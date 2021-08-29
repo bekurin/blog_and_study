@@ -5,23 +5,22 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+import street.pet.AutoAppConfig;
 import street.pet.domain.Address;
 import street.pet.domain.Owner;
 import street.pet.repository.OwnerRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@Transactional
 class OwnerServiceTest {
 
-    @Autowired
-    OwnerService ownerService;
-    @Autowired
-    OwnerRepository ownerRepository;
+    ApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class);
+    private final OwnerService ownerService = ac.getBean(OwnerService.class);
+    private final OwnerRepository ownerRepository = ac.getBean(OwnerRepository.class);
 
     @Test
     @DisplayName("Join() 테스트")
@@ -35,7 +34,7 @@ class OwnerServiceTest {
         Long ownerId = ownerService.join(owner);
 
         //then
-        assertThat(owner).isEqualTo(ownerService.findOne(ownerId));
+        assertThat("userA").isEqualTo(ownerService.findOne(ownerId).getName());
     }
 
     @Test

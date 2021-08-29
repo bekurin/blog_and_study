@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import street.pet.domain.Address;
 import street.pet.domain.Owner;
 
-import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 
 @Component
@@ -15,9 +14,8 @@ public class InitDb {
 
     private final InitService initService;
 
-    @PostConstruct
     public void init(){
-//        initService.dbInit1();
+        initService.dbInit1();
     }
 
     @Component
