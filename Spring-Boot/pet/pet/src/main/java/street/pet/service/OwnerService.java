@@ -34,7 +34,7 @@ public class OwnerService {
     }
 
     /**
-     * 회원 전체 조회
+     * 회원 조회
      */
     public List<Owner> findOwners() {
         return ownerRepository.findAll();
@@ -44,6 +44,9 @@ public class OwnerService {
         return ownerRepository.findOne(ownerId);
     }
 
+    /**
+     * 회원 이름 변경
+     */
     @Transactional
     public void update(Long id, String name){
         Owner owner = ownerRepository.findOne(id);
