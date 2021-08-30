@@ -43,6 +43,10 @@ public class Pet extends BaseTimeEntity{
         owner.getPet().add(this);
     }
 
+    void setName(String name){
+        this.name = name;
+    }
+
     void setPetType(PetType petType) {
         this.petType = petType;
         petType.setPet(this);
@@ -58,11 +62,12 @@ public class Pet extends BaseTimeEntity{
     }
 
     //== 비즈니스 로직 ==//
-    public static Pet createPet(Owner owner, PetType petType, LocalDate birthDate, Chart ...charts){
+    public static Pet createPet(Owner owner, PetType petType, LocalDate birthDate, String name, Chart ...charts){
         Pet pet = new Pet();
         pet.setOwner(owner);
         pet.setPetType(petType);
         pet.setBirthDate(birthDate);
+        pet.setName(name);
 
         for (Chart chart : charts) {
             pet.addChart(chart);
