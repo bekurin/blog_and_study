@@ -11,13 +11,14 @@ import static javax.persistence.FetchType.LAZY;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PetType extends BaseTimeEntity{
+public class Diagnosis extends BaseTimeEntity{
 
     @Id @GeneratedValue
     @Column(name = "pet_type_id")
     private Long id;
 
-    private String description;
+    @Enumerated(EnumType.STRING)
+    private DiagnosisStatus status;
 
     @OneToOne(mappedBy = "petType", fetch = LAZY)
     private Pet pet;
