@@ -24,6 +24,8 @@ public class Pet extends BaseTimeEntity{
 
     private LocalDate birthDate; // 생일
 
+    private String name;
+
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "owner_id")
     private Owner owner;
