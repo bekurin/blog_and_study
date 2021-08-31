@@ -14,13 +14,13 @@ import static javax.persistence.FetchType.LAZY;
 public class Diagnosis extends BaseTimeEntity{
 
     @Id @GeneratedValue
-    @Column(name = "pet_type_id")
+    @Column(name = "diagnosis_id")
     private Long id;
 
     @Enumerated(EnumType.STRING)
     private DiagnosisStatus status;
 
-    @OneToOne(mappedBy = "petType", fetch = LAZY)
+    @OneToOne(mappedBy = "diagnosis", fetch = LAZY)
     private Pet pet;
 
     public void setPet(Pet pet) {

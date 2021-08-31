@@ -3,22 +3,22 @@ package street.pet.domain;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.apache.tomcat.jni.Local;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
-@Getter
+@Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Pet extends BaseTimeEntity{
+public class Pet extends BaseTimeEntity {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "pet_id")
     private Long id;
 
@@ -34,40 +34,35 @@ public class Pet extends BaseTimeEntity{
     private List<Chart> charts = new ArrayList<>();
 
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "pet_type_id")
-    private PetType petType;
+    @JoinColumn(name = "diagnosis_id")
+    private Diagnosis diagnosis;
+
+    @Enumerated(EnumType.STRING)
+    private PetStatus status;
 
     //== 연관 관계 메서드 ==//
     void setOwner(Owner owner) {
         this.owner = owner;
-        owner.getPet().add(this);
+        owner.getPets().add(this);
     }
 
-    void setName(String name){
-        this.name = name;
+    void setDiagnosis(Diagnosis diagnosis) {
+        this.diagnosis = diagnosis;
+        diagnosis.setPet(this);
     }
 
-    void setPetType(PetType petType) {
-        this.petType = petType;
-        petType.setPet(this);
-    }
-
-    void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    void addChart(Chart chart){
+    void addChart(Chart chart) {
         charts.add(chart);
         chart.setPet(this);
     }
 
     //== 비즈니스 로직 ==//
-    public static Pet createPet(Owner owner, PetType petType, LocalDate birthDate, String name, Chart ...charts){
+    public static Pet createPet(Owner owner, Diagnosis diagnosis, LocalDate birthDate, String name, Chart... charts) {
         Pet pet = new Pet();
         pet.setOwner(owner);
-        pet.setPetType(petType);
         pet.setBirthDate(birthDate);
         pet.setName(name);
+        pet.setStatus(PetStatus.DIAGNOSIS);
 
         for (Chart chart : charts) {
             pet.addChart(chart);
@@ -75,4 +70,14 @@ public class Pet extends BaseTimeEntity{
         return pet;
     }
 
+    /**
+     * 진료 취소
+     */
+    public void cancel() {
+        if (diagnosis.getStatus() == DiagnosisStatus.COMPLETE) {
+            throw new IllegalStateException("진료가 끝난 예약은 취소가 불가능합니다.");
+        }
+
+        this.setStatus(PetStatus.CANCEL);
+    }
 }

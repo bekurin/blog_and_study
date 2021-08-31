@@ -25,7 +25,7 @@ public class Owner extends BaseTimeEntity{
     private Address address;
 
     @OneToMany(mappedBy = "owner")
-    private List<Pet> pet = new ArrayList<>();
+    private List<Pet> pets = new ArrayList<>();
 
     public void setName(String name) {
         this.name = name;
