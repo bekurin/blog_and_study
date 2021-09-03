@@ -1,5 +1,5 @@
 package street.pet.domain;
 
 public enum ChartStatus {
-    READY, ADMISSION, COMPLETE
+    READY, ACCESS, COMPLETE
 }
