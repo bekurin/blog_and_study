@@ -28,7 +28,7 @@ public class Member extends BaseTimeEntity {
     private Address address;
 
     //== 비즈니스 로직 ==//
-    public static Member crateMember(String name, String phone, Address address){
+    public static Member createMember(String name, String phone, Address address){
         Member member = new Member();
         member.name = name;
         member.phone = phone;

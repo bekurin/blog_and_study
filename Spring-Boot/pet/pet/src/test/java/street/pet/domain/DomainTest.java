@@ -88,7 +88,7 @@ public class DomainTest {
 
     //== 생성 메서드 ==//
     private Member createMember(String name, String phone, Address address) {
-        return Member.crateMember(name, phone, address);
+        return Member.createMember(name, phone, address);
     }
 
     private Address createAddress(String city, String street, String zipcode) {

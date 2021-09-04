@@ -21,7 +21,7 @@ public class MemberServiceTest {
     public void memberJoin() throws Exception {
         //given
         Address address = new Address("서울", "test", "644-9");
-        Member member = Member.crateMember("홍길동", "123-456-5484", address);
+        Member member = Member.createMember("홍길동", "123-456-5484", address);
 
         //when
         Long memberId = memberService.join(member);
@@ -36,8 +36,8 @@ public class MemberServiceTest {
     public void memberJoinFail() throws Exception {
         //given
         Address address = new Address("서울", "test", "644-9");
-        Member memberA = Member.crateMember("홍길동", "123-456-5484", address);
-        Member memberB = Member.crateMember("홍길동", "844-421-5432", address);
+        Member memberA = Member.createMember("홍길동", "123-456-5484", address);
+        Member memberB = Member.createMember("홍길동", "844-421-5432", address);
 
         //when
         memberService.join(memberA);
@@ -52,8 +52,8 @@ public class MemberServiceTest {
     public void findAll() throws Exception {
         //given
         Address address = new Address("서울", "test", "644-9");
-        Member memberA = Member.crateMember("홍길동", "123-456-5484", address);
-        Member memberB = Member.crateMember("아무개", "844-421-5432", address);
+        Member memberA = Member.createMember("홍길동", "123-456-5484", address);
+        Member memberB = Member.createMember("아무개", "844-421-5432", address);
 
         //when
         memberService.join(memberA);
@@ -68,7 +68,7 @@ public class MemberServiceTest {
     public void memberUpdate() throws Exception {
         //given
         Address address = new Address("서울", "test", "632-9");
-        Member member = Member.crateMember("홍길동", "123-456-5484", address);
+        Member member = Member.createMember("홍길동", "123-456-5484", address);
         Long memberId = memberService.join(member);
 
         //when

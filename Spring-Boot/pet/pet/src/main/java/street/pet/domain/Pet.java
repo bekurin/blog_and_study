@@ -40,9 +40,12 @@ public class Pet extends BaseTimeEntity {
         Pet pet = new Pet();
         pet.name = name;
         pet.birthDate = birthDate;
-
         pet.setMember(member);
 
         return pet;
+    }
+
+    public void update(String name){
+        this.name = name;
     }
 }
