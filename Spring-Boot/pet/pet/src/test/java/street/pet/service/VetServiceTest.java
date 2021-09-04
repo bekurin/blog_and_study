@@ -1,5 +1,6 @@
 package street.pet.service;
 
+import org.hibernate.Hibernate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -108,7 +109,4 @@ public class VetServiceTest {
         assertThat(vetService.findByDepartment(departmentA).size()).isEqualTo(1);
         assertThat(vetService.findByDepartment(departmentB).size()).isEqualTo(2);
     }
-
-
-
 }

@@ -16,7 +16,6 @@ import java.util.List;
 public class PetService {
 
     private final PetRepository petRepository;
-    private final MemberRepository memberRepository;
 
     /**
      * 반려동물 등록
