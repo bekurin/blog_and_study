@@ -19,4 +19,11 @@ public class Department extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "department")
     private List<Vet> vets = new ArrayList<>();
+
+    //== 비즈니스 로직 ==//
+    public static Department createDepartment(String name){
+        Department department = new Department();
+        department.name = name;
+        return department;
+    }
 }
