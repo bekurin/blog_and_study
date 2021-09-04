@@ -80,6 +80,8 @@ public class DomainTest {
 
         assertThat(chart.getPrescription()).isEqualTo(prescription);
         assertThat(chart.getPrescription().getChart()).isEqualTo(chart);
+
+        assertThat(chart.getStatus()).isEqualTo(ChartStatus.READY);
     }
 
 
