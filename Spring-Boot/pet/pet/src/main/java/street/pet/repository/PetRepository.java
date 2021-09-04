@@ -34,4 +34,11 @@ public class PetRepository {
                 .setParameter("name", name)
                 .getResultList();
     }
+
+    public List<Pet> findByMember(Member member){
+        return em.createQuery(
+                        "select p from Pet p where p.member = :member", Pet.class)
+                .setParameter("member", member)
+                .getResultList();
+    }
 }

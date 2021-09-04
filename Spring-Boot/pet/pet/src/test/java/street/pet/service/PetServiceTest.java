@@ -9,6 +9,7 @@ import street.pet.AutoAppConfig;
 import street.pet.domain.Address;
 import street.pet.domain.Member;
 import street.pet.domain.Pet;
+import street.pet.repository.PetRepository;
 
 import java.time.LocalDate;
 
@@ -43,6 +44,7 @@ public class PetServiceTest {
         Address address = new Address("부산", "바캉스", "123-4");
         Member member = Member.createMember("홍길동", "010-3232-4422", address);
 
+        System.out.println("member.getId() = " + member.getId());
         //when
         Pet pet = Pet.createPet("잔디", LocalDate.of(2020, 8, 1), member);
 
@@ -71,6 +73,25 @@ public class PetServiceTest {
     }
 
     @Test
+    @DisplayName("회원으로 반려동물 검색")
+    public void findByMember() throws Exception {
+        //given
+        Address address = new Address("경기", "테스트", "123-4");
+        Member member = Member.createMember("홍길동", "010-3232-4422", address);
+        memberService.join(member);
+
+        Pet petA = Pet.createPet("잔디", LocalDate.of(2020, 8, 1), member);
+        Pet petB = Pet.createPet("구름", LocalDate.of(2019, 4, 22), member);
+
+        //when
+        petService.join(petA);
+        petService.join(petB);
+
+        //then
+        assertThat(petService.findByMember(member).size()).isEqualTo(2);
+    }
+
+    @Test
     @DisplayName("반려동물 이름 수정 테스트")
     public void updateName() throws Exception {
         //given
@@ -82,7 +103,7 @@ public class PetServiceTest {
 
         //when
         Long petId = petService.join(pet);
-        petService.update(petId, "하늘");
+        petService.updatePet(petId, "하늘");
 
         //then
         assertThat(petService.findOne(petId).getName()).isEqualTo("하늘");

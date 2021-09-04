@@ -48,8 +48,8 @@ public class MemberService {
      * 회원 수정
      */
     @Transactional
-    public void update(Long id, String name, String phone, Address address){
+    public void updateMember(Long id, String phone, Address address){
         Member member = memberRepository.findOne(id);
-        member.updateMember(name, phone, address);
+        member.updateMember(phone, address);
     }
 }

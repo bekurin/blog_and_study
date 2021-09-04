@@ -29,8 +29,7 @@ public class PetService {
     }
 
     private void validateJoinedMember(Pet pet) {
-        List<Member> members = memberRepository.findByName(pet.getMember().getName());
-        if(members.isEmpty()){
+        if (pet.getMember().getId() == null){
             throw new IllegalStateException("등록된 회원만 반려동물을 등록할 수 있습니다.");
         }
     }
@@ -46,11 +45,15 @@ public class PetService {
         return petRepository.findOne(petId);
     }
 
+    public List<Pet> findByMember(Member member) {
+        return petRepository.findByMember(member);
+    }
+
     /**
      * 반려동물 정보 수정
      */
     @Transactional
-    public void update(Long petId, String name) {
+    public void updatePet(Long petId, String name) {
         Pet pet = petRepository.findOne(petId);
         pet.update(name);
     }

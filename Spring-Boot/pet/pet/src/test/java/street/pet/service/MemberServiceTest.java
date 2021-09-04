@@ -72,10 +72,9 @@ public class MemberServiceTest {
         Long memberId = memberService.join(member);
 
         //when
-        memberService.update(memberId, "아무개", "485-239-3498", address);
+        memberService.updateMember(memberId, "485-239-3498", address);
 
         //then
-        assertThat(memberService.findOne(memberId).getName()).isEqualTo("아무개");
         assertThat(memberService.findOne(memberId).getPhone()).isEqualTo("485-239-3498");
     }
 
