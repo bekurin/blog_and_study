@@ -66,10 +66,9 @@ public class DomainTest {
         Department department = Department.createDepartment("신경외과");
         Vet vet = createVet("안녕하세요 신경외과 전문의입니다.", "조태경", department);
 
-        Prescription prescription = Prescription.createPrescription("test Prescription");
 
         //when
-        Chart chart = Chart.createChart(vet, pet, prescription);
+        Chart chart = Chart.createChart(vet, pet);
 
         //then
         assertThat(chart.getPet()).isEqualTo(pet);
@@ -78,10 +77,18 @@ public class DomainTest {
         assertThat(chart.getVet()).isEqualTo(vet);
         assertThat(chart.getVet().getCharts().size()).isEqualTo(1);
 
-        assertThat(chart.getPrescription()).isEqualTo(prescription);
-        assertThat(chart.getPrescription().getChart()).isEqualTo(chart);
-
         assertThat(chart.getStatus()).isEqualTo(ChartStatus.READY);
+    }
+
+    @Test
+    @DisplayName("처방전 생성 테스트")
+    public void createPrescription() throws Exception {
+        //given
+
+
+        //when
+
+        //then
     }
 
 

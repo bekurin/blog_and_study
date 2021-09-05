@@ -16,20 +16,23 @@ public class Prescription extends BaseTimeEntity {
     @Column(name = "prescription_id")
     private Long id;
 
-    @OneToOne(mappedBy = "prescription", fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "chart_id")
     private Chart chart;
 
     private String description;
 
     //== 연관관계 메서드 ==//
-    public void setChart(Chart chart) {
+    private void setChart(Chart chart){
         this.chart = chart;
+        chart.getPrescription().add(this);
     }
 
     //== 비즈니스 로직 ==//
-    public static Prescription createPrescription(String description){
+    public static Prescription createPrescription(String description, Chart chart){
         Prescription prescription = new Prescription();
         prescription.description = description;
+        prescription.setChart(chart);
         return prescription;
     }
 }

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -26,9 +27,8 @@ public class Chart extends BaseTimeEntity {
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "prescription_id")
-    private Prescription prescription;
+    @OneToMany(mappedBy = "chart")
+    private List<Prescription> prescription;
 
     //== 연관관계 메서드 ==//
     public void setVet(Vet vet){
@@ -41,18 +41,19 @@ public class Chart extends BaseTimeEntity {
         pet.getCharts().add(this);
     }
 
-    public void setPrescription(Prescription prescription){
-        this.prescription = prescription;
-        prescription.setChart(this);
-    }
-
     //== 비즈니스 로직 ==//
-    public static Chart createChart(Vet vet, Pet pet, Prescription prescription){
+    public static Chart createChart(Vet vet, Pet pet){
         Chart chart = new Chart();
         chart.status = ChartStatus.READY;
         chart.setVet(vet);
         chart.setPet(pet);
-        chart.setPrescription(prescription);
         return chart;
+    }
+
+    public void cancel() {
+        if (status != ChartStatus.READY){
+            throw new IllegalStateException("접수된 차트느느 취소가 불가능합니다.");
+        }
+        this.status = ChartStatus.CANCEL;
     }
 }
