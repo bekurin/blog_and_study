@@ -30,7 +30,10 @@ public class Pet extends BaseTimeEntity {
     private List<Chart> charts = new ArrayList<>();
 
     //== 연관관계 메서드 ==//
-    public void setMember(Member member){
+    public void setMember(Member member) {
+        if (this.member != null) {
+            this.member.getPets().remove(this);
+        }
         this.member = member;
         member.getPets().add(this);
     }
@@ -45,7 +48,7 @@ public class Pet extends BaseTimeEntity {
         return pet;
     }
 
-    public void update(String name){
+    public void update(String name) {
         this.name = name;
     }
 }

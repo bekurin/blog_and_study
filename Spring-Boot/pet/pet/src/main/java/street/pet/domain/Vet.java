@@ -31,13 +31,16 @@ public class Vet extends BaseTimeEntity {
     private Department department;
 
     //== 연관관계 메서드 ==//
-    public void setDepartment(Department department){
+    public void setDepartment(Department department) {
+        if (this.department != null) {
+            this.department.getVets().remove(this);
+        }
         this.department = department;
         department.getVets().add(this);
     }
 
     //== 비즈니스 로직 ==//
-    public static Vet createVet(String description, String name, Department department){
+    public static Vet createVet(String description, String name, Department department) {
         Vet vet = new Vet();
         vet.description = description;
         vet.name = name;
@@ -46,7 +49,7 @@ public class Vet extends BaseTimeEntity {
         return vet;
     }
 
-    public void update(String name, Department department){
+    public void update(String name, Department department) {
         this.name = name;
         this.department = department;
     }

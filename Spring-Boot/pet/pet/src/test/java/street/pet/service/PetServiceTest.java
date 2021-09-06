@@ -44,7 +44,6 @@ public class PetServiceTest {
         Address address = new Address("부산", "바캉스", "123-4");
         Member member = Member.createMember("홍길동", "010-3232-4422", address);
 
-        System.out.println("member.getId() = " + member.getId());
         //when
         Pet pet = Pet.createPet("잔디", LocalDate.of(2020, 8, 1), member);
 

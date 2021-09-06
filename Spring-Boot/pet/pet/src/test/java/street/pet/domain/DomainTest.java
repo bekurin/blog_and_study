@@ -81,17 +81,32 @@ public class DomainTest {
     }
 
     @Test
-    @DisplayName("처방전 생성 테스트")
+    @DisplayName("Prescription 생성 테스트")
     public void createPrescription() throws Exception {
         //given
+        Address address = createAddress("경기", "테스트", "543-4");
+        Member member = createMember("김하준", "973-614-2124", address);
 
+        Pet pet = createPet("구름", LocalDate.of(2020, 9, 3), member);
+
+        Department department = Department.createDepartment("신경외과");
+        Vet vetA = createVet("안녕하세요 신경외과 전문의입니다.", "조태경", department);
+        Vet vetB = createVet("안녕하세요 신경외과 전문의입니다.", "하준석", department);
+
+        Chart chart = Chart.createChart(vetA, pet);
 
         //when
+        Prescription prescriptionA = createPrescription("처방 내역 1", chart, vetA);
+        Prescription prescriptionB = createPrescription("처방 내역 2", chart, vetB);
 
         //then
+        assertThat(chart.getPrescriptions().size()).isEqualTo(2);
+        assertThat(prescriptionA.getChart()).isEqualTo(chart);
+        assertThat(prescriptionA.getDescription()).isEqualTo(prescriptionA.getDescription());
+
+        assertThat(prescriptionA.getVet()).isEqualTo(vetA);
+        assertThat(prescriptionB.getVet()).isEqualTo(vetB);
     }
-
-
 
     //== 생성 메서드 ==//
     private Member createMember(String name, String phone, Address address) {
@@ -108,5 +123,9 @@ public class DomainTest {
 
     private Vet createVet(String description, String name, Department department) {
         return Vet.createVet(description, name, department);
+    }
+
+    private Prescription createPrescription(String description, Chart chart, Vet vet) {
+        return Prescription.createPrescription(description, chart, vet);
     }
 }
