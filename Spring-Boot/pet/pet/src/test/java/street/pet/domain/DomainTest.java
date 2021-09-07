@@ -72,10 +72,7 @@ public class DomainTest {
 
         //then
         assertThat(chart.getPet()).isEqualTo(pet);
-        assertThat(chart.getPet().getCharts().size()).isEqualTo(1);
-
         assertThat(chart.getVet()).isEqualTo(vet);
-        assertThat(chart.getVet().getCharts().size()).isEqualTo(1);
 
         assertThat(chart.getStatus()).isEqualTo(ChartStatus.READY);
     }

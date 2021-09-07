@@ -26,9 +26,6 @@ public class Pet extends BaseTimeEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "pet")
-    private List<Chart> charts = new ArrayList<>();
-
     //== 연관관계 메서드 ==//
     public void setMember(Member member) {
         if (this.member != null) {

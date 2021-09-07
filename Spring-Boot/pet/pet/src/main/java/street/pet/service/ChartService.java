@@ -11,6 +11,8 @@ import street.pet.repository.ChartRepository;
 import street.pet.repository.PetRepository;
 import street.pet.repository.VetRepository;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor

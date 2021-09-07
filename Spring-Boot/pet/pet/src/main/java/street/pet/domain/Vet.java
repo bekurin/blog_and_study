@@ -23,9 +23,6 @@ public class Vet extends BaseTimeEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "vet")
-    private List<Chart> charts = new ArrayList<>();
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     private Department department;
