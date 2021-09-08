@@ -42,7 +42,7 @@ public class Chart extends BaseTimeEntity {
 
     public void cancel() {
         if (status != ChartStatus.READY) {
-            throw new IllegalStateException("접수된 차트느느 취소가 불가능합니다.");
+            throw new IllegalStateException("접수가 완료된 차트는 취소가 불가능합니다.");
         }
         this.status = ChartStatus.CANCEL;
     }
