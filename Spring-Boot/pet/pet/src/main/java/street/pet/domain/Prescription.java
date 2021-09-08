@@ -43,4 +43,8 @@ public class Prescription extends BaseTimeEntity {
         prescription.setChart(chart);
         return prescription;
     }
+
+    public void update(String description){
+        this.description = description;
+    }
 }
