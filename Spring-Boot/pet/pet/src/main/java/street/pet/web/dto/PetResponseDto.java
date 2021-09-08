@@ -1,4 +1,4 @@
-package street.pet.api.dto;
+package street.pet.web.dto;
 
 import street.pet.domain.Pet;
 
