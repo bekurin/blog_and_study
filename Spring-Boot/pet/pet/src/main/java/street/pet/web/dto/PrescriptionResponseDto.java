@@ -9,13 +9,13 @@ import java.time.LocalDateTime;
 public class PrescriptionResponseDto {
 
     private String description;
-    private VetResponseDto vet;
+    private String doctor;
     private LocalDateTime create_date;
     private LocalDateTime update_date;
 
     public PrescriptionResponseDto(Prescription entity) {
+        doctor = entity.getVet().getName();
         description = entity.getDescription();
-        vet = new VetResponseDto(entity.getVet());
         create_date = entity.getCreateDate();
         update_date = entity.getUpdateDate();
     }

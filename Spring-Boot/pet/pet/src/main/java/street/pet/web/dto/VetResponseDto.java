@@ -6,11 +6,11 @@ import street.pet.domain.Vet;
 @Data
 public class VetResponseDto {
 
-    private String name;
+    private String doctor;
     private String departmentName;
 
     public VetResponseDto(Vet entity) {
-        name = entity.getName();
+        doctor = entity.getName();
         departmentName = entity.getDepartment().getName();
     }
 }

@@ -93,7 +93,7 @@ public class InitDB {
             Vet vetB = getVet(vetIds, "vetB");
             Vet vetC = getVet(vetIds, "vetC");
 
-            Chart chart = createChart(vetB, petA);
+            Chart chart = createChart(vetA, petA);
             em.persist(chart);
 
             Prescription testA = createPrescription("테스트A", chart, vetA);
