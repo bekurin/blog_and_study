@@ -1,10 +1,12 @@
 package street.pet.web.dto;
 
+import lombok.Data;
 import street.pet.domain.Department;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Data
 public class DepartmentResponseDto {
 
     private Long id;

@@ -1,11 +1,13 @@
 package street.pet.web.dto;
 
+import lombok.Data;
 import street.pet.domain.Address;
 import street.pet.domain.Member;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Data
 public class MemberResponseDto {
 
     private Long id;

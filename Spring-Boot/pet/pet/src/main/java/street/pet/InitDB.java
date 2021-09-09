@@ -12,10 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /** 멤버 2명 생성
- *  홍길동 - userA
+ *  조창석 - userA
  *     - 하늘 - petA
  *     - 구름 - petB
- *  아무개 - userB
+ *  정민 - userB
  *     - 잔디 - petC
  *
  *  수의사 2명 생성
@@ -74,7 +74,7 @@ public class InitDB {
         }
 
         public void dbInit1(Map<String, Long> vetIds) {
-            Member member = createMember("홍길동", "010-1324-4432", "서울", "테스트", "123-4");
+            Member member = createMember("조창석", "010-1324-4432", "서울", "테스트", "123-4");
             em.persist(member);
 
             Pet petA = createPet("하늘", LocalDate.of(2019, 8, 13), member);
@@ -100,7 +100,7 @@ public class InitDB {
         }
 
         public void dbInit2(Map<String, Long> vetIds) {
-            Member member = createMember("아무개", "010-7654-1298", "인천", "테스트", "654-1");
+            Member member = createMember("정민", "010-7654-1298", "인천", "테스트", "654-1");
             em.persist(member);
 
             Pet petC = createPet("잔디", LocalDate.of(2017, 12, 18), member);
