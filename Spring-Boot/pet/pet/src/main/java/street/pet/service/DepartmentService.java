@@ -26,7 +26,7 @@ public class DepartmentService {
     private void validateDuplicatedName(Department department) {
         List<Department> findDepartment = departmentRepository.findByName(department.getName());
         if(!findDepartment.isEmpty()){
-            throw new IllegalStateException("중복 이름입니다.");
+            throw new IllegalStateException("이미 존재하는 부서 이름입니다.");
         }
     }
 

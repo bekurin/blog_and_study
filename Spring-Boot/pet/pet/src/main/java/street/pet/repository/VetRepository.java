@@ -45,4 +45,20 @@ public class VetRepository {
                 .setParameter("department", department)
                 .getResultList();
     }
+
+    public List<Vet> findAllWithDepartment(){
+        return em.createQuery(
+                "select v from Vet v" +
+                        " join fetch v.department d", Vet.class)
+                .getResultList();
+    }
+
+    public List<Vet> findByIdWithDepartment(Long id) {
+        return em.createQuery(
+                "select v from Vet v" +
+                        " join fetch v.department d" +
+                        " where v.id = :id")
+                .setParameter("id", id)
+                .getResultList();
+    }
 }
