@@ -3,6 +3,8 @@ package street.pet.repository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import street.pet.domain.Chart;
+import street.pet.domain.Pet;
+import street.pet.domain.Vet;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -43,6 +45,26 @@ public class ChartRepository {
                                 " join fetch c.pet p" +
                                 " join fetch c.vet v" +
                                 " where c.id = :id", Chart.class)
+                .setParameter("id", id)
+                .getResultList();
+    }
+
+    public List<Chart> findByVetWithPetVet(Long id) {
+        return em.createQuery(
+                        "select c from Chart c" +
+                                " join fetch c.pet p" +
+                                " join fetch c.vet v" +
+                                " where c.vet.id = :id", Chart.class)
+                .setParameter("id", id)
+                .getResultList();
+    }
+
+    public List<Chart> findByPetWithPetVet(Long id) {
+        return em.createQuery(
+                        "select c from Chart c" +
+                                " join fetch c.pet p" +
+                                " join fetch c.vet v" +
+                                " where c.pet.id = :id", Chart.class)
                 .setParameter("id", id)
                 .getResultList();
     }

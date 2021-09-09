@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import street.pet.domain.Chart;
 import street.pet.repository.ChartRepository;
+import street.pet.repository.PetRepository;
+import street.pet.repository.VetRepository;
 import street.pet.web.dto.ChartResponseDto;
 
 import java.util.List;
@@ -31,11 +33,33 @@ public class ChartApiController extends BaseApiController{
 
     @GetMapping("/api/v1/chart")
     public Result chartV1(
-            @RequestParam(name = "id", defaultValue = "0") Long id) {
+            @RequestParam(name = "id") Long id) {
         List<Chart> charts = chartRepository.findByIdWithPetVet(id);
         List<ChartResponseDto> result = charts.stream()
                 .map(chart -> new ChartResponseDto(chart))
                 .collect(Collectors.toList());
+        return new Result(result.size(), result);
+    }
+
+    @GetMapping("/api/v1/chart/pet")
+    public Result chartPetV1(
+            @RequestParam(name = "id") Long id) {
+        List<Chart> charts = chartRepository.findByPetWithPetVet(id);
+        List<ChartResponseDto> result = charts.stream()
+                .map(chart -> new ChartResponseDto(chart))
+                .collect(Collectors.toList());
+
+        return new Result(result.size(), result);
+    }
+
+    @GetMapping("/api/v1/chart/vet")
+    public Result chartVetV1(
+            @RequestParam(name = "id") Long id) {
+        List<Chart> charts = chartRepository.findByVetWithPetVet(id);
+        List<ChartResponseDto> result = charts.stream()
+                .map(chart -> new ChartResponseDto(chart))
+                .collect(Collectors.toList());
+
         return new Result(result.size(), result);
     }
 }

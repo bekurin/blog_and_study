@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02931840-52ce-453a-8063-98c6e84de296" name="Changes" comment="4. 회원 서비스, 리포지토리 개발">
-      <change afterPath="$PROJECT_DIR$/../pet/pet/src/main/java/street/pet/repository/ChartRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../pet/pet/src/main/java/street/pet/service/ChartService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../pet/pet/src/test/java/street/pet/service/ChartServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pet/pet/src/main/java/street/pet/domain/Chart.java" beforeDir="false" afterPath="$PROJECT_DIR$/../pet/pet/src/main/java/street/pet/domain/Chart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pet/pet/src/main/java/street/pet/domain/ChartStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/../pet/pet/src/main/java/street/pet/domain/ChartStatus.java" afterDir="false" />
-    </list>
+    <list default="true" id="02931840-52ce-453a-8063-98c6e84de296" name="Changes" comment="4. 회원 서비스, 리포지토리 개발" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

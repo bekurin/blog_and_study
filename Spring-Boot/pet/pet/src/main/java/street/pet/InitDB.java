@@ -21,6 +21,7 @@ import java.util.Map;
  *  수의사 2명 생성
  *  김길도 - vetA, 신경외과 - departmentA
  *  박수아 - vetB, 정형외과 - departmentB
+ *  이발소 - vetC, 정형외과 - departmentB
  *
  *   차트 2개 생성
  *   잔디, 김길도 - chartA
@@ -29,9 +30,10 @@ import java.util.Map;
  *   처방전 5개 생성
  *   테스트A - prescriptionA, 김길도, ChartA
  *   테스트B - prescriptionB, 박수아, ChartA
- *   테스트C - prescriptionC, 김길도, ChartA
+ *   테스트C - prescriptionC, 이발소, ChartA
  *   테스트D - prescriptionD, 박수아, ChartB
- *   테스트E - prescriptionE, 김길도, ChartB
+ *   테스트E - prescriptionE, 이발소, ChartB
+ *   테스트F - prescriptionF, 김길도, ChartB
  */
 @Component
 @RequiredArgsConstructor
@@ -66,10 +68,14 @@ public class InitDB {
             Vet vetB = Vet.createVet("안녕하세요!", "박수아", departmentB);
             em.persist(vetB);
 
+            Vet vetC = Vet.createVet("안녕하세요!", "이발소", departmentB);
+            em.persist(vetC);
+
             Map<String, Long> vetIds = new HashMap<>();
 
             vetIds.put("vetA", vetA.getId());
             vetIds.put("vetB", vetB.getId());
+            vetIds.put("vetC", vetC.getId());
             return vetIds;
         }
 
@@ -85,6 +91,7 @@ public class InitDB {
 
             Vet vetA = getVet(vetIds, "vetA");
             Vet vetB = getVet(vetIds, "vetB");
+            Vet vetC = getVet(vetIds, "vetC");
 
             Chart chart = createChart(vetB, petA);
             em.persist(chart);
@@ -95,7 +102,7 @@ public class InitDB {
             Prescription testB = createPrescription("테스트B", chart, vetB);
             em.persist(testB);
 
-            Prescription testC = createPrescription("테스트C", chart, vetA);
+            Prescription testC = createPrescription("테스트C", chart, vetC);
             em.persist(testC);
         }
 
@@ -108,6 +115,7 @@ public class InitDB {
 
             Vet vetA = getVet(vetIds, "vetA");
             Vet vetB = getVet(vetIds, "vetB");
+            Vet vetC = getVet(vetIds, "vetC");
 
             Chart chart = createChart(vetB, petC);
             em.persist(chart);
@@ -115,8 +123,12 @@ public class InitDB {
             Prescription testD = createPrescription("테스트D", chart, vetB);
             em.persist(testD);
 
-            Prescription testE = createPrescription("테스트E", chart, vetA);
+            Prescription testE = createPrescription("테스트E", chart, vetC);
             em.persist(testE);
+
+            Prescription testF = createPrescription("테스트F", chart, vetA);
+            em.persist(testF);
+
         }
 
         private Prescription createPrescription(String description, Chart chart, Vet vet) {
