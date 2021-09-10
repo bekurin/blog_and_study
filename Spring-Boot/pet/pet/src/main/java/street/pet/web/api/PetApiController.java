@@ -2,6 +2,7 @@ package street.pet.web.api;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import street.pet.domain.Pet;
@@ -28,7 +29,7 @@ public class PetApiController extends BaseApiController{
 
     @GetMapping("/api/v1/pet")
     public PetResponseDto petV1(
-            @RequestParam(name = "id", defaultValue = "0") Long id){
+            @RequestParam(value = "id") Long id){
         Pet pet = petRepository.findOne(id);
         return new PetResponseDto(pet);
     }
