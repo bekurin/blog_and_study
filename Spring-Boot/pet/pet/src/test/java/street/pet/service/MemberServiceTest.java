@@ -78,4 +78,20 @@ public class MemberServiceTest {
         assertThat(memberService.findOne(memberId).getPhone()).isEqualTo("485-239-3498");
     }
 
+    @Test
+    @DisplayName("회원 삭제 테스트")
+    public void deleteMember() throws Exception {
+        //given
+        Address address = new Address("서울", "test", "632-9");
+        Member member = Member.createMember("홍길동", "123-456-5484", address);
+        Long memberId = memberService.join(member);
+
+        //when
+        Long id = memberService.deleteMember(memberId);
+        Member member1 = memberService.findOne(id);
+
+        //then
+        Assertions.assertThrows(NullPointerException.class,
+                () -> memberService.findOne(id).getName());
+    }
 }

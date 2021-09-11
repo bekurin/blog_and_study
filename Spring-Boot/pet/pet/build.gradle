@@ -2,18 +2,12 @@ plugins {
     id 'org.springframework.boot' version '2.5.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
-    id 'org.asciidoctor.jvm.convert' version '3.3.0'
+    id "org.asciidoctor.convert" version "1.5.9.2"
 }
 
 group = 'street'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
-
-asciidoctor {
-    sourceDir 'src/main/asciidoc'
-    attributes \
-		'snippets': file('target/snippets')
-}
 
 configurations {
     compileOnly {
@@ -26,9 +20,15 @@ repositories {
 }
 
 dependencies {
+    asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'junit:junit:4.13.1'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
+
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
+
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     compileOnly 'org.projectlombok:lombok'
@@ -40,6 +40,23 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+ext {
+    snippetsDir = file('build/generated-snippets')
+}
+
 test {
     useJUnitPlatform()
+    outputs.dir snippetsDir
+}
+
+asciidoctor {
+    inputs.dir snippetsDir
+    dependsOn test
+}
+
+bootJar {
+    dependsOn asciidoctor
+    from ("${asciidoctor.outputDir}/html5") {
+        into 'static/docs'
+    }
 }

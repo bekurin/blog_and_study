@@ -52,4 +52,18 @@ public class MemberService {
         Member member = memberRepository.findOne(id);
         member.updateMember(phone, address);
     }
+
+    /**
+     * 회원 삭제
+     */
+    @Transactional
+    public Long deleteMember(Long id){
+        Member member = memberRepository.findOne(id);
+        if(member.getPets() != null) {
+            throw new IllegalStateException("반려동물이 존재하는 회원은 삭제할 수 없습니다.");
+        }
+
+        memberRepository.deleteByMember(member);
+        return id;
+    }
 }

@@ -33,4 +33,8 @@ public class MemberRepository {
                 .setParameter("name", name)
                 .getResultList();
     }
+
+    public void deleteByMember(Member member) {
+        em.remove(member);
+    }
 }
