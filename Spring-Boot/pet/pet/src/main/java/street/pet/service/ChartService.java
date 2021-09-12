@@ -37,7 +37,7 @@ public class ChartService {
     /**
      * 차트 조회
      */
-    public Chart findOne(Long chartId){
+    public Chart findOne(Long chartId) {
         return chartRepository.findOne(chartId);
     }
 
@@ -45,7 +45,7 @@ public class ChartService {
      * 차트 취소
      */
     @Transactional
-    public void cancelChart(Long chartId){
+    public void cancelChart(Long chartId) {
         Chart chart = chartRepository.findOne(chartId);
         chart.cancel();
     }
@@ -54,7 +54,7 @@ public class ChartService {
      * 차트 수정
      */
     @Transactional
-    public Long updateChart(Long id, ChartStatus status){
+    public Long updateChart(Long id, ChartStatus status) {
         Chart chart = chartRepository.findOne(id);
         chart.update(status);
         return chart.getId();

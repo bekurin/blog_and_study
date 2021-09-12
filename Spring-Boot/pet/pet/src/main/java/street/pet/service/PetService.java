@@ -5,14 +5,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import street.pet.domain.Member;
 import street.pet.domain.Pet;
-import street.pet.repository.MemberRepository;
 import street.pet.repository.PetRepository;
 
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class PetService {
 
     private final PetRepository petRepository;
@@ -28,7 +27,7 @@ public class PetService {
     }
 
     private void validateJoinedMember(Pet pet) {
-        if (pet.getMember().getId() == null){
+        if (pet.getMember().getId() == null) {
             throw new IllegalStateException("등록된 회원만 반려동물을 등록할 수 있습니다.");
         }
     }
@@ -62,7 +61,7 @@ public class PetService {
      * 반려동물 삭제
      */
     @Transactional
-    public Long deletePet(Long id){
+    public Long deletePet(Long id) {
         Pet pet = petRepository.findOne(id);
         petRepository.deleteByPet(pet);
         return pet.getId();

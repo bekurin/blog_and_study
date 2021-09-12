@@ -10,8 +10,8 @@ import street.pet.repository.VetRepository;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class VetService {
 
     private final VetRepository vetRepository;

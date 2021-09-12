@@ -17,7 +17,7 @@ public class DepartmentService {
     private final DepartmentRepository departmentRepository;
 
     @Transactional
-    public Long save(Department department){
+    public Long save(Department department) {
         validateDuplicatedName(department);
         departmentRepository.save(department);
         return department.getId();
@@ -25,7 +25,7 @@ public class DepartmentService {
 
     private void validateDuplicatedName(Department department) {
         List<Department> findDepartment = departmentRepository.findByName(department.getName());
-        if(!findDepartment.isEmpty()){
+        if (!findDepartment.isEmpty()) {
             throw new IllegalStateException("이미 존재하는 부서 이름입니다.");
         }
     }
@@ -34,12 +34,12 @@ public class DepartmentService {
         return departmentRepository.findAll();
     }
 
-    public Department findOne(Long id){
+    public Department findOne(Long id) {
         return departmentRepository.findOne(id);
     }
 
     @Transactional
-    public Long update(Long id, String name){
+    public Long update(Long id, String name) {
         Department department = departmentRepository.findOne(id);
         department.update(name);
 

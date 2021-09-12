@@ -6,11 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import street.pet.domain.Chart;
 import street.pet.domain.ChartStatus;
-import street.pet.domain.Pet;
-import street.pet.domain.Vet;
 import street.pet.repository.ChartRepository;
-import street.pet.repository.PetRepository;
-import street.pet.repository.VetRepository;
 import street.pet.service.ChartService;
 import street.pet.web.dto.ChartResponseDto;
 

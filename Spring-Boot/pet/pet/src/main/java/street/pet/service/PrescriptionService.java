@@ -41,16 +41,16 @@ public class PrescriptionService {
     /**
      * 처방전 조회
      */
-    public List<Prescription> findPrescriptions(){
+    public List<Prescription> findPrescriptions() {
         return prescriptionRepository.findAll();
     }
 
-    public List<Prescription> findByChart(Long chartId){
+    public List<Prescription> findByChart(Long chartId) {
         Chart chart = chartRepository.findOne(chartId);
         return prescriptionRepository.findByChart(chart);
     }
 
-    public Prescription findOne(Long id){
+    public Prescription findOne(Long id) {
         return prescriptionRepository.findOne(id);
     }
 
@@ -58,7 +58,7 @@ public class PrescriptionService {
      * 처방전 수정
      */
     @Transactional
-    public Long update(Long id, String description){
+    public Long update(Long id, String description) {
         Prescription prescription = prescriptionRepository.findOne(id);
         prescription.update(description);
         return prescription.getId();
