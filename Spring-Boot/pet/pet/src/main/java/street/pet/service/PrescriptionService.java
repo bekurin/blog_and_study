@@ -58,8 +58,9 @@ public class PrescriptionService {
      * 처방전 수정
      */
     @Transactional
-    public void update(Long id, String description){
+    public Long update(Long id, String description){
         Prescription prescription = prescriptionRepository.findOne(id);
         prescription.update(description);
+        return prescription.getId();
     }
 }

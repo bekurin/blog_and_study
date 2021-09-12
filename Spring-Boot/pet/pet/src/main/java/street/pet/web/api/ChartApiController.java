@@ -1,15 +1,20 @@
 package street.pet.web.api;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import street.pet.domain.Chart;
+import street.pet.domain.ChartStatus;
+import street.pet.domain.Pet;
+import street.pet.domain.Vet;
 import street.pet.repository.ChartRepository;
 import street.pet.repository.PetRepository;
 import street.pet.repository.VetRepository;
+import street.pet.service.ChartService;
 import street.pet.web.dto.ChartResponseDto;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +23,12 @@ import java.util.stream.Collectors;
 public class ChartApiController extends BaseApiController{
 
     private final ChartRepository chartRepository;
+    private final ChartService chartService;
 
+
+    /**
+     * 차트 조회
+     */
     @GetMapping("/api/v1/charts")
     public Result chartsV1(
             @RequestParam(value = "offset", defaultValue = "0") int offset,
@@ -61,5 +71,62 @@ public class ChartApiController extends BaseApiController{
                 .collect(Collectors.toList());
 
         return new Result(result.size(), result);
+    }
+
+    /**
+     * 차트 생성
+     */
+    @PostMapping("/api/v1/chart")
+    public CreateChartResponse createChartV1(
+            @RequestBody @Valid CreateChartRequest request) {
+        Long id = chartService.Chart(request.getPetId(), request.getVetId());
+        Chart chart = chartService.findOne(id);
+
+        return new CreateChartResponse(chart.getId(), chart.getVet().getName(), chart.getPet().getName());
+    }
+
+    /**
+     * 차트 수정
+     */
+    @PutMapping("/api/v1/chart/{id}")
+    public UpdateChartResponse updateChartV1(
+            @PathVariable Long id,
+            @RequestBody @Valid UpdateChartRequest request) {
+        Long chartId = chartService.updateChart(id, request.getStatus());
+        Chart chart = chartService.findOne(chartId);
+
+        return new UpdateChartResponse(chart.getId(), chart.getStatus());
+    }
+
+    /**
+     * 차트 생성 request, response
+     */
+    @Data
+    @AllArgsConstructor
+    static class CreateChartResponse {
+        private Long id;
+        private String vetName;
+        private String petName;
+    }
+
+    @Data
+    static class CreateChartRequest {
+        private Long vetId;
+        private Long petId;
+    }
+
+    /**
+     * 차트 수정 request, response
+     */
+    @Data
+    @AllArgsConstructor
+    static class UpdateChartResponse {
+        private Long id;
+        private ChartStatus status;
+    }
+
+    @Data
+    static class UpdateChartRequest {
+        private ChartStatus status;
     }
 }

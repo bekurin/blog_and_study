@@ -48,9 +48,11 @@ public class MemberService {
      * 회원 수정
      */
     @Transactional
-    public void updateMember(Long id, String phone, Address address){
+    public Long updateMember(Long id, String phone, Address address){
         Member member = memberRepository.findOne(id);
         member.updateMember(phone, address);
+
+        return member.getId();
     }
 
     /**

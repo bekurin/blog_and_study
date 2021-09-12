@@ -3,10 +3,7 @@ package street.pet.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import street.pet.domain.Chart;
-import street.pet.domain.Pet;
-import street.pet.domain.Prescription;
-import street.pet.domain.Vet;
+import street.pet.domain.*;
 import street.pet.repository.ChartRepository;
 import street.pet.repository.PetRepository;
 import street.pet.repository.VetRepository;
@@ -51,5 +48,15 @@ public class ChartService {
     public void cancelChart(Long chartId){
         Chart chart = chartRepository.findOne(chartId);
         chart.cancel();
+    }
+
+    /**
+     * 차트 수정
+     */
+    @Transactional
+    public Long updateChart(Long id, ChartStatus status){
+        Chart chart = chartRepository.findOne(id);
+        chart.update(status);
+        return chart.getId();
     }
 }

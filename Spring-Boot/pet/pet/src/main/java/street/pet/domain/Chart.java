@@ -46,4 +46,8 @@ public class Chart extends BaseTimeEntity {
         }
         this.status = ChartStatus.CANCEL;
     }
+
+    public void update(ChartStatus status){
+        this.status = status;
+    }
 }

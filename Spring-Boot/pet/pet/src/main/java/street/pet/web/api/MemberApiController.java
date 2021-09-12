@@ -61,9 +61,9 @@ public class MemberApiController extends BaseApiController {
     public UpdateMemberResponse updateMemberV1(
             @PathVariable Long id,
             @RequestBody @Valid UpdateMemberRequest request) {
-        memberService.updateMember(id, request.getPhone(), request.getAddress());
+        Long memberId = memberService.updateMember(id, request.getPhone(), request.getAddress());
+        Member member = memberService.findOne(memberId);
 
-        Member member = memberService.findOne(id);
         return new UpdateMemberResponse(member.getId(), member.getPhone(), member.getAddress());
     }
 
