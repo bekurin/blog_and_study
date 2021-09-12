@@ -1,5 +1,6 @@
 package street.pet.service;
 
+import com.fasterxml.jackson.databind.deser.std.StdNodeBasedDeserializer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -98,7 +99,7 @@ public class PetServiceTest {
         Member member = Member.createMember("홍길동", "010-3232-4422", address);
         memberService.join(member);
 
-        Pet pet = Pet.createPet("잔디", LocalDate.of(2020, 8, 1), member);
+        Pet pet = Pet.createPet("잔디", LocalDate.of(2020, 8, 22), member);
 
         //when
         Long petId = petService.join(pet);
@@ -106,5 +107,24 @@ public class PetServiceTest {
 
         //then
         assertThat(petService.findOne(petId).getName()).isEqualTo("하늘");
+    }
+
+    @Test
+    @DisplayName("반려동물 삭제 테스트")
+    public void deletePet() throws Exception {
+        //given
+        Address address = new Address("경기", "테스트", "123-4");
+        Member member = Member.createMember("홍길동", "010-6643-4422", address);
+        memberService.join(member);
+
+        Pet pet = Pet.createPet("수박", LocalDate.of(2010, 8, 12), member);
+
+        //when
+        Long id = petService.join(pet);
+        petService.deletePet(id);
+
+        //then
+        Assertions.assertThrows(NullPointerException.class,
+                () -> petService.findOne(id).getName());
     }
 }

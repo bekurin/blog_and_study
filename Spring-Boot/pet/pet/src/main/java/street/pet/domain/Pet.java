@@ -48,4 +48,9 @@ public class Pet extends BaseTimeEntity {
     public void update(String name) {
         this.name = name;
     }
+
+    public void delete(){
+        this.member.getPets().remove(this);
+        this.member = null;
+    }
 }

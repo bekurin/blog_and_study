@@ -1,0 +1,47 @@
+= new API Docs //큰 제목
+Lynn<qnswwrn@gmail.com> //작성자
+1.0.0, 09/06/2020 //버전, 날짜
+:toc: left //왼쪽 테이블
+:sectnums:
+
+//이렇게 하면 표를 만들 수 있다.
+|===
+| Method | Content
+
+| `GET`
+| 읽기
+
+| `POST`
+| 추가
+
+| `PATCH`
+| 수정
+
+| `DELETE`
+| 삭제
+|===
+
+== GET member list 모든 회원 가져오기 //api제목
+
+=== HTTP Request
+include::{snippets}/member-controller-test/test-list/http-request.adoc[]
+//여기서 스니펫을 이용해서 어떻게 작성하면 되는지 보여줌
+// {snippets} 는 스니펫이 있는 경로로 build/generated-snippets 를 의미
+
+📌snippets의 경로를 찾지 못하는 경우📌
+🤣{snippets}대신 ../../../build/generated-snippets 경로를 직접 써줌🤣
+
+=== HTTP Response
+include::{snippets}/member-controller-test/test-member/http-response.adoc[]
+
+=== Path-parameters
+include::{snippets}/member-controller-test/test-member/path-parameters.adoc[]
+
+=== Response Fields
+include::{snippets}/member-controller-test/test-member/response-fields.adoc[]
+
+마크다운처럼
+- 이 표시와
+```
+블럭으로 감쌀 수도 있다.
+```

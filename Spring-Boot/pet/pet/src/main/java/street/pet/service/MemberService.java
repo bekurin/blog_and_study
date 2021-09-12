@@ -59,7 +59,7 @@ public class MemberService {
     @Transactional
     public Long deleteMember(Long id){
         Member member = memberRepository.findOne(id);
-        if(member.getPets() != null) {
+        if(!member.getPets().isEmpty()) {
             throw new IllegalStateException("반려동물이 존재하는 회원은 삭제할 수 없습니다.");
         }
 

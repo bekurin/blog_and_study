@@ -41,4 +41,9 @@ public class PetRepository {
                 .setParameter("member", member)
                 .getResultList();
     }
+
+    public void deleteByPet(Pet pet){
+        pet.delete();
+        em.remove(pet);
+    }
 }

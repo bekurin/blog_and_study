@@ -52,8 +52,19 @@ public class PetService {
      * 반려동물 정보 수정
      */
     @Transactional
-    public void updatePet(Long petId, String name) {
+    public Long updatePet(Long petId, String name) {
         Pet pet = petRepository.findOne(petId);
         pet.update(name);
+        return pet.getId();
+    }
+
+    /**
+     * 반려동물 삭제
+     */
+    @Transactional
+    public Long deletePet(Long id){
+        Pet pet = findOne(id);
+        petRepository.deleteByPet(pet);
+        return pet.getId();
     }
 }
