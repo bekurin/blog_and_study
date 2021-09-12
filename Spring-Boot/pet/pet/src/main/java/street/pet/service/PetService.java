@@ -63,7 +63,7 @@ public class PetService {
      */
     @Transactional
     public Long deletePet(Long id){
-        Pet pet = findOne(id);
+        Pet pet = petRepository.findOne(id);
         petRepository.deleteByPet(pet);
         return pet.getId();
     }

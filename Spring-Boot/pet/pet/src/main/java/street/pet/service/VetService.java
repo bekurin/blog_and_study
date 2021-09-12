@@ -51,4 +51,15 @@ public class VetService {
     public List<Vet> findByDepartment(Department department) {
         return vetRepository.findByDepartment(department);
     }
+
+    /**
+     * 수의사 정보 수정
+     */
+    @Transactional
+    public Long updateVet(Long id, String description, Department department){
+        Vet vet = vetRepository.findOne(id);
+        vet.update(description, department);
+
+        return vet.getId();
+    }
 }

@@ -46,8 +46,8 @@ public class Vet extends BaseTimeEntity {
         return vet;
     }
 
-    public void update(String name, Department department) {
-        this.name = name;
-        this.department = department;
+    public void update(String description, Department department) {
+        this.description = description;
+        setDepartment(department);
     }
 }
