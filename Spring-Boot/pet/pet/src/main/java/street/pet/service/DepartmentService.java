@@ -37,4 +37,12 @@ public class DepartmentService {
     public Department findOne(Long id){
         return departmentRepository.findOne(id);
     }
+
+    @Transactional
+    public Long update(Long id, String name){
+        Department department = departmentRepository.findOne(id);
+        department.update(name);
+
+        return department.getId();
+    }
 }

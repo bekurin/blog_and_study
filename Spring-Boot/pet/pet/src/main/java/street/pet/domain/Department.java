@@ -26,4 +26,8 @@ public class Department extends BaseTimeEntity {
         department.name = name;
         return department;
     }
+
+    public void update(String name){
+        this.name = name;
+    }
 }
