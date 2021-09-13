@@ -33,21 +33,19 @@ public class ChartServiceTest {
         memberService.join(member);
         Pet pet = Pet.createPet("하늘", LocalDate.of(2019, 8, 13), member);
 
-        Department department = Department.createDepartment("신경외과");
+        Department department = Department.createDepartment("안과");
         departmentService.save(department);
         Vet vet = Vet.createVet("안녕하세요 아무개입니다.", "아무개", department);
 
         //when
         Long vetId = vetService.saveVet(vet);
         Long petId = petService.join(pet);
-        chartService.Chart(petId, vetId);
+        Long id = chartService.Chart(petId, vetId);
 
         //then
-        List<Chart> allWithPetVet = chartRepository.findAllWithPetVet(0,0);
-        for (Chart chart1 : allWithPetVet) {
-            assertThat(chart1.getVet()).isEqualTo(vet);
-            assertThat(chart1.getPet()).isEqualTo(pet);
-        }
+        List<Chart> charts = chartRepository.findByIdWithPetVet(id);
+        assertThat(charts.get(0).getVet().getName()).isEqualTo(vet.getName());
+        assertThat(charts.get(0).getPet().getName()).isEqualTo(pet.getName());
     }
 
     @Test

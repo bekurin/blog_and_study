@@ -41,7 +41,7 @@ public class InitDB {
 
     private final InitService initService;
 
-    @PostConstruct
+//    @PostConstruct
     public void init() {
         Map<String, Long> vetIds = initService.dbVet();
         initService.dbInit1(vetIds);
