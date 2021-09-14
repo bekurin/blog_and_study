@@ -12,6 +12,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.persistence.EntityManager;
+
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 
 @RunWith(SpringRunner.class)
@@ -28,6 +30,9 @@ public abstract class ApiDocumentationTest {
 
     @Autowired
     protected WebApplicationContext context;
+
+    @Autowired
+    protected EntityManager em;
 
     @Before
     public void setUp() {

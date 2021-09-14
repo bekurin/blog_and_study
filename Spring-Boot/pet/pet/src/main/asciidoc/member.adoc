@@ -1,0 +1,45 @@
+ifndef::snippets[]
+:snippets: ../../../build/generated-snippets
+endif::[]
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-http-request-title: Example Request
+:operation-http-response-title: Example Response
+
+= Member 조회 API
+
+[[resource-user-review]]
+== 멤버 조회
+
+==== Example Request
+include::{snippets}/GET-members/http-response.adoc[]
+
+[[resource-user-create]]
+== 멤버 등록
+
+==== Example Request
+include::{snippets}/POST-member/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/POST-member/http-response.adoc[]
+
+==== Request Fields
+include::{snippets}/POST-member/request-fields.adoc[]
+
+
+
+[[resource-user-update]]
+== 멤버 수정
+
+==== Example Request
+include::{snippets}/PUT-member/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/PUT-member/http-response.adoc[]
+
+==== Request Fields
+include::{snippets}/PUT-member/request-fields.adoc[]

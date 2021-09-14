@@ -2,9 +2,11 @@ package street.pet.web.api;
 
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 import street.pet.AutoAppConfig;
@@ -14,48 +16,53 @@ import street.pet.domain.Pet;
 import street.pet.service.MemberService;
 import street.pet.service.PetService;
 import street.pet.web.api.member.MemberApiController;
+import street.pet.web.api.member.reqeust.UpdateMemberRequest;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class MemberApiControllerTest extends ApiDocumentationTest{
+@Transactional
+public class MemberApiControllerTest extends ApiDocumentationTest {
 
-    ApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class);
-    private final MemberService memberService = ac.getBean(MemberService.class);
-    private final PetService petService = ac.getBean(PetService.class);
-    private final MemberApiController memberApiController = ac.getBean(MemberApiController.class);
+    @Autowired
+    private MemberApiController memberApiController;
 
     @Test
     @DisplayName("[GET] 멤버 전체 조회")
-    @Transactional
     public void getMembers() throws Exception {
         //given
         Address address = new Address("서울", "테스트", "123-4");
         Member member1 = Member.createMember("박성수", "010-2356-5432", address);
         Member member2 = Member.createMember("이기자", "010-5462-6562", address);
-        memberService.join(member1);
-        memberService.join(member2);
+        em.persist(member1);
+        em.persist(member2);
 
         Pet petA = Pet.createPet("태양", LocalDate.of(2012, 5, 23), member2);
         Pet petB = Pet.createPet("하늘", LocalDate.of(2018, 3, 13), member2);
-        petService.join(petA);
-        petService.join(petB);
+        em.persist(petA);
+        em.persist(petB);
 
         //when
         BaseApiController.Result membersV1 = memberApiController.membersV1();
 
-        ResultActions result = this.mockMvc.perform(get("/api/v1/members/")
+        ResultActions result = mockMvc.perform(get("/api/v1/members/")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(membersV1))
-                .accept(MediaType.APPLICATION_JSON));
+                .accept(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(objectMapper.writeValueAsString(membersV1)));
 
         //then
         result.andExpect(status().isOk())
-                .andDo(document("members",
+                .andDo(document("GET-members",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())));
     }
@@ -64,10 +71,68 @@ public class MemberApiControllerTest extends ApiDocumentationTest{
     @DisplayName("[POST] 멤버 생성")
     public void createMember() throws Exception {
         //given
+        Address address = new Address("경기도", "테스트", "544-54");
+        Member member = Member.createMember("홍길동", "010-5424-6542", address);
 
+        Map<String, Object> map = new HashMap<>();
+        map.put("address", member.getAddress());
+        map.put("phone", member.getPhone());
+        map.put("name", member.getName());
 
         //when
+        ResultActions result = mockMvc.perform(post("/api/v1/member/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(objectMapper.writeValueAsString(map)));
+        //then
+        result.andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value(member.getName()))
+                .andDo(document("POST-member",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        requestFields(
+                                fieldWithPath("name").type(JsonFieldType.STRING).description("멤버의 이름"),
+                                fieldWithPath("phone").type(JsonFieldType.STRING).description("멤버의 핸드폰 번호"),
+                                fieldWithPath("address.city").type(JsonFieldType.STRING).description("멤버의 도시"),
+                                fieldWithPath("address.street").type(JsonFieldType.STRING).description("멤버의 도로명"),
+                                fieldWithPath("address.zipcode").type(JsonFieldType.STRING).description("멤버의 zipcode")
+                        )));
+    }
+
+    @Test
+    @DisplayName("[PUT] 멤버 수정")
+    public void updateMember() throws Exception {
+        //given
+        Address addressA = new Address("경기도", "테스트", "53-123");
+        Member member = Member.createMember("아무개", "010-6541-9815", addressA);
+        em.persist(member);
+
+        //when
+        Address addressB = new Address("서울", "테스트", "53-123");
+        Map<String, Object> map = new HashMap<>();
+        map.put("address", addressB);
+        map.put("phone", "010-1111-2222");
+
+        ResultActions result = mockMvc.perform(put("/api/v1/member/" + member.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(objectMapper.writeValueAsString(map)));
 
         //then
+        result.andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(member.getId()))
+                .andExpect(jsonPath("$.phone").value(member.getPhone()))
+                .andExpect(jsonPath("$.address.city").value(member.getAddress().getCity()))
+                .andExpect(jsonPath("$.address.street").value(member.getAddress().getStreet()))
+                .andExpect(jsonPath("$.address.zipcode").value(member.getAddress().getZipcode()))
+                .andDo(document("PUT-member",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        requestFields(
+                                fieldWithPath("phone").type(JsonFieldType.STRING).description("멤버의 핸드폰 번호"),
+                                fieldWithPath("address.city").type(JsonFieldType.STRING).description("멤버의 도시"),
+                                fieldWithPath("address.street").type(JsonFieldType.STRING).description("멤버의 도로명"),
+                                fieldWithPath("address.zipcode").type(JsonFieldType.STRING).description("멤버의 zipcode")
+                        )));
     }
 }

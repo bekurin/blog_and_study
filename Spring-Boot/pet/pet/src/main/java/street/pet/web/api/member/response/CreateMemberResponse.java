@@ -7,4 +7,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class CreateMemberResponse {
     private Long id;
+    private String name;
 }

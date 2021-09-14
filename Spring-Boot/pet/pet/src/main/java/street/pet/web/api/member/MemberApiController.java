@@ -1,5 +1,6 @@
 package street.pet.web.api.member;
 
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import street.pet.domain.Member;
@@ -34,6 +35,7 @@ public class MemberApiController extends BaseApiController {
         List<MemberResponseDto> result = members.stream()
                 .map(member -> new MemberResponseDto(member))
                 .collect(Collectors.toList());
+
         return new Result(result.size(), result);
     }
 
@@ -52,8 +54,9 @@ public class MemberApiController extends BaseApiController {
             @RequestBody @Valid CreateMemberRequest request) {
         Member member = Member.createMember(request.getName(), request.getPhone(), request.getAddress());
         Long id = memberService.join(member);
+        Member createdMember = memberService.findOne(id);
 
-        return new CreateMemberResponse(id);
+        return new CreateMemberResponse(createdMember.getId(), createdMember.getName());
     }
 
     /**
