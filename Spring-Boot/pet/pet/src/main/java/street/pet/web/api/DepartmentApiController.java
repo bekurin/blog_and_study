@@ -1,5 +1,6 @@
 package street.pet.web.api;
 
+import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class DepartmentApiController extends BaseApiController {
      * 진료과목 조회
      */
     @GetMapping("/api/v1/departments")
-    public Result departmentsV1() {
+    public Result departmentsV1() throws NotFoundException {
         List<Department> departments = departmentRepository.findAll();
         List<DepartmentResponseDto> result = departments.stream()
                 .map(department -> new DepartmentResponseDto(department))

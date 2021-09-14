@@ -1,5 +1,6 @@
 package street.pet.web.api;
 
+import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ public class VetApiController extends BaseApiController {
      * 수의사 조회
      */
     @GetMapping("/api/v1/vets")
-    public Result vetsV1() {
+    public Result vetsV1() throws NotFoundException {
         List<Vet> vets = vetRepository.findAllWithDepartment();
         List<VetResponseDto> result = vets.stream()
                 .map(vet -> new VetResponseDto(vet))
@@ -38,7 +39,7 @@ public class VetApiController extends BaseApiController {
 
     @GetMapping("/api/v1/vet")
     public Result vetV1(
-            @RequestParam(name = "id", defaultValue = "0") Long id) {
+            @RequestParam(name = "id", defaultValue = "0") Long id) throws NotFoundException {
         List<Vet> vets = vetRepository.findByIdWithDepartment(id);
         List<VetResponseDto> result = vets.stream()
                 .map(vet -> new VetResponseDto(vet))

@@ -29,7 +29,7 @@ public class MemberApiController extends BaseApiController {
      * 멤버 조회
      */
     @GetMapping("/api/v1/members")
-    public Result membersV1() {
+    public Result membersV1() throws NotFoundException {
         List<Member> members = memberRepository.findAll();
 
         List<MemberResponseDto> result = members.stream()

@@ -1,5 +1,6 @@
 package street.pet.web.api;
 
+import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ public class ChartApiController extends BaseApiController{
     @GetMapping("/api/v1/charts")
     public Result chartsV1(
             @RequestParam(value = "offset", defaultValue = "0") int offset,
-            @RequestParam(value = "limit", defaultValue = "100") int limit) {
+            @RequestParam(value = "limit", defaultValue = "100") int limit) throws NotFoundException {
 
         List<Chart> charts = chartRepository.findAllWithPetVet(offset, limit);
         List<ChartResponseDto> result = charts.stream()
@@ -39,7 +40,7 @@ public class ChartApiController extends BaseApiController{
 
     @GetMapping("/api/v1/chart")
     public Result chartV1(
-            @RequestParam(name = "id") Long id) {
+            @RequestParam(name = "id") Long id) throws NotFoundException {
         List<Chart> charts = chartRepository.findByIdWithPetVet(id);
         List<ChartResponseDto> result = charts.stream()
                 .map(chart -> new ChartResponseDto(chart))
@@ -49,7 +50,7 @@ public class ChartApiController extends BaseApiController{
 
     @GetMapping("/api/v1/chart/pet")
     public Result chartPetV1(
-            @RequestParam(name = "id") Long id) {
+            @RequestParam(name = "id") Long id) throws NotFoundException {
         List<Chart> charts = chartRepository.findByPetWithPetVet(id);
         List<ChartResponseDto> result = charts.stream()
                 .map(chart -> new ChartResponseDto(chart))
@@ -60,7 +61,7 @@ public class ChartApiController extends BaseApiController{
 
     @GetMapping("/api/v1/chart/vet")
     public Result chartVetV1(
-            @RequestParam(name = "id") Long id) {
+            @RequestParam(name = "id") Long id) throws NotFoundException {
         List<Chart> charts = chartRepository.findByVetWithPetVet(id);
         List<ChartResponseDto> result = charts.stream()
                 .map(chart -> new ChartResponseDto(chart))

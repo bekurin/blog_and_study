@@ -1,5 +1,6 @@
 package street.pet.web.api;
 
+import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class PrescriptionApiController extends BaseApiController{
      * 처방전 조회
      */
     @GetMapping("/api/v1/prescriptions")
-    public Result prescriptionsV1() {
+    public Result prescriptionsV1() throws NotFoundException {
         List<Prescription> prescriptions = prescriptionRepository.findAll();
 
         List<PrescriptionResponseDto> result = prescriptions.stream()
