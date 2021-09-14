@@ -1,6 +1,7 @@
-package street.pet.web.api;
+package street.pet.web.api.pet;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,12 @@ import street.pet.domain.Pet;
 import street.pet.repository.PetRepository;
 import street.pet.service.MemberService;
 import street.pet.service.PetService;
+import street.pet.web.api.BaseApiController;
+import street.pet.web.api.pet.request.CreatePetRequest;
+import street.pet.web.api.pet.request.UpdatePetRequest;
+import street.pet.web.api.pet.response.CreatePetResponse;
+import street.pet.web.api.pet.response.DeletePetResponse;
+import street.pet.web.api.pet.response.UpdatePetResponse;
 import street.pet.web.dto.PetResponseDto;
 
 import javax.validation.Valid;
@@ -29,7 +36,7 @@ public class PetApiController extends BaseApiController {
      * 반려동물 조회
      */
     @GetMapping("/api/v1/pets")
-    public Result petsV1() {
+    public Result petsV1() throws NotFoundException {
         List<Pet> pets = petRepository.findAll();
         List<PetResponseDto> result = pets.stream()
                 .map(pet -> new PetResponseDto(pet))
@@ -80,49 +87,5 @@ public class PetApiController extends BaseApiController {
         //!! 연관관계(member, chart) 제거 후 pet 제거 수정 필요
         Long petId = petService.deletePet(id);
         return new DeletePetResponse(petId);
-    }
-
-
-    /**
-     * 반려동물 생성 request, response
-     */
-    @Data
-    @AllArgsConstructor
-    static class CreatePetResponse {
-        private Long id;
-        private String name;
-    }
-
-    @Data
-    static class CreatePetRequest {
-        private String name;
-        private Long memberId;
-
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-        private LocalDate birthDate;
-    }
-
-    /**
-     * 반려동물 수정 request, response
-     */
-    @Data
-    @AllArgsConstructor
-    static class UpdatePetResponse {
-        private Long id;
-        private String name;
-    }
-
-    @Data
-    static class UpdatePetRequest {
-        private String name;
-    }
-
-    /**
-     * 반려동물 삭제 response
-     */
-    @Data
-    @AllArgsConstructor
-    static class DeletePetResponse {
-        private Long id;
     }
 }
