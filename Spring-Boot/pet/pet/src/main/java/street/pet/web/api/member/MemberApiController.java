@@ -1,17 +1,19 @@
-package street.pet.web.api;
+package street.pet.web.api.member;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import street.pet.domain.Address;
 import street.pet.domain.Member;
 import street.pet.repository.MemberRepository;
 import street.pet.service.MemberService;
+import street.pet.web.api.BaseApiController;
+import street.pet.web.api.member.reqeust.CreateMemberRequest;
+import street.pet.web.api.member.reqeust.UpdateMemberRequest;
+import street.pet.web.api.member.response.CreateMemberResponse;
+import street.pet.web.api.member.response.DeleteMemberResponse;
+import street.pet.web.api.member.response.UpdateMemberResponse;
 import street.pet.web.dto.MemberResponseDto;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -76,49 +78,5 @@ public class MemberApiController extends BaseApiController {
         Long memberId = memberService.deleteMember(id);
 
         return new DeleteMemberResponse(memberId);
-    }
-
-    /**
-     * 멤버 생성 request, response
-     */
-    @Data
-    static class CreateMemberRequest {
-        @NotEmpty
-        private String name;
-        @NotEmpty
-        private String phone;
-        private Address address;
-    }
-
-    @Data
-    @AllArgsConstructor
-    static class CreateMemberResponse {
-        private Long id;
-    }
-
-    /**
-     * 멤버 수정 request, response
-     */
-    @Data
-    @AllArgsConstructor
-    static class UpdateMemberResponse {
-        private Long id;
-        private String phone;
-        private Address address;
-    }
-
-    @Data
-    static class UpdateMemberRequest {
-        private String phone;
-        private Address address;
-    }
-
-    /**
-     * 멤버 삭제 response
-     */
-    @Data
-    @AllArgsConstructor
-    static class DeleteMemberResponse {
-        private Long id;
     }
 }

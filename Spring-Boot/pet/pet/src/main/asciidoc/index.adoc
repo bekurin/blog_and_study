@@ -1,6 +1,4 @@
-= Member 생성 API
-
-=== Request
+= Member 조회 API
 
 === [Request Url]
 ....
@@ -8,17 +6,5 @@ GET /api/v1/members
 Content-Type: application/json; chartset=UTF-8
 ....
 
-==== [Request HTTP Sample]
-include::{snippets}/index/http-request.adoc[]
-
-==== [Response Http Sample]
-include::{snippets}/index/http-response.adoc[]
-
-=== curl-request
-include::{snippets}/index/curl-request.adoc[]
-
-=== request-body
-include::{snippets}/index/request-body.adoc[]
-
-=== response-body
-include::{snippets}/index/response-body.adoc[]
+=== [Http Response]
+include::{snippets}/members/http-response.adoc[]

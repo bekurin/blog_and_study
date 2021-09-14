@@ -6,7 +6,7 @@ import lombok.Data;
 public class BaseApiController {
     @Data
     @AllArgsConstructor
-    static class Result<T> {
+    protected class Result<T> {
         private int count;
         private T data;
     }
