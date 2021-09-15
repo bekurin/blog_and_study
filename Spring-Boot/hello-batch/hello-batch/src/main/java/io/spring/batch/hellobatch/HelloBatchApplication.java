@@ -25,22 +25,19 @@ public class HelloBatchApplication {
 	private StepBuilderFactory stepBuilderFactory;
 
 	@Bean
-	public Step step() {
-		return this.stepBuilderFactory.get("step1")
-				.tasklet(new Tasklet() {
-					@Override
-					public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-						System.out.println("Hello, Batch!");
-						return RepeatStatus.FINISHED;
-					}
-				}).build();
+	public Job job() {
+		return this.jobBuilderFactory.get("basicJob")
+				.start(step())
+				.build();
 	}
 
 	@Bean
-	public Job job() {
-		return this.jobBuilderFactory.get("job")
-				.start(step())
-				.build();
+	public Step step() {
+		return this.stepBuilderFactory.get("step1")
+				.tasklet(((contribution, chunkContext) -> {
+					System.out.println("Hello, Batch!");
+					return RepeatStatus.FINISHED;
+				})).build();
 	}
 
 	public static void main(String[] args) {
