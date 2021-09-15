@@ -1,4 +1,4 @@
-package street.pet.web.api;
+package street.pet.web.api.chart;
 
 import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
@@ -9,6 +9,11 @@ import street.pet.domain.Chart;
 import street.pet.domain.ChartStatus;
 import street.pet.repository.ChartRepository;
 import street.pet.service.ChartService;
+import street.pet.web.api.BaseApiController;
+import street.pet.web.api.chart.request.CreateChartRequest;
+import street.pet.web.api.chart.request.UpdateChartRequest;
+import street.pet.web.api.chart.response.CreateChartResponse;
+import street.pet.web.api.chart.response.UpdateChartResponse;
 import street.pet.web.dto.ChartResponseDto;
 
 import javax.validation.Valid;
@@ -17,11 +22,10 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-public class ChartApiController extends BaseApiController{
+public class ChartApiController extends BaseApiController {
 
     private final ChartRepository chartRepository;
     private final ChartService chartService;
-
 
     /**
      * 차트 조회
@@ -30,7 +34,6 @@ public class ChartApiController extends BaseApiController{
     public Result chartsV1(
             @RequestParam(value = "offset", defaultValue = "0") int offset,
             @RequestParam(value = "limit", defaultValue = "100") int limit) throws NotFoundException {
-
         List<Chart> charts = chartRepository.findAllWithPetVet(offset, limit);
         List<ChartResponseDto> result = charts.stream()
                 .map(chart -> new ChartResponseDto(chart))
@@ -93,37 +96,5 @@ public class ChartApiController extends BaseApiController{
         Chart chart = chartService.findOne(chartId);
 
         return new UpdateChartResponse(chart.getId(), chart.getStatus());
-    }
-
-    /**
-     * 차트 생성 request, response
-     */
-    @Data
-    @AllArgsConstructor
-    static class CreateChartResponse {
-        private Long id;
-        private String vetName;
-        private String petName;
-    }
-
-    @Data
-    static class CreateChartRequest {
-        private Long vetId;
-        private Long petId;
-    }
-
-    /**
-     * 차트 수정 request, response
-     */
-    @Data
-    @AllArgsConstructor
-    static class UpdateChartResponse {
-        private Long id;
-        private ChartStatus status;
-    }
-
-    @Data
-    static class UpdateChartRequest {
-        private ChartStatus status;
     }
 }

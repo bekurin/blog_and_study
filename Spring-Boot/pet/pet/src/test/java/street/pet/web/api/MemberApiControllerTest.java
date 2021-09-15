@@ -5,21 +5,14 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
-import street.pet.AutoAppConfig;
 import street.pet.domain.Address;
 import street.pet.domain.Member;
 import street.pet.domain.Pet;
-import street.pet.service.MemberService;
-import street.pet.service.PetService;
 import street.pet.web.api.member.MemberApiController;
-import street.pet.web.api.member.reqeust.UpdateMemberRequest;
-import street.pet.web.dto.MemberResponseDto;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -89,7 +82,7 @@ public class MemberApiControllerTest extends ApiDocumentationTest {
     }
 
     @Test
-    @DisplayName("[GET] 멤버 요청 X")
+    @DisplayName("멤버 요청 X")
     public void failGetMember() throws Exception {
         //then
         Assertions.assertThrows(NotFoundException.class,
