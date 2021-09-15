@@ -1,6 +1,8 @@
 package street.pet.web.api;
 
+import javassist.NotFoundException;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -17,6 +19,7 @@ import street.pet.service.MemberService;
 import street.pet.service.PetService;
 import street.pet.web.api.member.MemberApiController;
 import street.pet.web.api.member.reqeust.UpdateMemberRequest;
+import street.pet.web.dto.MemberResponseDto;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -55,16 +58,42 @@ public class MemberApiControllerTest extends ApiDocumentationTest {
         BaseApiController.Result membersV1 = memberApiController.membersV1();
 
         ResultActions result = mockMvc.perform(get("/api/v1/members/")
-                .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                .characterEncoding("UTF-8")
-                .content(objectMapper.writeValueAsString(membersV1)));
+                .characterEncoding("UTF-8"));
 
         //then
         result.andExpect(status().isOk())
                 .andDo(document("GET-members",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())));
+    }
+
+    @Test
+    @DisplayName("[GET] 멤버 Id로 조회하기")
+    public void findById() throws Exception {
+        //given
+        Address address = new Address("서울", "테스트", "123-4");
+        Member member = Member.createMember("박성수", "010-2356-5432", address);
+        em.persist(member);
+
+        //when
+        ResultActions result = mockMvc.perform(get("/api/v1/member/" + member.getId())
+                .accept(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8"));
+
+        //then
+        result.andExpect(status().isOk())
+                .andDo(document("GET-member",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())));
+    }
+
+    @Test
+    @DisplayName("[GET] 멤버 요청 X")
+    public void failGetMember() throws Exception {
+        //then
+        Assertions.assertThrows(NotFoundException.class,
+                () -> memberApiController.membersV1());
     }
 
     @Test

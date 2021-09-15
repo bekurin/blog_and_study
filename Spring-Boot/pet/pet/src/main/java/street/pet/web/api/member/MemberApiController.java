@@ -39,9 +39,9 @@ public class MemberApiController extends BaseApiController {
         return new Result(result.size(), result);
     }
 
-    @GetMapping("/api/v1/member")
+    @GetMapping("/api/v1/member/{id}")
     public MemberResponseDto memberV1(
-            @RequestParam(value = "id", defaultValue = "0") Long id) {
+            @PathVariable Long id) {
         Member member = memberRepository.findOne(id);
         return new MemberResponseDto(member);
     }
