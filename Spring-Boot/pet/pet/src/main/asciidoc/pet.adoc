@@ -1,0 +1,48 @@
+ifndef::snippets[]
+:snippets: ../../../build/generated-snippets
+endif::[]
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-http-request-title: Example Request
+:operation-http-response-title: Example Response
+
+= Pet 조회 API
+
+[[resource-pet-review]]
+== 반려동물 조회
+
+==== Example Request
+include::{snippets}/GET-pets/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/GET-pets/http-response.adoc[]
+
+[[resource-user-create]]
+== 반려동물 등록
+
+==== Example Request
+include::{snippets}/POST-pet/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/POST-pet/http-response.adoc[]
+
+==== Request Fields
+include::{snippets}/POST-pet/request-fields.adoc[]
+
+
+
+[[resource-user-update]]
+== 멤버 수정
+
+==== Example Request
+include::{snippets}/PUT-pet/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/PUT-pet/http-response.adoc[]
+
+==== Request Fields
+include::{snippets}/PUT-pet/request-fields.adoc[]

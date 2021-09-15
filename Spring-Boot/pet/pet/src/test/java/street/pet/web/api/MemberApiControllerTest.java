@@ -3,7 +3,6 @@ package street.pet.web.api;
 import javassist.NotFoundException;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
@@ -33,8 +32,7 @@ public class MemberApiControllerTest extends ApiDocumentationTest {
     private MemberApiController memberApiController;
 
     @Test
-    @DisplayName("[GET] 멤버 전체 조회")
-    public void getMembers() throws Exception {
+    public void GET_멤버_전체_조회() throws Exception {
         //given
         Address address = new Address("서울", "테스트", "123-4");
         Member member1 = Member.createMember("박성수", "010-2356-5432", address);
@@ -48,8 +46,6 @@ public class MemberApiControllerTest extends ApiDocumentationTest {
         em.persist(petB);
 
         //when
-        BaseApiController.Result membersV1 = memberApiController.membersV1();
-
         ResultActions result = mockMvc.perform(get("/api/v1/members/")
                 .accept(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8"));
@@ -62,8 +58,7 @@ public class MemberApiControllerTest extends ApiDocumentationTest {
     }
 
     @Test
-    @DisplayName("[GET] 멤버 Id로 조회하기")
-    public void findById() throws Exception {
+    public void GET_멤버_Id_조회() throws Exception {
         //given
         Address address = new Address("서울", "테스트", "123-4");
         Member member = Member.createMember("박성수", "010-2356-5432", address);
@@ -82,16 +77,14 @@ public class MemberApiControllerTest extends ApiDocumentationTest {
     }
 
     @Test
-    @DisplayName("멤버 요청 X")
-    public void failGetMember() throws Exception {
+    public void 등록된_멤버가_없으면_NotFoundException() throws Exception {
         //then
         Assertions.assertThrows(NotFoundException.class,
                 () -> memberApiController.membersV1());
     }
 
     @Test
-    @DisplayName("[POST] 멤버 생성")
-    public void createMember() throws Exception {
+    public void POST_멤버_생성() throws Exception {
         //given
         Address address = new Address("경기도", "테스트", "544-54");
         Member member = Member.createMember("홍길동", "010-5424-6542", address);
@@ -122,8 +115,7 @@ public class MemberApiControllerTest extends ApiDocumentationTest {
     }
 
     @Test
-    @DisplayName("[PUT] 멤버 수정")
-    public void updateMember() throws Exception {
+    public void PUT_멤버_수정() throws Exception {
         //given
         Address addressA = new Address("경기도", "테스트", "53-123");
         Member member = Member.createMember("아무개", "010-6541-9815", addressA);

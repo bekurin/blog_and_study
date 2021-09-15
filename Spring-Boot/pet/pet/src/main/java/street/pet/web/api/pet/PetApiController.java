@@ -44,9 +44,9 @@ public class PetApiController extends BaseApiController {
         return new Result(result.size(), result);
     }
 
-    @GetMapping("/api/v1/pet")
+    @GetMapping("/api/v1/pet/{id}")
     public PetResponseDto petV1(
-            @RequestParam(value = "id") Long id) {
+            @PathVariable Long id) {
         Pet pet = petRepository.findOne(id);
         return new PetResponseDto(pet);
     }
