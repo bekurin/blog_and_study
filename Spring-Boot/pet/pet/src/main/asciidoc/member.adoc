@@ -12,8 +12,17 @@ endif::[]
 
 = Member 조회 API
 
-[[resource-user-review]]
+[[resource-pet-review]]
 == 멤버 조회
+
+==== Example Request
+include::{snippets}/GET-member/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/GET-member/http-response.adoc[]
+
+[[resource-user-review]]
+== 전체 멤버 조회
 
 ==== Example Request
 include::{snippets}/GET-members/http-response.adoc[]
