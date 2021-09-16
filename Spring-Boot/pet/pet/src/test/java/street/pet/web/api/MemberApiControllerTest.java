@@ -84,7 +84,7 @@ public class MemberApiControllerTest extends ApiDocumentationTest {
     }
 
     @Test
-    public void POST_멤버_생성() throws Exception {
+    public void POST_멤버_등록() throws Exception {
         //given
         Address address = new Address("경기도", "테스트", "544-54");
         Member member = Member.createMember("홍길동", "010-5424-6542", address);
