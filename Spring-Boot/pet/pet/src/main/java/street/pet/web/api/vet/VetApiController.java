@@ -42,9 +42,9 @@ public class VetApiController extends BaseApiController {
         return new Result(result.size(), result);
     }
 
-    @GetMapping("/api/v1/vet")
+    @GetMapping("/api/v1/vet/{id}")
     public Result vetV1(
-            @RequestParam(name = "id", defaultValue = "0") Long id) throws NotFoundException {
+            @PathVariable Long id) throws NotFoundException {
         List<Vet> vets = vetRepository.findByIdWithDepartment(id);
         List<VetResponseDto> result = vets.stream()
                 .map(vet -> new VetResponseDto(vet))

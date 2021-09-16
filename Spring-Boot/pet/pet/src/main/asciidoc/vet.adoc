@@ -1,0 +1,57 @@
+ifndef::snippets[]
+:snippets: ../../../build/generated-snippets
+endif::[]
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-http-request-title: Example Request
+:operation-http-response-title: Example Response
+
+= Vet 조회 API
+
+[[resource-vet-review]]
+== 수의사 조회
+
+==== Example Request
+include::{snippets}/GET-vet/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/GET-vet/http-response.adoc[]
+
+[[resource-vets-review]]
+== 모든 수의사 조회
+
+==== Example Request
+include::{snippets}/GET-vets/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/GET-vets/http-response.adoc[]
+
+[[resource-vet-create]]
+== 수의사 등록
+
+==== Example Request
+include::{snippets}/POST-vet/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/POST-vet/http-response.adoc[]
+
+==== Request Fields
+include::{snippets}/POST-vet/request-fields.adoc[]
+
+
+
+[[resource-vet-update]]
+== 수의사 수정
+
+==== Example Request
+include::{snippets}/PUT-vet/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/PUT-vet/http-response.adoc[]
+
+==== Request Fields
+include::{snippets}/PUT-vet/request-fields.adoc[]
