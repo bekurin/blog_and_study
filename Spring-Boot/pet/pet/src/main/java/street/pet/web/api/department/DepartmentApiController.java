@@ -1,13 +1,16 @@
-package street.pet.web.api;
+package street.pet.web.api.department;
 
 import javassist.NotFoundException;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import street.pet.domain.Department;
 import street.pet.repository.DepartmentRepository;
 import street.pet.service.DepartmentService;
+import street.pet.web.api.BaseApiController;
+import street.pet.web.api.department.request.CreateDepartmentRequest;
+import street.pet.web.api.department.request.UpdateDepartmentRequest;
+import street.pet.web.api.department.response.CreateDepartmentResponse;
+import street.pet.web.api.department.response.UpdateDepartmentResponse;
 import street.pet.web.dto.DepartmentResponseDto;
 
 import javax.validation.Valid;
@@ -34,9 +37,9 @@ public class DepartmentApiController extends BaseApiController {
         return new Result(result.size(), result);
     }
 
-    @GetMapping("/api/v1/department")
+    @GetMapping("/api/v1/department/{id}")
     public DepartmentResponseDto departmentV1(
-            @RequestParam(name = "id", defaultValue = "0") Long id) {
+            @PathVariable Long id) {
         Department department = departmentRepository.findOne(id);
         return new DepartmentResponseDto(department);
     }
@@ -66,33 +69,4 @@ public class DepartmentApiController extends BaseApiController {
         return new UpdateDepartmentResponse(department.getId(), department.getName());
     }
 
-    /**
-     * 진료과목 생성 request, response
-     */
-    @Data
-    @AllArgsConstructor
-    static class CreateDepartmentResponse {
-        private Long id;
-        private String name;
-    }
-
-    @Data
-    static class CreateDepartmentRequest {
-        private String name;
-    }
-
-    /**
-     * 진료과목 수정 request, response
-     */
-    @Data
-    @AllArgsConstructor
-    static class UpdateDepartmentResponse {
-        private Long id;
-        private String name;
-    }
-
-    @Data
-    static class UpdateDepartmentRequest {
-        private String name;
-    }
 }
