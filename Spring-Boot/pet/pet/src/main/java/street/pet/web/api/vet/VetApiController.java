@@ -1,4 +1,4 @@
-package street.pet.web.api;
+package street.pet.web.api.vet;
 
 import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
@@ -10,6 +10,11 @@ import street.pet.domain.Vet;
 import street.pet.repository.VetRepository;
 import street.pet.service.DepartmentService;
 import street.pet.service.VetService;
+import street.pet.web.api.BaseApiController;
+import street.pet.web.api.vet.request.CreateVetRequest;
+import street.pet.web.api.vet.request.UpdateVetRequest;
+import street.pet.web.api.vet.response.CreateVetResponse;
+import street.pet.web.api.vet.response.UpdateVetResponse;
 import street.pet.web.dto.VetResponseDto;
 
 import javax.validation.Valid;
@@ -72,39 +77,5 @@ public class VetApiController extends BaseApiController {
         Vet vet = vetService.findOne(vetId);
 
         return new UpdateVetResponse(vetId, vet.getDescription(), department.getName());
-    }
-
-    /**
-     * 수의사 생성 request, response
-     */
-    @Data
-    @AllArgsConstructor
-    static class CreateVetResponse {
-        private Long id;
-        private String name;
-    }
-
-    @Data
-    static class CreateVetRequest {
-        private String name;
-        private String description;
-        private Long departmentId;
-    }
-
-    /**
-     * 수의사 수정 request, response
-     */
-    @Data
-    @AllArgsConstructor
-    static class UpdateVetResponse {
-        private Long id;
-        private String description;
-        private String departmentName;
-    }
-
-    @Data
-    static class UpdateVetRequest {
-        private String description;
-        private Long departmentId;
     }
 }
