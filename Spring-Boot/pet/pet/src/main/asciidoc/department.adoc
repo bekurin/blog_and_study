@@ -1,0 +1,55 @@
+ifndef::snippets[]
+:snippets: ../../../build/generated-snippets
+endif::[]
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-http-request-title: Example Request
+:operation-http-response-title: Example Response
+
+= Department 조회 API
+
+[[resource-department-review]]
+== 진료과목 조회
+
+==== Example Request
+include::{snippets}/GET-department/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/GET-department/http-response.adoc[]
+
+[[resource-departments-review]]
+== 모든 진료과목 조회
+
+==== Example Request
+include::{snippets}/GET-departments/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/GET-departments/http-response.adoc[]
+
+[[resource-department-create]]
+== 진료과목 등록
+
+==== Example Request
+include::{snippets}/POST-department/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/POST-department/http-response.adoc[]
+
+==== Request Fields
+include::{snippets}/POST-department/request-fields.adoc[]
+
+[[resource-department-update]]
+== 진료과목 수정
+
+==== Example Request
+include::{snippets}/PUT-department/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/PUT-department/http-response.adoc[]
+
+==== Request Fields
+include::{snippets}/PUT-department/request-fields.adoc[]
