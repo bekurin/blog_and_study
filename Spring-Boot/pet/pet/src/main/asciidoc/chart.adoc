@@ -1,0 +1,73 @@
+ifndef::snippets[]
+:snippets: ../../../build/generated-snippets
+endif::[]
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:operation-http-request-title: Example Request
+:operation-http-response-title: Example Response
+
+= Chart 조회 API
+
+[[resource-chart-review]]
+== 차트 조회
+
+==== Example Request
+include::{snippets}/GET-chart/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/GET-chart/http-response.adoc[]
+
+[[resource-charts-review]]
+== 모든 차트 조회
+
+==== Example Request
+include::{snippets}/GET-charts/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/GET-charts/http-response.adoc[]
+
+[[resource-chart-pet-review]]
+== 반려동물로 차트 조회
+
+==== Example Request
+include::{snippets}/GET-chart-pet/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/GET-chart-pet/http-response.adoc[]
+
+[[resource-charts-vet-review]]
+== 수의사로 차트 조회
+
+==== Example Request
+include::{snippets}/GET-chart-vet/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/GET-chart-vet/http-response.adoc[]
+
+[[resource-chart-create]]
+== 차트 등록
+
+==== Example Request
+include::{snippets}/POST-chart/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/POST-chart/http-response.adoc[]
+
+==== Request Fields
+include::{snippets}/POST-chart/request-fields.adoc[]
+
+[[resource-chart-update]]
+== 차트 수정
+
+==== Example Request
+include::{snippets}/PUT-chart/http-request.adoc[]
+
+==== Example Response
+include::{snippets}/PUT-chart/http-response.adoc[]
+
+==== Request Fields
+include::{snippets}/PUT-chart/request-fields.adoc[]
