@@ -71,6 +71,7 @@ public class MemberApiControllerTest extends ApiDocumentationTest {
 
         //then
         result.andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value(member.getName()))
                 .andDo(document("GET-member",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())));
