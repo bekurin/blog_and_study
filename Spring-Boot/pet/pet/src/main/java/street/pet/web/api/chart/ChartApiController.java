@@ -41,9 +41,9 @@ public class ChartApiController extends BaseApiController {
         return new Result(result.size(), result);
     }
 
-    @GetMapping("/api/v1/chart")
+    @GetMapping("/api/v1/chart/{id}")
     public Result chartV1(
-            @RequestParam(name = "id") Long id) throws NotFoundException {
+            @PathVariable Long id) throws NotFoundException {
         List<Chart> charts = chartRepository.findByIdWithPetVet(id);
         List<ChartResponseDto> result = charts.stream()
                 .map(chart -> new ChartResponseDto(chart))
@@ -51,9 +51,9 @@ public class ChartApiController extends BaseApiController {
         return new Result(result.size(), result);
     }
 
-    @GetMapping("/api/v1/chart/pet")
+    @GetMapping("/api/v1/chart/pet/{id}")
     public Result chartPetV1(
-            @RequestParam(name = "id") Long id) throws NotFoundException {
+            @PathVariable Long id) throws NotFoundException {
         List<Chart> charts = chartRepository.findByPetWithPetVet(id);
         List<ChartResponseDto> result = charts.stream()
                 .map(chart -> new ChartResponseDto(chart))
@@ -62,9 +62,9 @@ public class ChartApiController extends BaseApiController {
         return new Result(result.size(), result);
     }
 
-    @GetMapping("/api/v1/chart/vet")
+    @GetMapping("/api/v1/chart/vet/{id}")
     public Result chartVetV1(
-            @RequestParam(name = "id") Long id) throws NotFoundException {
+            @PathVariable Long id) throws NotFoundException {
         List<Chart> charts = chartRepository.findByVetWithPetVet(id);
         List<ChartResponseDto> result = charts.stream()
                 .map(chart -> new ChartResponseDto(chart))
