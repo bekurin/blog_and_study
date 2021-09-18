@@ -5,6 +5,7 @@
 - 모든 테이블에 있어 CRUD API 개발
 - Spring Rest Docs를 사용하여 API 문서화
 - Service, Controller, Entity 성공, 실패 테스트 코드 작성 (약 90% 커버)
+- Github 커밋 컨벤션 적용
 
 ### 프로젝트 진행 시 발생한 문제점
 #### 조회 API n+1 문제 발생
