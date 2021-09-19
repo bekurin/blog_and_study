@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import street.pet.domain.Chart;
 import street.pet.domain.ChartStatus;
-import street.pet.repository.ChartRepository;
 import street.pet.repository.ChartSearch;
 import street.pet.service.ChartService;
 import street.pet.web.api.BaseApiController;
@@ -23,7 +22,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ChartApiController extends BaseApiController {
 
-    private final ChartRepository chartRepository;
     private final ChartService chartService;
 
     /**
@@ -33,7 +31,7 @@ public class ChartApiController extends BaseApiController {
     public Result chartsV1(
             @RequestParam(value = "offset", defaultValue = "0") int offset,
             @RequestParam(value = "limit", defaultValue = "100") int limit) throws NotFoundException {
-        List<Chart> charts = chartRepository.findAllWithPetVet(offset, limit);
+        List<Chart> charts = chartService.findAllWithPetVet(offset, limit);
         List<ChartResponseDto> result = charts.stream()
                 .map(chart -> new ChartResponseDto(chart))
                 .collect(Collectors.toList());
@@ -43,7 +41,7 @@ public class ChartApiController extends BaseApiController {
     @GetMapping("/api/v1/chart/{id}")
     public Result chartV1(
             @PathVariable Long id) throws NotFoundException {
-        List<Chart> charts = chartRepository.findByIdWithPetVet(id);
+        List<Chart> charts = chartService.findById(id);
         List<ChartResponseDto> result = charts.stream()
                 .map(chart -> new ChartResponseDto(chart))
                 .collect(Collectors.toList());
@@ -53,7 +51,7 @@ public class ChartApiController extends BaseApiController {
     @GetMapping("/api/v1/chart/pet/{id}")
     public Result chartPetV1(
             @PathVariable Long id) throws NotFoundException {
-        List<Chart> charts = chartRepository.findByPetWithPetVet(id);
+        List<Chart> charts = chartService.findByPet(id);
         List<ChartResponseDto> result = charts.stream()
                 .map(chart -> new ChartResponseDto(chart))
                 .collect(Collectors.toList());
@@ -64,7 +62,7 @@ public class ChartApiController extends BaseApiController {
     @GetMapping("/api/v1/chart/vet/{id}")
     public Result chartVetV1(
             @PathVariable Long id) throws NotFoundException {
-        List<Chart> charts = chartRepository.findByVetWithPetVet(id);
+        List<Chart> charts = chartService.findByVet(id);
         List<ChartResponseDto> result = charts.stream()
                 .map(chart -> new ChartResponseDto(chart))
                 .collect(Collectors.toList());
@@ -76,7 +74,7 @@ public class ChartApiController extends BaseApiController {
     public Result chartSearchV1(
             @RequestParam(value = "name") String name,
             @RequestParam(value = "status") String status) throws NotFoundException {
-        List<Chart> charts = chartRepository.findAllWithSearch(new ChartSearch(ChartStatus.valueOf(status), name));
+        List<Chart> charts = chartService.findAllWithSearch(new ChartSearch(ChartStatus.valueOf(status), name));
         List<ChartResponseDto> result = charts.stream()
                 .map(chart -> new ChartResponseDto(chart))
                 .collect(Collectors.toList());
