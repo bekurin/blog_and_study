@@ -52,6 +52,14 @@ public class VetService {
         return vetRepository.findByDepartment(department);
     }
 
+    public List<Vet> findById(Long id) {
+        return vetRepository.findByIdWithDepartment(id);
+    }
+
+    public List<Vet> findAllWithDepartment() {
+        return vetRepository.findAllWithDepartment();
+    }
+
     /**
      * 수의사 정보 수정
      */
