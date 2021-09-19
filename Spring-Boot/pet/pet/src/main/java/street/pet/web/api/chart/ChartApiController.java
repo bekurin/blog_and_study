@@ -1,13 +1,12 @@
 package street.pet.web.api.chart;
 
 import javassist.NotFoundException;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import street.pet.domain.Chart;
 import street.pet.domain.ChartStatus;
 import street.pet.repository.ChartRepository;
+import street.pet.repository.ChartSearch;
 import street.pet.service.ChartService;
 import street.pet.web.api.BaseApiController;
 import street.pet.web.api.chart.request.CreateChartRequest;
@@ -70,6 +69,18 @@ public class ChartApiController extends BaseApiController {
                 .map(chart -> new ChartResponseDto(chart))
                 .collect(Collectors.toList());
 
+        return new Result(result.size(), result);
+    }
+    
+    @GetMapping("/api/v1/chart")
+    public Result chartSearchV1(
+            @RequestParam(value = "name") String name,
+            @RequestParam(value = "status") String status) throws NotFoundException {
+        List<Chart> charts = chartRepository.findAllWithSearch(new ChartSearch(ChartStatus.valueOf(status), name));
+        List<ChartResponseDto> result = charts.stream()
+                .map(chart -> new ChartResponseDto(chart))
+                .collect(Collectors.toList());
+        
         return new Result(result.size(), result);
     }
 

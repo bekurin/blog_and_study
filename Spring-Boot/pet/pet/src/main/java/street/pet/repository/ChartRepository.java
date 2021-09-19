@@ -1,10 +1,12 @@
 package street.pet.repository;
 
+import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import street.pet.domain.Chart;
-import street.pet.domain.Pet;
-import street.pet.domain.Vet;
+import org.springframework.util.StringUtils;
+import street.pet.domain.*;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -67,5 +69,37 @@ public class ChartRepository {
                                 " where c.pet.id = :id", Chart.class)
                 .setParameter("id", id)
                 .getResultList();
+    }
+
+    public List<Chart> findAllWithSearch(ChartSearch chartSearch){
+        JPAQueryFactory query = new JPAQueryFactory(em);
+        QChart chart = QChart.chart;
+        QPet pet = QPet.pet;
+        QVet vet = QVet.vet;
+
+        return query
+                .select(chart)
+                .from(chart)
+                .join(chart.pet, pet)
+                .fetchJoin()
+                .join(chart.vet, vet)
+                .fetchJoin()
+                .where(petNameLike(chartSearch.getPetName()), chartStatusEq(chartSearch.getStatus()))
+                .limit(1000)
+                .fetch();
+    }
+
+    private BooleanExpression chartStatusEq(ChartStatus status) {
+        if (status == null) {
+            return null;
+        }
+        return QChart.chart.status.eq(status);
+    }
+
+    private BooleanExpression petNameLike(String petName) {
+        if(!StringUtils.hasText(petName)) {
+            return null;
+        }
+        return QPet.pet.name.like(petName);
     }
 }
