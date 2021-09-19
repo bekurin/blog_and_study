@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class VetApiController extends BaseApiController {
 
-    private final VetRepository vetRepository;
     private final VetService vetService;
     private final DepartmentService departmentService;
 
@@ -34,7 +33,7 @@ public class VetApiController extends BaseApiController {
      */
     @GetMapping("/api/v1/vets")
     public Result vetsV1() throws NotFoundException {
-        List<Vet> vets = vetRepository.findAllWithDepartment();
+        List<Vet> vets = vetService.findAllWithDepartment();
         List<VetResponseDto> result = vets.stream()
                 .map(vet -> new VetResponseDto(vet))
                 .collect(Collectors.toList());
@@ -45,7 +44,7 @@ public class VetApiController extends BaseApiController {
     @GetMapping("/api/v1/vet/{id}")
     public Result vetV1(
             @PathVariable Long id) throws NotFoundException {
-        List<Vet> vets = vetRepository.findByIdWithDepartment(id);
+        List<Vet> vets = vetService.findById(id);
         List<VetResponseDto> result = vets.stream()
                 .map(vet -> new VetResponseDto(vet))
                 .collect(Collectors.toList());
