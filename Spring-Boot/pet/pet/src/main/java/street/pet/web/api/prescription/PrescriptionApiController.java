@@ -1,4 +1,4 @@
-package street.pet.web.api;
+package street.pet.web.api.prescription;
 
 import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import street.pet.domain.Prescription;
 import street.pet.repository.PrescriptionRepository;
 import street.pet.service.PrescriptionService;
+import street.pet.web.api.BaseApiController;
+import street.pet.web.api.prescription.request.CreatePrescriptionRequest;
+import street.pet.web.api.prescription.request.UpdatePrescriptionRequest;
+import street.pet.web.api.prescription.response.CreatePrescriptionResponse;
+import street.pet.web.api.prescription.response.UpdatePrescriptionResponse;
 import street.pet.web.dto.PrescriptionResponseDto;
 
 import javax.validation.Valid;
@@ -16,7 +21,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-public class PrescriptionApiController extends BaseApiController{
+public class PrescriptionApiController extends BaseApiController {
 
     private final PrescriptionRepository prescriptionRepository;
     private final PrescriptionService prescriptionService;
@@ -65,38 +70,5 @@ public class PrescriptionApiController extends BaseApiController{
         Prescription prescription = prescriptionService.findOne(prescriptionId);
 
         return new UpdatePrescriptionResponse(prescription.getId(), prescription.getDescription());
-    }
-
-    /**
-     * 처방전 생성 request, response
-     */
-    @Data
-    @AllArgsConstructor
-    static class CreatePrescriptionResponse {
-        private Long id;
-        private String description;
-        private String doctor;
-    }
-
-    @Data
-    static class CreatePrescriptionRequest {
-        private String description;
-        private Long vetId;
-        private Long chartId;
-    }
-
-    /**
-     * 처방전 수정 request, response
-     */
-    @Data
-    @AllArgsConstructor
-    static class UpdatePrescriptionResponse {
-        private Long id;
-        private String description;
-    }
-
-    @Data
-    static class UpdatePrescriptionRequest {
-        private String description;
     }
 }
