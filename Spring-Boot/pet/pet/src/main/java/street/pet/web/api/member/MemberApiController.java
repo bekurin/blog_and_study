@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MemberApiController extends BaseApiController {
 
-    private final MemberRepository memberRepository;
     private final MemberService memberService;
 
     /**
@@ -30,7 +29,7 @@ public class MemberApiController extends BaseApiController {
      */
     @GetMapping("/api/v1/members")
     public Result membersV1() throws NotFoundException {
-        List<Member> members = memberRepository.findAll();
+        List<Member> members = memberService.findMembers();
 
         List<MemberResponseDto> result = members.stream()
                 .map(member -> new MemberResponseDto(member))
@@ -42,7 +41,7 @@ public class MemberApiController extends BaseApiController {
     @GetMapping("/api/v1/member/{id}")
     public MemberResponseDto memberV1(
             @PathVariable Long id) {
-        Member member = memberRepository.findOne(id);
+        Member member = memberService.findOne(id);
         return new MemberResponseDto(member);
     }
 

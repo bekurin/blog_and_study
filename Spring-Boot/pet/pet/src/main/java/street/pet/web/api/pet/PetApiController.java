@@ -28,7 +28,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PetApiController extends BaseApiController {
 
-    private final PetRepository petRepository;
     private final MemberService memberService;
     private final PetService petService;
 
@@ -37,7 +36,7 @@ public class PetApiController extends BaseApiController {
      */
     @GetMapping("/api/v1/pets")
     public Result petsV1() throws NotFoundException {
-        List<Pet> pets = petRepository.findAll();
+        List<Pet> pets = petService.findPets();
         List<PetResponseDto> result = pets.stream()
                 .map(pet -> new PetResponseDto(pet))
                 .collect(Collectors.toList());
@@ -47,7 +46,7 @@ public class PetApiController extends BaseApiController {
     @GetMapping("/api/v1/pet/{id}")
     public PetResponseDto petV1(
             @PathVariable Long id) {
-        Pet pet = petRepository.findOne(id);
+        Pet pet = petService.findOne(id);
         return new PetResponseDto(pet);
     }
 

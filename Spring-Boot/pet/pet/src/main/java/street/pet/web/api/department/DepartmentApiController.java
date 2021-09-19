@@ -4,7 +4,6 @@ import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import street.pet.domain.Department;
-import street.pet.repository.DepartmentRepository;
 import street.pet.service.DepartmentService;
 import street.pet.web.api.BaseApiController;
 import street.pet.web.api.department.request.CreateDepartmentRequest;
@@ -21,7 +20,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DepartmentApiController extends BaseApiController {
 
-    private final DepartmentRepository departmentRepository;
     private final DepartmentService departmentService;
 
     /**
@@ -29,7 +27,7 @@ public class DepartmentApiController extends BaseApiController {
      */
     @GetMapping("/api/v1/departments")
     public Result departmentsV1() throws NotFoundException {
-        List<Department> departments = departmentRepository.findAll();
+        List<Department> departments = departmentService.findDepartments();
         List<DepartmentResponseDto> result = departments.stream()
                 .map(department -> new DepartmentResponseDto(department))
                 .collect(Collectors.toList());
@@ -40,7 +38,7 @@ public class DepartmentApiController extends BaseApiController {
     @GetMapping("/api/v1/department/{id}")
     public DepartmentResponseDto departmentV1(
             @PathVariable Long id) {
-        Department department = departmentRepository.findOne(id);
+        Department department = departmentService.findOne(id);
         return new DepartmentResponseDto(department);
     }
 
