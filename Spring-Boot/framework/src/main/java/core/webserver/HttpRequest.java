@@ -1,5 +1,8 @@
 package core.webserver;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,37 +15,48 @@ import static core.util.IOUtils.readData;
 
 public class HttpRequest {
 
-    private String method;
-    private String path;
-    private Map<String, String> header;
-    private Map<String, String> parameter;
+    private static final Logger log = LoggerFactory.getLogger(HttpRequest.class);
 
-    public String getMethod() {
-        return method;
-    }
+    private String path;
+    private HttpMethod method;
+    private Map<String, String> header;
+    private Map<String, String> params;
+    private RequestLine requestLine;
 
     public String getPath() {
         return path;
+    }
+
+    public HttpMethod getMethod() {
+        return method;
     }
 
     public String getHeader(String key) {
         return header.get(key);
     }
 
-    public String getParameter(String key) {
-        return parameter.get(key);
+    public String getParams(String key) {
+        return params.get(key);
     }
 
     public HttpRequest(InputStream in) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
-        String line = br.readLine();
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+            String line = br.readLine();
 
-        String[] tokens = line.split(" ");
-        method = tokens[0];
-        path = tokens[1];
+            requestLine = new RequestLine(line);
+            path = requestLine.getPath();
+            method = requestLine.getMethod();
 
-        header = setHeader(br, line);
-        parameter = setParameter(path, method, br);
+            header = setHeader(br, line);
+            if (requestLine.getMethod().equals(HttpMethod.POST)) {
+                params = setParameter(br);
+            } else {
+                params = requestLine.getParams();
+            }
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
     }
 
     private Map<String, String> setHeader(BufferedReader br, String line) throws IOException {
@@ -54,23 +68,13 @@ public class HttpRequest {
 
             if (pair != null) {
                 headerParameters.put(pair.getKey(), pair.getValue().trim());
+                log.debug("header: {} - {}", pair.getKey(), pair.getValue());
             }
         }
         return headerParameters;
     }
 
-    private Map<String, String> setParameter(String path, String method, BufferedReader br) throws IOException {
-        String queryString = "";
-
-        if (method.equals("GET")){
-            int index = path.indexOf("?");
-
-            queryString = path.substring(index + 1);
-            this.path = path.substring(0, index);
-        } else if (method.equals("POST")) {
-            queryString = readData(br, Integer.parseInt(header.get("Content-Length")));
-        }
-
-        return parseQueryString(queryString);
+    private Map<String, String> setParameter(BufferedReader br) throws IOException {
+        return parseQueryString(readData(br, Integer.parseInt(header.get("Content-Length"))));
     }
 }
