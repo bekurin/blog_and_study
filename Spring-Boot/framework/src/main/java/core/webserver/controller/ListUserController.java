@@ -10,14 +10,11 @@ import java.util.Map;
 public class ListUserController extends AbstractController {
 
     @Override
-    public void service(HttpRequest request, HttpResponse response) throws IOException {
-        doGet(request, response);
-    }
-
-    @Override
     public void doGet(HttpRequest request, HttpResponse response) throws IOException {
         if (isLogin(request.getHeader("Cookie"))) {
-            response.forward("/user/login.html");
+            response.forward("user/list.html");
+        } else {
+            response.forward("user/login_failed.html");
         }
     }
 

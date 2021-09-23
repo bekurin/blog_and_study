@@ -1,21 +1,14 @@
 package core.webserver.controller;
 
-import core.db.DataBase;
 import core.model.User;
 import core.webserver.HttpRequest;
 import core.webserver.HttpResponse;
 
 import java.io.IOException;
-import java.sql.DatabaseMetaData;
 
-import static core.db.DataBase.*;
+import static core.db.DataBase.findUserById;
 
 public class LoginController extends AbstractController {
-
-    @Override
-    public void service(HttpRequest request, HttpResponse response) throws IOException {
-        doPost(request, response);
-    }
 
     @Override
     public void doPost(HttpRequest request, HttpResponse response) throws IOException {
