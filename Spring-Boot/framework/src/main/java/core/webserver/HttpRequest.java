@@ -48,6 +48,8 @@ public class HttpRequest {
             path = requestLine.getPath();
             method = requestLine.getMethod();
 
+            log.debug("path: {}", path);
+
             header = setHeader(br, line);
             if (requestLine.getMethod().equals(HttpMethod.POST)) {
                 params = setParameter(br);
@@ -76,5 +78,12 @@ public class HttpRequest {
 
     private Map<String, String> setParameter(BufferedReader br) throws IOException {
         return parseQueryString(readData(br, Integer.parseInt(header.get("Content-Length"))));
+    }
+
+    public String getDefaultPath(String path) {
+        if (path.equals("/")){
+            return "/index.html";
+        }
+        return path;
     }
 }
