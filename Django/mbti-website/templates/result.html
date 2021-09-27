@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section id="main_contents">
+    <div class="wrapper">
+        <div class="result">
+            <div class="titles">
+                <h3 id="sub_title">{{ result_info.sub_title }}</h3>
+                <h1 id="head_title">{{ result_info.title }}</h1>
+            </div>
+            <div class="result_img">
+                <img id="img_type" src="{{ result_info.result_image.url }}" alt="결과 이미지">
+            </div>
+        </div>
+        <div class="result_explains">
+            <div class="explain">
+                <h3 class="title" id="title"></h3>
+                <ul>
+                    <li id="description_1">{{ result_info.description_1 }}</li>
+                    <li id="description_2">{{ result_info.description_2 }}</li>
+                    <li id="description_3">전체 참여자의 {{ percentage }}%의 사람이 해당 유형에 속합니다.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="web_links">
+            <h3 class="title">이번학기 팀프로젝트가 있었나?</h3>
+            <ul>
+                <li>
+                    <a href="https://everytime.kr/" target="_blank">
+                        <img src="{% static 'img/everytime.png' %}" alt="에브리타임으로 가기">
+                        <h3>에브리타임 바로 가기</h3>
+                        <button type="button">시간표 확인하러 가기</button>
+                    </a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <a id="mbti" href="https://www.16personalities.com/ko/%EC%84%B1%EA%B2%A9%EC%9C%A0%ED%98%95-{{ result_info.result.name }}" target="_blank">
+                        <img src="{% static 'img/mbti_logo.svg' %}" alt="mbti 홈페이지 가기">
+                        <h3>mbti 홈페이지 바로 가기</h3>
+                        <button type="button">나의 mbti는?</button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="share">
+            <div class="url">
+                <button class="copy_btn" type="button">URL 복사하기</button>
+            </div>
+            <div class="facebook">
+                <button class="facebook_share" type="button">Facebook 공유하기</button>
+            </div>
+            <div class="kakao">
+                <button class="kakao_share" type="button">카카오톡 공유하기</button>
+            </div>
+        </div>
+        <div class="buttons">
+            <ul>
+                <li>
+                    <h3>난 이런 유형이 아니야 검사가 잘못되었어!!!</h3>
+                    <a href="{% url 'home' %}">
+                        <button type="button">테스트 다시 하기</button>
+                    </a>
+                </li>
+                <li>
+                    <h3>어떤 유형들이 있을까?</h3>
+                    <a href="{% url 'result_set' %}"
+                        target="_blank">
+                        <button type="button">다른 결과 알아보기</button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="logo_image">
+            <a href="https://www.notion.so/chungchung-34d224bce3154434a9d5c85af7d4511e" target="_blank">
+                <img src="{% static 'img/img_logo.png' %}" alt="Logo Image">
+            </a>
+        </div>
+    </div>
+</section>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="{% static 'js/result.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section id="main_contents">
+    <div class="wraaper">
+        <div class="title">
+            <h3 class="main_title">나의 팀플 유형은?</h3>
+            <h3 class="sub_title">What is my team project type?</h3>
+        </div>
+        <div class="intro">
+            <h1>나의 팀플 유형은?!</h1>
+            <div class="type">
+                <ul class="type_list">
+                    <li>열정가득 배려왕</li>
+                    <li>설계 달인</li>
+                    <li>최고의 서포터</li>
+                    <li>이성적인 전략가</li>
+                    <li>계획왕</li>
+                    <li>날개 없는 천사</li>
+                    <li>게으른 천재</li>
+                    <li>현실적 중재자</li>
+                    <li>성실한 완벽주의자</li>
+                    <li>본투비 조장</li>
+                    <li>분위기 메이커</li>
+                    <li>창의력 대장</li>
+                    <li>에너지 뿜뿜</li>
+                    <li>게으른 완벽주의자</li>
+                    <li>칭찬은 나를 숨쉬게 해</li>
+                    <li>정리의 달인</li>
+                    <li>열정가득 배려왕</li>
+                </ul>
+            </div>
+        </div>
+        <div class="button">
+            <a href="{% url 'form' %}">
+                <button class="start" type="button">시작하기</button>
+            </a>
+        </div>
+        <div class="result_data">
+            <div class="data_wrap">
+                <h3>벌써 이만큼이나?</h3>
+                <ul>
+                    <li>참여자 수: <span id="participant">{{ total_count }}</span>명</li>
+                </ul>
+            </div>
+        </div>
+        <div class="logo-image">
+            <a href="https://www.notion.so/chungchung-34d224bce3154434a9d5c85af7d4511e" target="_blank">
+                <img src="{% static 'img/img_logo.png' %}" alt="Logo Image">
+            </a>
+        </div>
+        <div class="description">
+            <p></p>
+        </div>
+    </div>
+</section>
+</body>
+
+</html>
+
+{% endblock %}

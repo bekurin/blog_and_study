@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section>
+    <h2 class="main_title">다른 유형은 어떤게 있을까?</h2>
+    <div class="wrapper">
+        {% for item in result_info %}
+            {% if forloop.counter0|divisibleby:"4" %}
+            <div class="columns">
+            {% endif %}
+            <figure>
+                <img onclick="img_click('{{ item.result.name }}')" src="{{ item.result_image.url }}" alt="{{ item.result }} Image">
+                <figcaption>{{ item.title }}</figcaption>
+                <h2>{{ item.sub_title }}</h2>
+            </figure>
+            {% if forloop.counter|divisibleby:"4" %}
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="warrper">
+                <div class="titles">
+                    <h3 id="sub_title">sub_title</h2>
+                        <h1 id="title">title</h2>
+                </div>
+                <div class="result_img">
+                    <img id="type_image" src="" alt="결과 이미지">
+                </div>
+                <div class="explain">
+                    <ul>
+                        <li id="description_1">hello world</li>
+                        <li id="description_2">hello world</li>
+                    </ul>
+                </div>
+                <div class="buttons">
+                    <a href="{% url 'home' %}"><button>테스트 다시 하기</button></a>
+                    <a href="https://www.notion.so/chungchung-34d224bce3154434a9d5c85af7d4511e" target="_blank"><img src="{% static 'img/img_logo.png' %}"
+                            alt="로고 이미지"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const modal = document.getElementById("myModal")
+    const span = document.getElementsByClassName("close")[0];
+    
+    var sub_title = document.getElementById("sub_title")
+    var title = document.getElementById("title")
+    var result_img = document.getElementById("type_image")
+    var description_1 = document.getElementById("description_1")
+    var description_2 = document.getElementById("description_2")
+
+    let info = [
+        {% for item in result_info %}
+            {
+                type: "{{ item.result.name }}",
+                sub_title: "{{ item.sub_title }}",
+                title: "{{ item.title }}",
+                result_img: "{{ item.result_image.url }}",
+                description_1: "{{ item.description_1 }}",
+                description_2: "{{ item.description_2 }}",
+            },
+        {% endfor %}
+    ]
+
+    console.log(info)
+    function set_value_to_modal(value){
+        console.log(value)
+        sub_title.innerText = value['sub_title']
+        title.innerText = value['title']
+        result_img.src = value['result_img']
+        description_1.innerText = value['description_1']
+        description_2.innerText = value['description_2']
+    }
+
+    function img_click(type){
+        for (let i=0; i<info.length; i++){
+            if (info[i]['type'] == type){
+                set_value_to_modal(info[i])
+            }
+        }
+        modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(e){
+        if (e.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+</script>
+
+{% endblock %}

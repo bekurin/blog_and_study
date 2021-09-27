@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<section id="survey">
+    <div class="wrapper">
+        <form action="{% url 'form_check' total_count %}" method="POST">
+            {% csrf_token %}
+            {% for question in questions %}
+            <div class="test">
+                <div class="question_container">
+                    <h3 class="number">{{ question.number }} / {{ total_count }}</h3>
+                    <h3 class="question">{{ question.content }}</h3>
+                </div>
+                <div class="answer">
+                    {% for choice in choices %}
+                    {% if choice.question == question %}
+                    <div>
+                        <input id="one_{{ choice.pk }}" type="radio" name="answer_{{ choice.question.number }}" value="{{ choice.score }}">
+                        <label for="one_{{ choice.pk }}">{{ choice.content }}</label>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="btn_wrap {% if question.number != 1 %}btn_sort{% endif %}">
+                    {% if question.number == 1 %}
+                    <button class="next_btn" type="button">다 음</button>
+                    {% elif question.number < total_count %}
+                    <button class="prev_btn" type="button">이 전</button>
+                    <button class="next_btn" type="button">다 음</button>
+                    {% else %}
+                    <button class="prev_btn" type="button">이 전</button>
+                    <input class="submit_btn" type="submit" value="제 출">
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </form>
+    </div>
+</section>
+<script type="text/javascript" src="{% static 'js/form.js' %}"></script>
+<script>
+    // $(function () {
+    //     $("form").submit(function () {
+    //         let radios = $('input[type=radio]:checked');
+    //         if (radios.length < "{{ total_count }}") {
+    //             console.log('radios: ' + radios.length)
+    //             console.log('total_count: ' + "{{ total_count }}")
+    //             alert("선택되지 않은 문항이 존재합니다.");
+    //             return false;
+    //         }
+    //         return true;
+    //     });
+    // })
+</script>
+
+{% endblock %}

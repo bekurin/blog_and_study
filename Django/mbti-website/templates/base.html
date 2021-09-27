@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 팀플 유형 찾기</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    {% if '/' == request.path %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    {% elif '/form/' == request.path %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+    {% elif '/result/' == request.path %}
+    <meta property="og:url"           content="https://www.your-domain.com/your-page.html" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Your Website Title" />
+    <meta property="og:description"   content="Your description" />
+    <meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/result.css' %}">
+    {% elif '/result_set' in request.path %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/result_group_page.css' %}">
+    {% endif %}
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+
+    {% block content %}
+    <!-- load content -->
+    {% endblock %}
