@@ -1,4 +1,4 @@
-# alistyle-e-commerce-with-django
+# e-commerce-website
 ### django를 공부하기 위한 목적으로 제작한 웹사이트입니다.
 
 ### 구현 항목
