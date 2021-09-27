@@ -1,0 +1,246 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content bg-white padding-y">
+    <div class="container">
+
+        <!-- ============================ ITEM DETAIL ======================== -->
+        <div class="row">
+            <aside class="col-md-6">
+                <div class="card">
+                    <article class="gallery-wrap">
+                        <div class="img-big-wrap">
+                            <div> <a href="#"><img src="{{ single_product.images.url }}"></a></div>
+                        </div> <!-- slider-product.// -->
+                        <!-- <div class="thumbs-wrap">
+          <a href="#" class="item-thumb"> <img src="images/items/15.jpg"></a>
+          <a href="#" class="item-thumb"> <img src="images/items/15-1.jpg"></a>
+          <a href="#" class="item-thumb"> <img src="images/items/15-2.jpg"></a>
+          <a href="#" class="item-thumb"> <img src="images/items/15-1.jpg"></a>
+        </div>  -->
+                        <!-- slider-nav.// -->
+                    </article> <!-- gallery-wrap .end// -->
+                </div> <!-- card.// -->
+            </aside>
+            <main class="col-md-6">
+                <form action="{% url 'add_cart' single_product.pk %}" method="POST">
+                    {% csrf_token %}
+                    <article class="product-info-aside">
+
+                        <h2 class="title mt-3">{{ single_product.proudct_name }}</h2>
+
+                        <div class="rating-star">
+                            <span>
+                                <i class="fa fa-star{% if single_product.get_average_review < 0.5 %}-o{% elif single_product.get_average_review >= 0.5 and single_product.get_average_review < 1 %}-half-o {% endif %}"
+                                    aria-hidden="true"></i>
+                                <i class="fa fa-star{% if single_product.get_average_review < 1.5 %}-o{% elif single_product.get_average_review >= 1.5 and single_product.get_average_review < 2 %}-half-o {% endif %}"
+                                    aria-hidden="true"></i>
+                                <i class="fa fa-star{% if single_product.get_average_review < 2.5 %}-o{% elif single_product.get_average_review >= 2.5 and single_product.get_average_review < 3 %}-half-o {% endif %}"
+                                    aria-hidden="true"></i>
+                                <i class="fa fa-star{% if single_product.get_average_review < 3.5 %}-o{% elif single_product.get_average_review >= 3.5 and single_product.get_average_review < 4 %}-half-o {% endif %}"
+                                    aria-hidden="true"></i>
+                                <i class="fa fa-star{% if single_product.get_average_review < 4.5 %}-o{% elif single_product.get_average_review >= 4.5 and single_product.get_average_review < 5 %}-half-o {% endif %}"
+                                    aria-hidden="true"></i>
+                            </span>
+                            <small class="label-rating text-muted"> {{ single_product.get_review_count }}개의 리뷰 </small>
+                            <small class="label-rating text-success"><i class="fas fa-clipboard-check"></i> {{ single_product.get_order_count }} 개의 주문 </small>
+                        </div> <!-- rating-wrap.// -->
+
+                        <div class="mb-3">
+                            {% if product.sale != 0 %}
+                            <var class="price h4">{{ single_product.price|intcomma }} 원</var>
+                            {% else %}
+                            <var class="text-muted"><del>{{ single_product.price|intcomma }} 원</del></var>
+                            <span class="price h4">{{ single_product.get_sale_price|intcomma }} 원</span>
+                            {% endif %}
+                        </div> <!-- price-detail-wrap .// -->
+
+                        <p> {{ single_product.description }} </p>
+
+
+                        <dl class="row">
+                            <dt class="col-sm-3">배송비</dt>
+                            <dd class="col-sm-9">
+                                <a href="#">
+                                    {% if single_product.delivery_cost <= 0 %}
+                                    <p>무료배송</p>
+                                    {% else %}
+                                    {{ single_product.delivery_cost }}
+                                    {% endif %}
+                                </a>
+                            </dd>
+
+                            <dt class="col-sm-3">평균 배송 기간</dt>
+                            <dd class="col-sm-9">{{ single_product.delivery_period }} 영업일 이내</dd>
+
+                            <dt class="col-sm-3">재고</dt>
+                            <dd class="col-sm-9">{{ single_product.stock }} 개 남았습니다.</dd>
+
+                            <dt class="col-sm-3">크기</dt>
+                            <dd class="col-sm-7">
+                                <select name="size" class="form-control">
+                                    <option value="" disabled selected>----</option>
+                                    {% for i in single_product.variation_set.sizes %}
+                                    <option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </dd>
+
+                            <dt class="col-sm-3">색상</dt>
+                            <dd class="col-sm-7">
+                                <select name="color" class="form-control">
+                                    <option value="" disabled selected>----</option>
+                                    {% for i in single_product.variation_set.colors %}
+                                    <option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </dd>
+                        </dl>
+
+                        <div class="form-row  mt-4">
+                            <div class="form-group col-md flex-grow-0">
+                                <div class="input-group mb-3 input-spinner">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-light" type="button" id="button-plus"> + </button>
+                                    </div>
+                                    <input type="text" class="form-control" value="1">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-light" type="button" id="button-minus"> &minus; </button>
+                                    </div>
+                                </div>
+                            </div> <!-- col.// -->
+                            <div class="form-group col-md">
+                                {% if single_product.stock <= 0 %}
+                                <h5 class="text-danger">재고 없음</h5>
+                                {% else %}
+                                <button type="submit" class="btn  btn-primary">
+                                    <span class="text"> 장바구니에 넣기 </span>
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                                {% endif %}
+                                {% if single_product in like_items %}
+                                <a href="{% url 'remove_like' single_product.id %}" class="btn btn-light"><i
+                                        class="fa fa-heart"></i> 좋아요 </a>
+                                {% else %}
+                                <a href="{% url 'add_like' single_product.id %}" class="btn btn-light"><i
+                                        class="far fa-heart"></i> 좋아요 </a>
+                                {% endif %}
+                            </div> <!-- col.// -->
+                        </div> <!-- row.// -->
+
+                    </article> <!-- product-info-aside .// -->
+                </form>
+            </main> <!-- col.// -->
+
+        </div> <!-- row.// -->
+        <!-- ================ ITEM DETAIL END .// ================= -->
+        <br>
+
+        <div class="row">
+            <div class="col-md-9">
+                {% include 'includes/alerts.html' %}
+                {% if user.is_authenticated and order_product %}
+                <form action="{% url 'submit_review' single_product.id %}" method="POST">
+                    {% csrf_token %}
+                    <div>
+                        <label for="" class="h5 title">상품은 마음에 드셨나요?</label>
+                        <br>
+                        <div class="rate">
+                            <input type="radio" name="rating" id="rating10" value="5" required checked><label for="rating10"
+                                title="5"></label>
+                            <input type="radio" name="rating" id="rating9" value="4.5" required><label for="rating9"
+                                title="4.5" class="half"></label>
+                            <input type="radio" name="rating" id="rating8" value="4" required><label for="rating8"
+                                title="4"></label>
+                            <input type="radio" name="rating" id="rating7" value="3.5" required><label for="rating7"
+                                title="3.5" class="half"></label>
+                            <input type="radio" name="rating" id="rating6" value="3" required><label for="rating6"
+                                title="3"></label>
+                            <input type="radio" name="rating" id="rating5" value="2.5" required><label for="rating5"
+                                title="2.5" class="half"></label>
+                            <input type="radio" name="rating" id="rating4" value="2" required><label for="rating4"
+                                title="2"></label>
+                            <input type="radio" name="rating" id="rating3" value="1.5" required><label for="rating3"
+                                title="1.5" class="half"></label>
+                            <input type="radio" name="rating" id="rating2" value="1" required><label for="rating2"
+                                title="1"></label>
+                            <input type="radio" name="rating" id="rating1" value="0.5" required><label for="rating1"
+                                title="0.5" class="half"></label>
+
+                        </div>
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" name="subject">
+                    </div>
+                    <br>
+                    <input class="btn btn-primary" type="submit" value="제출하기">
+                </form>
+                {% endif %}
+                
+                <br>
+
+                {% if reviews is not None %}
+                <header class="section-heading">
+                    <h3> 소중한 리뷰 </h3>
+                    <div class="rating-star">
+                        <span>
+                            <i class="fa fa-star{% if single_product.get_average_review < 0.5 %}-o{% elif single_product.get_average_review >= 0.5 and single_product.get_average_review < 1 %}-half-o {% endif %}"
+                                aria-hidden="true"></i>
+                            <i class="fa fa-star{% if single_product.get_average_review < 1.5 %}-o{% elif single_product.get_average_review >= 1.5 and single_product.get_average_review < 2 %}-half-o {% endif %}"
+                                aria-hidden="true"></i>
+                            <i class="fa fa-star{% if single_product.get_average_review < 2.5 %}-o{% elif single_product.get_average_review >= 2.5 and single_product.get_average_review < 3 %}-half-o {% endif %}"
+                                aria-hidden="true"></i>
+                            <i class="fa fa-star{% if single_product.get_average_review < 3.5 %}-o{% elif single_product.get_average_review >= 3.5 and single_product.get_average_review < 4 %}-half-o {% endif %}"
+                                aria-hidden="true"></i>
+                            <i class="fa fa-star{% if single_product.get_average_review < 4.5 %}-o{% elif single_product.get_average_review >= 4.5 and single_product.get_average_review < 5 %}-half-o {% endif %}"
+                                aria-hidden="true"></i>
+                            <span>{{ single_product.get_review_count }} 개의 리뷰가 작성되었습니다. </span>
+                        </span>
+                    </div>
+                </header>
+
+                {% for review in reviews %}
+                <article class="box mb-3">
+                    <div class="icontext w-100">
+                        <div class="text">
+                            <span class="date text-muted float-md-right">{{ review.updated_at }}</span>
+                            <h6 class="mb-1">{{ review.user.username }}</h6>
+                            <div class="rating-star">
+                                <span>
+                                    <i class="fa fa-star{% if review.rating == 0.5 %}-half-o{% elif review.rating < 1%}-o {% endif %}"
+                                        aria-hidden="true"></i>
+                                    <i class="fa fa-star{% if review.rating == 1.5 %}-half-o{% elif review.rating < 2%}-o {% endif %}"
+                                        aria-hidden="true"></i>
+                                    <i class="fa fa-star{% if review.rating == 2.5 %}-half-o{% elif review.rating < 3%}-o {% endif %}"
+                                        aria-hidden="true"></i>
+                                    <i class="fa fa-star{% if review.rating == 3.5 %}-half-o{% elif review.rating < 4%}-o {% endif %}"
+                                        aria-hidden="true"></i>
+                                    <i class="fa fa-star{% if review.rating == 4.5 %}-half-o{% elif review.rating < 5%}-o {% endif %}"
+                                        aria-hidden="true"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div> <!-- icontext.// -->
+                    <div class="mt-3">
+                        <h6>{{ review.subject }}</h6>
+                        <p>{{ review.review }}</p>
+                    </div>
+                </article>
+                {% endfor %}
+                {% else %}
+                <p>첫번째 리뷰의 주인공이 되어주세요!!</p>
+                {% endif %}
+
+            </div> <!-- col.// -->
+        </div> <!-- row.// -->
+
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock %}

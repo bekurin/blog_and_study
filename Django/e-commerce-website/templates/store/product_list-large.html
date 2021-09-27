@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+    <div class="container">
+
+
+        <!-- ============================  FILTER TOP  ================================= -->
+        <div class="card mb-3">
+            <div class="card-body">
+                <ol class="breadcrumb float-left">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">스토어</a></li>
+                    <li class="breadcrumb-item"><a href="{{ categories.get_url }}">{{ categories.category_name }}</a></li>
+                </ol>
+            </div> <!-- card-body .// -->
+        </div> <!-- card.// -->
+        <!-- ============================ FILTER TOP END.// ================================= -->
+
+
+        <div class="row">
+            {% include 'includes/store_sidebar.html' %}
+            <main class="col-md-10">
+                <header class="mb-3">
+                    <div class="form-inline">
+                        <strong class="mr-md-auto">상품 수 : {{ product_count }}개</strong>
+                        <select class="mr-2 form-control">
+                            <option>Latest items</option>
+                            <option>Trending</option>
+                            <option>Most Popular</option>
+                            <option>Cheapest</option>
+                        </select>
+                        <div class="btn-group">
+                            <a href="?list_kind=large" class="btn btn-light active" data-toggle="tooltip"
+                                title="List view">
+                                <i class="fa fa-bars"></i></a>
+                            <a href="?list_kind=grid" class="btn btn-light" data-toggle="tooltip"
+                                title="Grid view">
+                                <i class="fa fa-th"></i></a>
+                        </div>
+                    </div>
+                </header><!-- sect-heading -->
+
+                {% for product in products %}
+                <article class="card card-product-list">
+                    <div class="row no-gutters">
+                        <aside class="col-md-3">
+                            <a href="{{ product.get_url }}" class="img-wrap">
+                                <span class="badge badge-danger"> {{ product.product_status }} </span>
+                                <img src="{{ product.images.url }}">
+                            </a>
+                        </aside> <!-- col.// -->
+                        <div class="col-md-6">
+                            <div class="info-main">
+                                <a href="{{ product.get_url }}" class="title mb-1"> {{ product.brand.brand_name }}</a>
+                                <a href="#" class="h5 title">{{ product.product_name }}</a>
+
+                                <p class="mb-3">
+                                    <span class="tag"> <i class="fa fa-check"></i> 인증 상품 </span>
+                                    <span class="tag"> {{product.get_review_count}} 개의 리뷰 </span>
+                                    <span class="tag"> {{product.get_likes_count}} 개의 좋아요 </span>
+                                </p>
+
+                                <p> {{product.description}} </p>
+
+                            </div> <!-- info-main.// -->
+                            
+                        </div> <!-- col.// -->
+                        <aside class="col-sm-3">
+                            <div class="info-aside">
+                                <div class="price-wrap">
+                                    {% if product.sale != 0 %}
+                                    <small class="text-muted"><del>{{ product.price | intcomma }} 원</del></small>
+                                    <span class="h5 price">{{ product.get_sale_price | intcomma }} 원</span>
+                                    {% else %}
+                                    <span class="h5 price">{{ product.price | intcomma }} 원</span>
+                                    {% endif %}
+                                </div> <!-- price-wrap.// -->
+
+                                <p class="text-muted mt-3">{{ product.brand.brand_name }}</p>
+                                
+                                <div class="rating-wrap mb-2">
+                                    <ul class="rating-stars">
+                                        <li style="width:100%" class="stars-active">
+                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </li>
+                                    </ul>
+                                    <div class="label-rating">9/10</div>
+                                </div> <!-- rating-wrap.// -->
+                                <p class="mt-3">
+                                    <a href="{{ product.get_url }}" class="btn btn-outline-primary"> <i class="fas fa-info-circle"></i> 상세 정보 보기 </a>
+                                    {% if product in like_items %}
+                                        <a href="{% url 'remove_like' product.id %}" class="btn btn-light"><i class="fa fa-heart"></i> 좋아요 </a>
+                                    {% else %}
+                                        <a href="{% url 'add_like' product.id %}" class="btn btn-light"><i class="far fa-heart"></i> 좋아요 </a>
+                                    {% endif %}
+                                </p>
+                            </div> <!-- info-aside.// -->
+                        </aside> <!-- col.// -->
+                    </div> <!-- row.// -->
+                </article> <!-- card-product .// -->
+                {% endfor %}
+            </main> <!-- col.// -->
+
+        </div>
+
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock %}

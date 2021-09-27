@@ -1,0 +1,42 @@
+{% load static %}
+<aside class="col-md-2">
+
+    <article class="filter-group">
+        {% for category in links %}
+        <h6 class="title mt-3">
+            <a href="#" class="dropdown-toggle" data-toggle="collapse" data-target="#collapse_{{forloop.counter}}"> {{ category.category_name }} </a>
+        </h6>
+        {% if category.get_url in request.path %}
+        <div class="filter-content collapse show" id="collapse_{{forloop.counter}}">
+        {% else %}
+        <div class="filter-content collapse" id="collapse_{{forloop.counter}}">
+        {% endif %}
+            <div class="inner">
+                <ul class="list-menu">
+                    <li><a href="{{ category.get_url }}?list_kind={% if 'large' == request.GET.list_kind %}large{% else %}grid{% endif %}">전체보기</a></li>
+                    {% for subcategory in category.get_subcategories %}
+                        <li><a href="{{ subcategory.get_url }}?list_kind={% if 'large' == request.GET.list_kind %}large{% else %}grid{% endif %}">{{ subcategory.subcategory_name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div> <!-- inner.// -->
+        </div>
+        {% endfor %}
+    </article> <!-- filter-group  .// -->
+
+    <article class="filter-group">
+        <h6 class="title">
+            <a href="#" class="dropdown-toggle" data-toggle="collapse" data-target="#collapse_10"> 브랜드
+            </a>
+        </h6>
+        <div class="filter-content collapse" id="collapse_10">
+            <div class="inner">
+                {% for brand in brands %}
+                <label class="custom-control custom-radio">
+                    <input type="radio" name="myfilter_radio" class="custom-control-input">
+                    <div class="custom-control-label">{{ brand.brand_name }}</div>
+                </label>
+                {% endfor %}
+            </div> <!-- inner.// -->
+        </div>
+    </article> <!-- filter-group .// -->
+</aside>

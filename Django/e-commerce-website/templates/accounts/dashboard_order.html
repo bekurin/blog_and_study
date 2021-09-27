@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+    <div class="container">
+
+        <div class="row">
+            {% include 'includes/dashboard_sidebar.html' %}
+            <main class="col-md-9">
+                {% for order in orders %}
+                <article class="card mb-4">
+                    <header class="card-header">
+                        <strong class="d-inline-block mr-3">주문번호: {{ order.order_number }}</strong>
+                        <span>주문 날짜: {{ order.created_at }}</span>
+                    </header>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h6 class="text-muted">배송 정보</h6>
+                                <p>{{ order.user.full_name }}<br>
+                                    핸드폰 : {{ order.phone }} 이메일 : {{ order.user.email }} <br>
+                                    주소 : {{ order.full_address }} <br>
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6 class="text-muted">결제 정보</h6>
+                                <span class="text-success">
+                                    <i class="fab fa-lg fa-cc-visa"></i>
+                                    Visa **** 4216
+                                </span>
+                                <p>    
+                                    <span class="b">합계 : {{order.order_total | intcomma}} </span>
+                                </p>
+                            </div>
+                        </div> <!-- row.// -->
+                    </div> <!-- card-body .// -->
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <tbody>
+                                {% for order_product in order.get_order_products %}
+                                <tr>
+                                    <td>
+                                        <img src="{{ order_product.product.images.url }}" class="img-xs border">
+                                    </td>
+                                    <td>
+                                        <p class="title mb-0">{{ order_product.product.product_name }} </p>
+                                        <var class="price text-muted">{{ order_product.product.get_sale_price | intcomma }}원</var>
+                                    </td>
+                                    <td> Seller <br> Wallmart </td>
+                                    <td> <a href="{{ order_product.product.get_url }}" class="btn btn-outline-primary">상세 정보 보기</a>
+                                        <div class="dropdown d-inline-block">
+                                        </div> <!-- dropdown.// -->
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div> <!-- table-responsive .end// -->
+                </article> <!-- card order-item .// -->
+                {% endfor %}
+            </main> <!-- col.// -->
+        </div>
+
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+{% endblock %}

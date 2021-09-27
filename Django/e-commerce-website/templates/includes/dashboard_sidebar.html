@@ -1,0 +1,11 @@
+{% load static %}
+
+<aside class="col-md-3">
+    <nav class="list-group">
+        <a class="list-group-item {% if '/accounts/' == request.path %}active{% endif %}" href="{% url 'dashboard' %}">
+            정보 보기 </a>
+        <a class="list-group-item {% if '/orders' in request.path %}active{% endif %}" href="{% url 'orders' %}"> 주문 </a>
+        <a class="list-group-item {% if '/likes/' in request.path %}active{% endif %}" href="{% url 'like' %}"> 좋아요 </a>
+        <a class="list-group-item" href="{% url 'logout' %}"> 로그아웃 </a>
+    </nav>
+</aside> <!-- col.// -->

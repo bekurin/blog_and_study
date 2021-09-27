@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+    <div class="container">
+        <div class="row">
+            <main class="col-md-9">
+                <div class="card">
+
+                    <table class="table table-borderless table-shopping-cart">
+                        <thead class="text-muted">
+                            <tr class="small text-uppercase">
+                                <th scope="col">상품</th>
+                                <th scope="col" width="120">수량</th>
+                                <th scope="col" width="120">가격</th>
+                                <th scope="col" class="text-right" width="200"> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cart_item in cart_items %}
+                            <tr>
+                                <td>
+                                    <figure class="itemside">
+                                        <div class="aside"><img src="{{ cart_item.product.images.url }}" class="img-sm">
+                                        </div>
+                                        <figcaption class="info">
+                                            <a href="#" class="title text-dark">{{ cart_item.product.product_name }}</a>
+                                            {% if cart_item.variations.all %}
+                                            {% for item in cart_item.variations.all %}
+                                            <span class="mt-3">{{ item.variation_category | capfirst }} :
+                                                {{ item.variation_value | capfirst }}</span>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </figcaption>
+                                    </figure>
+                                </td>
+                                <td>
+                                    <div class="input-group input-spinner">
+                                        <div class="input-group-prepend">
+                                            <a href="{% url 'remove_cart' cart_item.product.id cart_item.id %}"
+                                                class="btn btn-light" type="button" id="button-minus">
+                                                <i class="fa fa-minus"></i>
+                                            </a>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{cart_item.quantity}}">
+                                        <div class="input-group-append">
+                                            <form action="#" , method="POST">
+                                                {% csrf_token %}
+                                                {% for item in cart_item.variations.all %}
+                                                <input type="hidden" name="{{item.variation_category | lower}}"
+                                                    value="{{item.variation_value | capfirst}}">
+                                                {% endfor %}
+                                                <a href="{% url 'add_cart_item' cart_item.product.id cart_item.id %}"
+                                                    class="btn btn-light" type="button" id="button-plus">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </form>
+                                        </div>
+                                    </div> <!-- input-group.// -->
+                                </td>
+                                <td>
+                                    <div class="price-wrap">
+                                        <var class="price"><del>{{ cart_item.product.price|intcomma }}원</del></var>
+                                        <small class="text-muted">
+                                            {{ cart_item.product.get_sale_price|intcomma }}원</small>
+                                    </div> <!-- price-wrap .// -->
+                                </td>
+                                <td class="text-right">
+                                    {% if cart_item.product in like_items %}
+                                    <a href="{% url 'remove_like' cart_item.product.id %}" class="btn btn-light"><i
+                                            class="fa fa-heart"></i></a>
+                                    {% else %}
+                                    <a href="{% url 'add_like' cart_item.product.id %}" class="btn btn-light"><i
+                                            class="far fa-heart"></i></a>
+                                    {% endif %}
+                                    <a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}"
+                                        class="btn btn-light">제거하기</a>
+                                </td>
+                            </tr>
+                            {% endfor%}
+                        </tbody>
+                    </table>
+
+                    <div class="card-body border-top">
+                        <a href="{% url 'checkout' %}" class="btn btn-primary float-md-right"> 결제하기 <i class="fa fa-chevron-right"></i>
+                        </a>
+                        <a href="{% url 'home' %}" class="btn btn-light"> <i class="fa fa-chevron-left"></i> 계속 쇼핑하기
+                        </a>
+                    </div>
+                </div> <!-- card.// -->
+
+                <div class="alert alert-success mt-3">
+                    <p class="icontext"><i class="icon text-success fa fa-truck"></i>코로나 19로 주문량이 급증하여 배송일이 늦어질 수 있습니다.
+                    </p>
+                </div>
+
+            </main> <!-- col.// -->
+            <aside class="col-md-3">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label>쿠폰을 가지고 있나요?</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="" placeholder="쿠폰 번호를 입력해주세요.">
+                                    <span class="input-group-append">
+                                        <button class="btn btn-primary">적용하기</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div> <!-- card-body.// -->
+                </div> <!-- card .// -->
+                <div class="card">
+                    <div class="card-body">
+                        <dl class="dlist-align">
+                            <dt>Total price:</dt>
+                            <dd class="text-right">{{ total|intcomma }}원</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Discount:</dt>
+                            <dd class="text-right">{{ discount_total|intcomma }}원</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Total:</dt>
+                            <dd class="text-right  h5"><strong>{{ sale_total|intcomma }}원</strong></dd>
+                        </dl>
+                        <hr>
+                        <p class="text-center mb-3">
+                            <img src="{% static 'images/misc/payments.png' %}" height="26">
+                        </p>
+
+                    </div> <!-- card-body.// -->
+                </div> <!-- card .// -->
+            </aside> <!-- col.// -->
+        </div>
+
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name border-top padding-y">
+    <div class="container">
+        <h6>결제 및 환불 정책</h6>
+        <p>대통령은 내란 또는 외환의 죄를 범한 경우를 제외하고는 재직중 형사상의 소추를 받지 아니한다. 공무원의 직무상 불법행위로 손해를 받은 국민은 법률이 정하는 바에 의하여 국가 또는 공공단체에 정당한
+            배상을 청구할 수 있다. 이 경우 공무원 자신의 책임은 면제되지 아니한다. 국방상 또는 국민경제상 긴절한 필요로 인하여 법률이 정하는 경우를 제외하고는, 사영기업을 국유 또는 공유로 이전하거나
+            그 경영을 통제 또는 관리할 수 없다.</p>
+
+        <p>모든 국민은 법률이 정하는 바에 의하여 선거권을 가진다. 신체장애자 및 질병·노령 기타의 사유로 생활능력이 없는 국민은 법률이 정하는 바에 의하여 국가의 보호를 받는다. 의무교육은 무상으로
+            한다. 새로운 회계연도가 개시될 때까지 예산안이 의결되지 못한 때에는 정부는 국회에서 예산안이 의결될 때까지 다음의 목적을 위한 경비는 전년도 예산에 준하여 집행할 수 있다.</p>
+
+    </div><!-- container // -->
+</section>
+<!-- ========================= SECTION  END// ========================= -->
+
+{% endblock %}

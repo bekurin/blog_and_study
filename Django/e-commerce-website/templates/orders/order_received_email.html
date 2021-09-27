@@ -1,0 +1,9 @@
+{% autoescape off %}
+
+안녕하세요! {{ user.username }}님의 주문을 접수하였습니다.
+
+주문하신 내역에 대한 주문접수 확인 메일입니다.
+
+주문 번호 : {{ order.order_number }}
+
+{% endautoescape %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y" style="min-height:84vh">
+    {% if request.GET.command == 'verification' %}
+    <div class="container mx-auto alert alert-info text-center" role="alert"
+        style="max-width: 1024px; margin-top:100px;">
+        회원가입을 해주셔서 감사합니다. 회원가입 아래의 이메일로 인증 메일을 보냈으니 확인해주시기 바랍니다.
+        <div>{{request.GET.email}}</div>
+        <br><br>
+        인증을 완료했나요? <a href="{% url 'login' %}">로그인</a>
+    </div>
+    {% else %}
+    <!-- ============================ COMPONENT LOGIN   ================================= -->
+    <div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
+        <div class="card-body">
+            <h4 class="card-title mb-4">로그인</h4>
+            {% include 'includes/alerts.html' %}
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input class="form-control" placeholder="abcd@email.com" type="text" name="email">
+                </div> <!-- form-group// -->
+                <div class="form-group">
+                    <input class="form-control" placeholder="비밀번호" type="password" name="password">
+                </div> <!-- form-group// -->
+
+                <div class="form-group">
+                    <a href="{% url 'forgotpassword' %}" class="float-right">비밀번호를 잊어버렸나요?</a>
+                    <label class="float-left custom-control custom-checkbox"> <input type="checkbox"
+                            class="custom-control-input" checked="" name="auto_login">
+                        <div class="custom-control-label"> 자동 로그인 </div>
+                    </label>
+                </div> <!-- form-group form-check .// -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block"> 로그인 </button>
+                </div> <!-- form-group// -->
+            </form>
+        </div> <!-- card-body.// -->
+    </div> <!-- card .// -->
+
+    <p class="text-center mt-4"> 아직 계정을 가지고 있지 않나요? <small><a href="{% url 'register' %}">회원가입</a></small></p>
+    <br><br>
+    <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
+    {% endif %}
+
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock %}

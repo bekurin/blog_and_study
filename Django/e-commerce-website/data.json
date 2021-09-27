@@ -1,0 +1,189 @@
+[{
+        "model": "admin.logentry",
+        "pk": 1,
+        "fields": {
+            "action_time": "2021-07-28T01:38:14.038Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "1",
+            "object_repr": "Brand object (1)",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        }
+    }, {
+        "model": "admin.logentry",
+        "pk": 2,
+        "fields": {
+            "action_time": "2021-07-28T01:41:05.216Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "1",
+            "object_repr": "Brand object (1)",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+        }
+    }, {
+        "model": "admin.logentry",
+        "pk": 3,
+        "fields": {
+            "action_time": "2021-07-28T01:41:29.354Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "1",
+            "object_repr": "Brand object (1)",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+        }
+    }, {
+        "model": "admin.logentry",
+        "pk": 4,
+        "fields": {
+            "action_time": "2021-07-28T01:49:48.118Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "1",
+            "object_repr": "Brand object (1)",
+            "action_flag": 2,
+            "change_message": "[]"
+        }
+    }, {
+        "model": "admin.logentry",
+        "pk": 5,
+        "fields": {
+            "action_time": "2021-07-28T01:57:56.708Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "1",
+            "object_repr": "Brand object (1)",
+            "action_flag": 2,
+            "change_message": "[]"
+        }
+    }, {
+        "model": "admin.logentry",
+        "pk": 6,
+        "fields": {
+            "action_time": "2021-07-28T01:58:30.510Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "1",
+            "object_repr": "Brand object (1)",
+            "action_flag": 2,
+            "change_message": "[]"
+        }
+    }, {
+        "model": "admin.logentry",
+        "pk": 7,
+        "fields": {
+            "action_time": "2021-07-28T01:58:49.822Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "1",
+            "object_repr": "Brand object (1)",
+            "action_flag": 2,
+            "change_message": "[]"
+        }
+    }, {
+        "model": "admin.logentry",
+        "pk": 8,
+        "fields": {
+            "action_time": "2021-07-28T01:59:36.232Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "1",
+            "object_repr": "Brand object (1)",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Slug\"]}}]"
+        }
+    }, {
+        "model": "admin.logentry",
+        "pk": 9,
+        "fields": {
+            "action_time": "2021-07-28T02:04:06.984Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "1",
+            "object_repr": "Brand object (1)",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Slug\"]}}]"
+        }
+    }, {
+        "model": "admin.logentry",
+        "pk": 10,
+        "fields": {
+            "action_time": "2021-07-28T02:04:10.128Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "1",
+            "object_repr": "Brand object (1)",
+            "action_flag": 2,
+            "change_message": "[]"
+        }
+    }, {
+        "model": "admin.logentry",
+        "pk": 11,
+        "fields": {
+            "action_time": "2021-07-28T02:04:49.797Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "1",
+            "object_repr": "Brand object (1)",
+            "action_flag": 2,
+            "change_message": "[]"
+        }
+    }, {
+        "model": "admin.logentry",
+        "pk": 12,
+        "fields": {
+            "action_time": "2021-07-28T02:05:04.076Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "1",
+            "object_repr": "Brand object (1)",
+            "action_flag": 2,
+            "change_message": "[]"
+        }
+    }, {
+        "model": "admin.logentry",
+        "pk": 13,
+        "fields": {
+            "action_time": "2021-07-28T02:05:16.819Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "1",
+            "object_repr": "Brand object (1)",
+            "action_flag": 2,
+            "change_message": "[]"
+        }
+    }, {
+        "model": "admin.logentry",
+        "pk": 14,
+        "fields": {
+            "action_time": "2021-07-28T02:08:31.970Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "1",
+            "object_repr": "Brand object (1)",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Slug\", \"Image\"]}}]"
+        }
+    }, {
+        "model": "admin.logentry",
+        "pk": 15,
+        "fields": {
+            "action_time": "2021-07-28T02:08:45.779Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "1",
+            "object_repr": "Brand object (1)",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+        }
+    }, {
+        "model": "admin.logentry",
+        "pk": 16,
+        "fields": {
+            "action_time": "2021-07-28T02:13:52.228Z",
+            "user": 1,
+            "content_type": 12,
+            "object_id": "1",
+            "object_repr":

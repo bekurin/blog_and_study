@@ -1,0 +1,252 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<div class="container">
+	<!-- ========================= SECTION MAIN  ========================= -->
+	<section class="section-main padding-y">
+		<main class="card">
+			<div class="card-body">
+
+				<div class="row">
+					<aside class="col-lg col-md-3 flex-lg-grow-0">
+						<nav class="nav-home-aside">
+							<h6 class="title-category">카테고리<i class="d-md-none icon fa fa-chevron-down"></i></h6>
+							<ul class="menu-category">
+								{% for category in categories %}
+								<li class="has-submenu"><a href="{{ category.get_url }}">{{ category.category_name }}</a>
+									<ul class="submenu">
+										{% for subcategory in category.get_subcategories %}
+										<li><a href="{{ subcategory.get_url }}">{{ subcategory.subcategory_name }}</a></li>
+										{% endfor %}
+									</ul>
+								</li>
+								{% endfor %}
+							</ul>
+						</nav>
+					</aside> <!-- col.// -->
+					<div class="col-md-9 col-xl-7 col-lg-7">
+
+						<!-- ================== COMPONENT SLIDER  BOOTSTRAP  ==================  -->
+						<div id="carousel1_indicator" class="slider-home-banner carousel slide" data-ride="carousel">
+							<ol class="carousel-indicators">
+								<li data-target="#carousel1_indicator" data-slide-to="0" class="active"></li>
+								<li data-target="#carousel1_indicator" data-slide-to="1"></li>
+								<li data-target="#carousel1_indicator" data-slide-to="2"></li>
+							</ol>
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+									<img src="{% static 'images/banners/slide1.jpg' %}" alt="First slide">
+								</div>
+								<div class="carousel-item">
+									<img src="{% static 'images/banners/slide2.jpg' %}" alt="Second slide">
+								</div>
+								<div class="carousel-item">
+									<img src="{% static 'images/banners/slide3.jpg' %}" alt="Third slide">
+								</div>
+							</div>
+							<a class="carousel-control-prev" href="#carousel1_indicator" role="button"
+								data-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
+							</a>
+							<a class="carousel-control-next" href="#carousel1_indicator" role="button"
+								data-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="sr-only">Next</span>
+							</a>
+						</div>
+						<!-- ==================  COMPONENT SLIDER BOOTSTRAP end.// ==================  .// -->
+
+					</div> <!-- col.// -->
+					<div class="col-md d-none d-lg-block flex-grow-1">
+						<aside class="special-home-right">
+							<h6 class="bg-blue text-center text-white mb-0 p-2">이벤트</h6>
+
+							<div class="card-banner border-bottom">
+								<div class="py-3" style="width:80%">
+									<h6 class="card-title">애플 창고 대방출</h6>
+									<a href="#" class="btn btn-secondary btn-sm"> 바로가기 </a>
+								</div>
+								<img src="{% static 'images/items/1.jpg' %}" height="80" class="img-bg">
+							</div>
+
+							<div class="card-banner border-bottom">
+								<div class="py-3" style="width:80%">
+									<h6 class="card-title">서머 시즌 라스트 세일</h6>
+									<a href="#" class="btn btn-secondary btn-sm"> 바로가기 </a>
+								</div>
+								<img src="{% static 'images/items/2.jpg' %}" height="80" class="img-bg">
+							</div>
+
+							<div class="card-banner border-bottom">
+								<div class="py-3" style="width:80%">
+									<h6 class="card-title">LG 가전 CEO가 미쳤어요</h6>
+									<a href="#" class="btn btn-secondary btn-sm"> 바로가기 </a>
+								</div>
+								<img src="{% static 'images/items/6.jpg' %}" height="80" class="img-bg">
+							</div>
+						</aside>
+					</div> <!-- col.// -->
+				</div> <!-- row.// -->
+
+			</div> <!-- card-body.// -->
+		</main> <!-- card.// -->
+
+	</section>
+	<!-- ========================= SECTION MAIN END// ========================= -->
+
+	<!-- =============== SECTION ITEMS =============== -->
+	<section class="padding-bottom-sm">
+
+		<header class="section-heading heading-line">
+			<h4 class="title-section text-uppercase">최근 등록 상품</h4>
+		</header>
+
+		<div class="row row-sm">
+			{% for product in products %}
+			<div class="col-xl-2 col-lg-3 col-md-4 col-6">
+				<div class="card card-sm card-product-grid">
+					<a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
+					<figcaption class="info-wrap">
+						<a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
+						{% if product.get_review_count != 0 %}
+						<div class="rating-star">
+							<span>
+								<i class="fa fa-star{% if product.get_average_review < 0.5 %}-o{% elif product.get_average_review >= 0.5 and product.get_average_review < 1 %}-half-o {% endif %}"
+									aria-hidden="true"></i>
+								<i class="fa fa-star{% if product.get_average_review < 1.5 %}-o{% elif product.get_average_review >= 1.5 and product.get_average_review < 2 %}-half-o {% endif %}"
+									aria-hidden="true"></i>
+								<i class="fa fa-star{% if product.get_average_review < 2.5 %}-o{% elif product.get_average_review >= 2.5 and product.get_average_review < 3 %}-half-o {% endif %}"
+									aria-hidden="true"></i>
+								<i class="fa fa-star{% if product.get_average_review < 3.5 %}-o{% elif product.get_average_review >= 3.5 and product.get_average_review < 4 %}-half-o {% endif %}"
+									aria-hidden="true"></i>
+								<i class="fa fa-star{% if product.get_average_review < 4.5 %}-o{% elif product.get_average_review >= 4.5 and product.get_average_review < 5 %}-half-o {% endif %}"
+									aria-hidden="true"></i>
+							</span>
+							<small class="label-rating text-muted">{{ product.get_review_count }}개의 리뷰</small>
+						</div> <!-- rating-wrap.// -->
+						{% else %}
+						<div class="text-muted"> 리뷰가 없습니다. </div>
+						{% endif %}
+						<div class="mb-3">
+							{% if product.sale != 0 %}
+							<span class="price"><del>{{ product.price|intcomma }} 원</del></span>
+							<span class="text-muted">{{ product.get_sale_price|intcomma }} 원</span>
+							{% else %}
+							<span class="price">{{ product.price|intcomma }} 원</span>
+							{% endif %}
+						</div> <!-- price-detail-wrap .// -->
+					</figcaption>
+				</div>
+			</div> <!-- col.// -->
+			{% endfor %}
+		</div> <!-- row.// -->
+	</section>
+	<!-- =============== SECTION ITEMS .//END =============== -->
+
+	<!-- =============== SECTION 1 =============== -->
+	<section class="padding-bottom">
+		<header class="section-heading heading-line">
+			<h4 class="title-section text-uppercase">구매 후기</h4>
+		</header>
+
+		<div class="card card-home-category">
+			<div class="row no-gutters">
+				<div class="col-md-3">
+
+					<div class="home-category-banner bg-light-orange">
+						<h5 class="title">에디터가 작성한 글을 넣는 곳</h5>
+						<p>이번 여름은 옷을 사도 입고 나갈 곳이 없다. 귀찮다!! 귀찮다!!! 운전면허 등록했는데 언제 따나</p>
+						<a href="#" class="btn btn-outline-primary rounded-pill">더 자세한 내용</a>
+						<img src="images/items/2.jpg" class="img-bg">
+					</div>
+
+				</div> <!-- col.// -->
+				<div class="col-md-9">
+					<ul class="row no-gutters bordered-cols">
+						{% for review in reviews %}
+						<li class="col-lg-3 col-md-4">
+								<div class="card-body">
+									<a href="#" class="item"><img class="img-sm float-right" src="{{ review.product.images.url }}"></a>
+									<div class="text-muted">{{ review.product.brand.brand_name }}</div>
+									<div class="h5 title">{{ review.product.product_name }}</div>
+									<div class="rating-star">
+										<span>
+											<i class="fa fa-star{% if review.product.get_average_review < 0.5 %}-o{% elif product.get_average_review >= 0.5 and product.get_average_review < 1 %}-half-o {% endif %}"
+												aria-hidden="true"></i>
+											<i class="fa fa-star{% if review.product.get_average_review < 1.5 %}-o{% elif product.get_average_review >= 1.5 and product.get_average_review < 2 %}-half-o {% endif %}"
+												aria-hidden="true"></i>
+											<i class="fa fa-star{% if review.product.get_average_review < 2.5 %}-o{% elif product.get_average_review >= 2.5 and product.get_average_review < 3 %}-half-o {% endif %}"
+												aria-hidden="true"></i>
+											<i class="fa fa-star{% if review.product.get_average_review < 3.5 %}-o{% elif product.get_average_review >= 3.5 and product.get_average_review < 4 %}-half-o {% endif %}"
+												aria-hidden="true"></i>
+											<i class="fa fa-star{% if review.product.get_average_review < 4.5 %}-o{% elif product.get_average_review >= 4.5 and product.get_average_review < 5 %}-half-o {% endif %}"
+												aria-hidden="true"></i>
+										</span>
+									</div> <!-- rating-wrap.// -->
+									<p class="text-muted"><i class="fas fa-adjust"></i> {{ review.subject }}</p>
+								</div>
+						</li>
+						{% endfor %}
+					</ul>
+				</div> <!-- col.// -->
+			</div> <!-- row.// -->
+		</div> <!-- card.// -->
+	</section>
+	<!-- =============== SECTION 1 END =============== -->
+
+	<article class="my-4">
+		<img src="{% static 'images/banners/ad-sm.png' %}" class="w-100">
+	</article>
+
+	<!-- =============== SECTION ITEMS =============== -->
+	<section class="padding-bottom-sm">
+
+		<header class="section-heading heading-line">
+			<h4 class="title-section text-uppercase">브랜드</h4>
+		</header>
+
+		<div class="row">
+			{% for brand in brands %}
+			<div class="col-xl-2">
+				<div class="card card-product-grid">
+					<a href="{{ brand.get_url }}" class="img-wrap" style="object-fit:cover;"> <img src="{{ brand.image.url }}"> </a>
+				</div>
+			</div> <!-- col.// -->
+			{% endfor %}
+		</div> <!-- row.// -->
+	</section>
+	<!-- =============== SECTION ITEMS .//END =============== -->
+</div>
+<!-- container end.// -->
+
+<!-- ========================= SECTION SUBSCRIBE  ========================= -->
+<section class="section-subscribe padding-y-lg">
+	<div class="container">
+
+		<p class="pb-2 text-center text-white">Delivering the latest product trends and industry news straight to your
+			inbox</p>
+
+		<div class="row justify-content-md-center">
+			<div class="col-lg-5 col-md-6">
+				<form class="form-row">
+					<div class="col-md-8 col-7">
+						<input class="form-control border-0" placeholder="Your Email" type="email">
+					</div> <!-- col.// -->
+					<div class="col-md-4 col-5">
+						<button type="submit" class="btn btn-block btn-warning"> <i class="fa fa-envelope"></i>
+							Subscribe </button>
+					</div> <!-- col.// -->
+				</form>
+				<small class="form-text text-white-50">We’ll never share your email address with a third-party. </small>
+			</div> <!-- col-md-6.// -->
+		</div>
+
+
+	</div>
+</section>
+<!-- ========================= SECTION SUBSCRIBE END// ========================= -->
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+    <div class="container">
+
+        <div class="row">
+            {% include 'includes/dashboard_sidebar.html' %}
+            <main class="col-md-9">
+
+                <article class="card">
+                    <div class="card-body">
+
+                        <div class="row">
+                            {% for like_product in like_products %}
+                            <div class="col-md-6">
+                                <figure class="itemside mb-4">
+                                    <div class="aside"><img src="{{ like_product.product.images.url }}"
+                                            class="border img-md"></div>
+                                    <figcaption class="info">
+                                        <a href="#"
+                                            class="title text-muted"><small>{{ like_product.product.brand.brand_name }}</small></a>
+                                        <a href="{{ like_product.product.get_url }}"
+                                            class="title">{{ like_product.product.product_name }}</a>
+                                        <div class="price-wrap mb-3">
+                                            <small class="text-muted"><del>{{ like_product.product.price | intcomma }}
+                                                    원</del></small>
+                                            <span class="price">{{ like_product.product.get_sale_price | intcomma }} 원</span>
+                                        </div> <!-- price-wrap.// -->
+                                        <a href="{% url 'remove_like' like_product.product.id %}" class="btn btn-danger btn-sm" data-toggle="tooltip" title=""
+                                            data-original-title="좋아요 목록에서 삭제하기"> 삭제하기 <i class="fa fa-times"></i>
+                                        </a>
+                                    </figcaption>
+                                </figure>
+                            </div> <!-- col.// -->
+                            {% endfor %}
+                        </div> <!-- row .//  -->
+
+                    </div> <!-- card-body.// -->
+                </article>
+
+
+            </main> <!-- col.// -->
+        </div>
+
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock %}

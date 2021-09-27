@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+    <div class="container">
+
+        <div class="row">
+            {% include 'includes/dashboard_sidebar.html' %}
+            <main class="col-md-9">
+
+                <article class="card mb-3">
+                    <div class="card-body">
+
+                        <figure class="icontext">
+                            <div class="text">
+                                <strong> {{ user.full_name }} </strong> <br>
+                                <p class="mb-2"> {{ user.email }}</p>
+                                <a href="#" class="btn btn-light btn-sm">Edit</a>
+                            </div>
+                        </figure>
+                        <hr>
+                        <p>
+                            <i class="fa fa-map-marker text-muted"></i> &nbsp; My address:
+                            <br>
+                            Tashkent city, Street name, Building 123, House 321 &nbsp
+                            <a href="#" class="btn-link"> Edit</a>
+                        </p>
+
+                        <article class="card-group card-stat">
+                            <figure class="card bg">
+                                <div class="p-3">
+                                    <h4 class="title">{{ order_count }}</h4>
+                                    <span>주문한 상품</span>
+                                </div>
+                            </figure>
+                            <figure class="card bg">
+                                <div class="p-3">
+                                    <h4 class="title">{{ like_count }}</h4>
+                                    <span>좋아요</span>
+                                </div>
+                            </figure>
+                            <figure class="card bg">
+                                <div class="p-3">
+                                    <h4 class="title">{{ cart_count }}</h4>
+                                    <span>장바구니</span>
+                                </div>
+                            </figure>
+                            <figure class="card bg">
+                                <div class="p-3">
+                                    <h4 class="title">{{ order_complete_count }}</h4>
+                                    <span>배달 완료 상품</span>
+                                </div>
+                            </figure>
+                        </article>
+
+
+                    </div> <!-- card-body .// -->
+                </article> <!-- card.// -->
+
+                <article class="card  mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">최근 주문</h5>
+
+                        <div class="row">
+                            {% for order in orders %}
+                            <div class="col-md-6">
+                                <figure class="itemside  mb-3">
+                                    <figcaption class="info">
+                                        <time class="text-muted"><i class="fa fa-calendar-alt"></i> {{ order.created_at }}</time>
+                                        <p>{{ order.order_number }}</p>
+                                        <p>{{ order.full_address }}</p>
+                                        <span class="text-success">{{ order.status }}</span>
+                                    </figcaption>
+                                </figure>
+                            </div> <!-- col.// -->
+                            {% endfor %}
+                        </div> <!-- row.// -->
+
+                        <a href="#" class="btn btn-outline-primary btn-block"> 모든 주문 보기<i
+                                class="fa fa-chevron-down"></i> </a>
+                    </div> <!-- card-body .// -->
+                </article> <!-- card.// -->
+
+            </main> <!-- col.// -->
+        </div>
+
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock %}

@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<section class="section-content padding-y bg">
+    <div class="container">
+        <!-- ============================ COMPONENT 1 ================================= -->
+        <div class="row">
+            <aside class="col-lg-8">
+                <div class="card">
+                    <h5 class="card-header">배송 상세 정보</h5>
+                    <div class="card-body">
+                        <p class="card-text mb-0">{{ order.full_name }}</p>
+                        <p class="card-text mb-0">{{ order.full_address }}</p>
+                        <p class="card-text mb-0">{{ order.phone }}</p>
+                        {% if order.order_note %}
+                        <div class="pt-2"><b>배송 유의사항: </b></div> 
+                        <div>{{ order.order_note }}</div>
+                        {% endif %}
+                    </div> <!-- card//  -->
+
+                    <div class="card">
+                        <h5 class="card-header">지불 방법</h5>
+                        <div class="card-body">
+                            <p class="card-text">PayPal</p>
+                        </div> <!-- card//  -->
+
+                        <div class="card">
+                            <h5 class="card-header">주문 상품</h5>
+                            <div class="card-body">
+                                <table class="table table-borderless table-shopping-cart">
+                                    <thead class="text-muted">
+                                        <tr class="small text-uppercase">
+                                            <th scope="col">상품</th>
+                                            <th scope="col" width="120">수량</th>
+                                            <th scope="col" width="120">가격</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for cart_item in cart_items %}
+                                        <tr>
+                                            <td>
+                                                <figure class="itemside align-items-center">
+                                                    <div class="aside"><img src="{{ cart_item.product.images.url }}"
+                                                            class="img-sm">
+                                                    </div>
+                                                    <figcaption class="info">
+                                                        <a href="{{ cart_item.product.get_url }}"
+                                                            class="title text-dark">{{cart_item.product.product_name}}</a>
+                                                        <p class="text-muted small">
+                                                            {% if cart_item.variations.all %}
+                                                                {% for item in cart_item.variations.all %}
+                                                                    {{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }} <br>
+                                                                {% endfor%}
+                                                            {% endif %}
+                                                        </p>
+                                                    </figcaption>
+                                                </figure>
+                                            </td>
+                                            <td>
+                                                <label for="">{{cart_item.quantity}}</label>
+                                            </td>
+                                            <td>
+                                                <div class="price-wrap">
+                                                    <del><small class="text-muted">{{cart_item.sub_total|intcomma}}원
+                                                    </small></del>
+                                                    <var class="price">{{cart_item.product.get_sale_price|intcomma}}원</var>
+                                                </div> <!-- price-wrap .// -->
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div> <!-- card//  -->
+            </aside> <!-- col.// -->
+            <aside class="col-lg-4">
+
+                <div class="card">
+                    <div class="card-body">
+                        <dl class="dlist-align">
+                            <dt>전체 가격 :</dt>
+                            <dd class="text-right">{{total|intcomma}}원</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>할인 가격:</dt>
+                            <dd class="text-right">{{sale_total|intcomma}}원</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>구매 가격:</dt>
+                            <dd class="text-right text-dark b"><strong>{{discount_total|intcomma}}원</strong></dd>
+                        </dl>
+                        <hr>
+                        <p class="text-center mb-3">
+                            <img src="{% static './images/misc/payments.png' %}" height="26">
+                        </p>
+                        <div id="paypal-button-container">
+
+                        </div>
+                    </div> <!-- card-body.// -->
+                </div> <!-- card.// -->
+
+            </aside> <!-- col.// -->
+
+
+        </div> <!-- row.// -->
+        <!-- ============================ COMPONENT 1 END .// ================================= -->
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+<script>
+    // Render the PayPal button into #paypal-button-container
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    
+    var amount = "{{ discount_total }}"
+    var url = "{% url 'payment' %}"
+    var csrftoken = getCookie('csrftoken');
+    var orderID = "{{ order.order_number }}"
+    var payment_method = 'PayPal'
+    var redirect_url = "{% url 'order_complete' %}"
+
+    paypal.Buttons({
+        style: {
+            color: 'blue',
+            shape: 'rect',
+            label: 'pay',
+            height: 40
+        },
+        // Set up the transaction
+        createOrder: function (data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: amount,
+                    }
+                }]
+            });
+        },
+
+        // Finalize the transaction
+        onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+                // Show a success message to the buyer
+                console.log(details)
+                sendData();
+                function sendData() {
+                    fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-type": "application/json",
+                            "X-CSRFToken": csrftoken,
+                        },
+                        body: JSON.stringify({
+                            orderID: orderID,
+                            transID: details.id,
+                            payment_method: payment_method,
+                            status: details.status,
+                        }),
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        window.location.href = redirect_url + "?order_number=" + data.order_number + "&payment_id=" + data.transID
+                    });
+                }
+            });
+        }
+    }).render('#paypal-button-container');
+</script>
+
+{% endblock %}
