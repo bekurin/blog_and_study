@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3d45d750-e3d2-4d03-ba7a-2bfcea4f4844" name="Changes" comment="Feat: &quot;6장 실습 프로젝트 생성&quot;">
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/main/java/core/db/DataBase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/main/java/core/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/main/java/core/util/HttpRequestUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/main/java/core/util/IOUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/main/java/core/webserver/HttpMethod.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/main/java/core/webserver/HttpRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/main/java/core/webserver/HttpResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/main/java/core/webserver/RequestHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/main/java/core/webserver/RequestHandlerOld.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/main/java/core/webserver/RequestLine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/main/java/core/webserver/RequestMapping.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/main/java/core/webserver/WebServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/main/java/core/webserver/controller/AbstractController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/main/java/core/webserver/controller/Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/main/java/core/webserver/controller/CreateUserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/main/java/core/webserver/controller/ListUserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/main/java/core/webserver/controller/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/main/resources/logback,xml.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/test/java/core/util/HttpRequestUtilsTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/test/java/core/util/IOUtilsTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/test/java/core/webserver/RequestHandlerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/test/java/core/webserver/request/Http-GET.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/test/java/core/webserver/request/Http-POST.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/test/java/core/webserver/request/HttpRequestTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/test/java/core/webserver/response/Http-Cookie.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/test/java/core/webserver/response/Http-Redirect.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/test/java/core/webserver/response/HttpResponseTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/src/test/java/core/webserver/response/Http_Forward.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/css/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/fonts/glyphicons-halflings-regular.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/images/80-text.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/js/jquery-2.2.0.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/js/scripts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/qna/form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/qna/show.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/user/form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/user/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/user/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/user/login_failed.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/framework/webapp/user/profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/src/main/java/core/db/DataBase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/src/main/java/core/jdbc/ConnectionManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/src/main/java/core/web/filter/CharacterEncodingFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/src/main/java/next/dao/UserDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/src/main/java/next/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/src/main/java/next/support/context/ContextLoaderListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/src/main/java/next/web/CreateUserServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/src/main/java/next/web/ListUserServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/src/main/resources/h2-1.3.167.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/src/main/resources/jwp.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/src/main/resources/logback.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/src/main/resources/startdb.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/src/test/java/next/WebServerLauncher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/src/test/java/next/dao/UserDaoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/src/test/resources/templates/helloworld.ftl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/sync_branch.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/WEB-INF/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/css/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/fonts/glyphicons-halflings-regular.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/images/80-text.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/js/jquery-2.2.0.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/js/scripts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/qna/form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/qna/show.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/user/form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/user/list.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/user/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/user/login_failed.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/webapp/user/profile.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="spring-beans.schema" />
+        <option value="JUnit4 Test Class" />
+        <option value="HTML File" />
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../.." value="framework-bad-version" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="JsbtTreeLayoutManager">
+    <layout place="tools.popupGrunt">
+      <scroll-view-position x="0" y="0" />
+    </layout>
+  </component>
+  <component name="ProjectId" id="1yKuVvcq2XdluESwIiCTrPwzmNj" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../framework-basic/jwp-basic-step0-getting-started/pom.xml" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\euise\Documents\GitHub\blog-and-study\Spring-Boot\framework\src\test\java\core\webserver\request" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="core.webserver" />
+      <recent name="core.util" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.WebServer">
+    <configuration name="WebServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="core.webserver.WebServer" />
+      <module name="framework.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="core.webserver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HttpRequestTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;core.webserver.request.HttpRequestTest&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="RequestHandlerTest.getCookies" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;core.webserver.RequestHandlerTest.getCookies&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="RequestHandlerTest.getParameters" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;core.webserver.RequestHandlerTest.getParameters&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="RequestHandlerTest.parseQueryString" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;core.util.RequestHandlerTest.parseQueryString&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="FrameworkApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="framework.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="core.framework.FrameworkApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.RequestHandlerTest.parseQueryString" />
+        <item itemvalue="Gradle.RequestHandlerTest.getParameters" />
+        <item itemvalue="Gradle.RequestHandlerTest.getCookies" />
+        <item itemvalue="Application.WebServer" />
+        <item itemvalue="Gradle.HttpRequestTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3d45d750-e3d2-4d03-ba7a-2bfcea4f4844" name="Changes" comment="" />
+      <created>1632012627993</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1632012627993</updated>
+      <workItem from="1632012629288" duration="795000" />
+      <workItem from="1632117847116" duration="4298000" />
+      <workItem from="1632143849734" duration="5824000" />
+      <workItem from="1632186896897" duration="4218000" />
+      <workItem from="1632201150168" duration="10083000" />
+      <workItem from="1632228280896" duration="6955000" />
+      <workItem from="1632290309856" duration="4845000" />
+      <workItem from="1632367050334" duration="6840000" />
+      <workItem from="1632393144792" duration="580000" />
+      <workItem from="1632399332475" duration="28000" />
+      <workItem from="1633146949722" duration="2299000" />
+      <workItem from="1633162948339" duration="1216000" />
+    </task>
+    <task id="LOCAL-00001" summary="Feat: &quot;추가 framework 프로젝트&quot;">
+      <created>1632012692410</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1632012692411</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Feat: &quot;추가 GET을 사용하여 Member 생성&quot;">
+      <created>1632122313672</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1632122313672</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Feat: &quot;추가 framework 프로젝트 생성&quot;">
+      <created>1632122454277</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1632122454277</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Feat: &quot;수정 form method GET -&gt; POST&quot;">
+      <created>1632215247171</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1632215247171</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Test: &quot;추가 parseCookies 테스트&quot;">
+      <created>1632215286275</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1632215286275</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Feat: &quot;수정 parseCookie separator ';' -&gt; '; '&quot;">
+      <created>1632215356641</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1632215356641</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Feat: &quot;추가 3장 요구사항 구현&quot;">
+      <created>1632215405419</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1632215405419</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Test: &quot;추가 HttpRequest [GET, POST] 방식&quot;">
+      <created>1632228629922</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1632228629922</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Feat: &quot;추가 HttpRequest 클래스&quot;">
+      <created>1632228720614</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1632228720614</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Rename: &quot;request 폴더로 이동&quot;">
+      <created>1632301087067</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1632301087067</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Test: &quot;추가 HttpResponse Cookie, Redirect, Forward 기능 테스트&quot;">
+      <created>1632301147842</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1632301147842</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Refactor: &quot;추가 Request, Parameter, HttpMethod 관심사 분리&quot;">
+      <created>1632301413733</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1632301413733</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Refactor: &quot;추가 Response 역할 분리&quot;">
+      <created>1632301455480</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1632301455480</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Refactor: &quot;추가 다형성을 활용해 클라이언트 요청 URL에 대한 분기 처리 제거&quot;">
+      <created>1632301513756</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1632301513756</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Refactor: &quot;추가 RequestHandler에서 Controller 역할 분리&quot;">
+      <created>1632388376910</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1632388376911</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Refactor: &quot;추가 AbstractController에서 Controller의 Service 일괄 처리&quot;">
+      <created>1632388447331</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1632388447332</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Refactor: &quot;수정 css, js, html 개별 처리 -&gt; forward 함수에서 일괄 처리&quot;">
+      <created>1632388576947</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1632388576947</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Feat: &quot;추가 Method 판별 함수 [GET, PUT, DELETE]&quot;">
+      <created>1632388902218</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1632388902218</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Feat: &quot;추가 경로 알려주는 log&quot;">
+      <created>1632388937495</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1632388937495</updated>
+    </task>
+    <task id="LOCAL-00020" summary="framework-basic 폴더로 이동">
+      <created>1633164202540</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1633164202540</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Feat: &quot;추가 framework 프로젝트&quot;" />
+    <MESSAGE value="Feat: &quot;추가 GET을 사용하여 Member 생성&quot;" />
+    <MESSAGE value="Feat: &quot;추가 framework 프로젝트 생성&quot;" />
+    <MESSAGE value="Feat: &quot;수정 form method GET -&gt; POST&quot;" />
+    <MESSAGE value="Test: &quot;추가 parseCookies 테스트&quot;" />
+    <MESSAGE value="Feat: &quot;수정 parseCookie separator ';' -&gt; '; '&quot;" />
+    <MESSAGE value="Feat: &quot;추가 3장 요구사항 구현&quot;" />
+    <MESSAGE value="Test: &quot;추가 HttpRequest [GET, POST] 방식&quot;" />
+    <MESSAGE value="Feat: &quot;추가 HttpRequest 클래스&quot;" />
+    <MESSAGE value="Rename: &quot;request 폴더로 이동&quot;" />
+    <MESSAGE value="Test: &quot;추가 HttpResponse Cookie, Redirect, Forward 기능 테스트&quot;" />
+    <MESSAGE value="Refactor: &quot;추가 Request, Parameter, HttpMethod 관심사 분리&quot;" />
+    <MESSAGE value="Refactor: &quot;추가 Response 역할 분리&quot;" />
+    <MESSAGE value="Refactor: &quot;추가 다형성을 활용해 클라이언트 요청 URL에 대한 분기 처리 제거&quot;" />
+    <MESSAGE value="Refactor: &quot;추가 RequestHandler에서 Controller 역할 분리&quot;" />
+    <MESSAGE value="Refactor: &quot;추가 AbstractController에서 Controller의 Service 일괄 처리&quot;" />
+    <MESSAGE value="Refactor: &quot;수정 css, js, html 개별 처리 -&gt; forward 함수에서 일괄 처리&quot;" />
+    <MESSAGE value="Feat: &quot;추가 Method 판별 함수 [GET, PUT, DELETE]&quot;" />
+    <MESSAGE value="Feat: &quot;추가 경로 알려주는 log&quot;" />
+    <MESSAGE value="framework-basic 폴더로 이동" />
+    <MESSAGE value="Feat: &quot;6장 실습 프로젝트 생성&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat: &quot;6장 실습 프로젝트 생성&quot;" />
+  </component>
+</project>
