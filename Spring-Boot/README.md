@@ -7,5 +7,3 @@
 - servlet - [스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-mvc-1/)
 - springmvc - [스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-mvc-1/)
 - item-service - [스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-mvc-1/)
-- hello-batch - [스프링 배치 완벽 가이드 2/e](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=269630446)
-- framework - [자바 웹 프로그래밍 Next Step](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=91501933)
