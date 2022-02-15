@@ -1,11 +1,18 @@
 package example.houseUtils.policy;
 
-public interface BrokeragePolicy {
+import example.houseUtils.exception.ErrorCode;
+import example.houseUtils.exception.HouseUtilsException;
 
-    BrokerageRule createBrokerageRule(Long price);
+import java.util.List;
+
+public interface BrokeragePolicy {
+    List<BrokerageRule> getRules();
 
     default Long calculate(Long price) {
-        BrokerageRule rule = createBrokerageRule(price);
-        return rule.calcMaxBrokerage(price);
+        BrokerageRule brokerageRule = getRules().stream()
+                .filter(rule -> price < rule.getLessThan())
+                .findFirst()
+                .orElseThrow(() -> new HouseUtilsException(ErrorCode.INTERNAL_ERROR));
+        return brokerageRule.calcMaxBrokerage(price);
     }
 }
