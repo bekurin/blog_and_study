@@ -4,7 +4,6 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.ExpressionUtils;
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.CaseBuilder;
@@ -735,8 +734,8 @@ public class QueryDslBasicTest {
         List<String> result = queryFactory
                 .select(member.username)
                 .from(member)
-//                .where(member.username.eq(
-//                        Expressions.stringTemplate("function('lower', {0})", member.username)))
+                // .where(member.username.eq(
+                //         Expressions.stringTemplate("function('lower', {0})", member.username)))
                 .where(member.username.eq(member.username.lower()))
                 .fetch();
 
