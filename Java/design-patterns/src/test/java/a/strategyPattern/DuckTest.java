@@ -42,4 +42,13 @@ public class DuckTest {
         duck.performFly();
         duck.performQuack();
     }
+
+    @Test
+    void hunterCreateTest() {
+        //given
+        Hunter hunter = new Hunter();
+
+        //then
+        hunter.speckLikeDuck();
+    }
 }
