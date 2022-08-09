@@ -1,7 +1,7 @@
-package a.strategyPattern;
+package a_strategyPattern;
 
-import a.strategyPattern.quack.Quack;
-import a.strategyPattern.quack.QuackBehavior;
+import a_strategyPattern.quack.Quack;
+import a_strategyPattern.quack.QuackBehavior;
 
 public class Hunter {
     QuackBehavior quackBehavior;

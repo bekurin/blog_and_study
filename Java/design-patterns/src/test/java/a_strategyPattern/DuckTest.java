@@ -1,7 +1,7 @@
-package a.strategyPattern;
+package a_strategyPattern;
 
-import a.strategyPattern.fly.FlyRocketPowered;
-import a.strategyPattern.quack.Quack;
+import a_strategyPattern.fly.FlyRocketPowered;
+import a_strategyPattern.quack.Quack;
 import org.junit.jupiter.api.Test;
 
 public class DuckTest {

@@ -1,7 +1,7 @@
-package a.strategyPattern;
+package a_strategyPattern;
 
-import a.strategyPattern.fly.FlyNoWay;
-import a.strategyPattern.quack.Squeak;
+import a_strategyPattern.fly.FlyNoWay;
+import a_strategyPattern.quack.Squeak;
 
 public class FakeDuck extends Duck {
     public FakeDuck() {
