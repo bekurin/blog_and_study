@@ -1,8 +1,12 @@
 package l_statePattern;
 
 import l_statePattern.state.*;
+import m_proxyPattern.GumballMachineRemote;
 
-public class GumballMachine {
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+public class GumballMachine extends UnicastRemoteObject implements GumballMachineRemote {
     private State soldOutState;
     private State noQuarterState;
     private State hasQuarterState;
@@ -13,7 +17,7 @@ public class GumballMachine {
     private String location;
     private int count = 0;
 
-    public GumballMachine(String location, int count) {
+    public GumballMachine(String location, int count) throws RemoteException {
         this.location = location;
         soldOutState = new SoldOutState(this);
         noQuarterState = new NoQuarterState(this);
