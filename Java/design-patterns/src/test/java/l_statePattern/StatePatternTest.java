@@ -2,10 +2,12 @@ package l_statePattern;
 
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
+
 public class StatePatternTest {
 
     @Test
-    void gumballMachineTest() {
+    void gumballMachineTest() throws RemoteException {
         GumballMachine gumballMachine = new GumballMachine("seoul", 5);
         System.out.println(gumballMachine);
 
@@ -26,7 +28,7 @@ public class StatePatternTest {
     }
 
     @Test
-    void notEnoughQuarterTest() {
+    void notEnoughQuarterTest() throws RemoteException {
         GumballMachine gumballMachine = new GumballMachine("seoul", 50);
 
         for (int i = 0; i < 50; i++) {
