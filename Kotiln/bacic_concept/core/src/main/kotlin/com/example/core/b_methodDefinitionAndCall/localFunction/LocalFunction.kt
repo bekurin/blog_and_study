@@ -1,4 +1,4 @@
-package com.example.core.b_methodDefinitionAndCall
+package com.example.core.b_methodDefinitionAndCall.localFunction
 
 class User(
         val id: Int,
