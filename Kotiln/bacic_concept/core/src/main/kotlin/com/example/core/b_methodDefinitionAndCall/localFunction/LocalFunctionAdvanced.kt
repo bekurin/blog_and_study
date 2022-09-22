@@ -1,8 +1,8 @@
 package com.example.core.b_methodDefinitionAndCall.localFunction
 
-class Person(val id: Int, val name: String = "", val address: String = "")
+class Human(val id: Int, val name: String = "", val address: String = "")
 
-fun savePerson(person: Person) {
+fun savePerson(person: Human) {
     fun validate(value: String, fieldName: String) {
         if (value.isEmpty()) {
             throw IllegalStateException("Can't save user ${person.id}: empty $fieldName")
@@ -14,7 +14,7 @@ fun savePerson(person: Person) {
     println("user save!")
 }
 
-fun Person.validateBeforeSave() {
+fun Human.validateBeforeSave() {
     fun validate(value: String, fieldName: String) {
         if (value.isEmpty()) {
             throw IllegalStateException("Can't save user $id: empty $fieldName")
@@ -25,15 +25,15 @@ fun Person.validateBeforeSave() {
     println("save Person!")
 }
 
-fun savePersonAdvanced(person: Person) {
+fun savePersonAdvanced(person: Human) {
     person.validateBeforeSave()
     println("save Person!")
 }
 
 fun main() {
-    val person = Person(3, "hangman", "seoul")
-    val personWithoutName = Person(3, address = "seoul")
-    val personWithoutAddress = Person(3, "hangman")
+    val person = Human(3, "hangman", "seoul")
+    val personWithoutName = Human(3, address = "seoul")
+    val personWithoutAddress = Human(3, "hangman")
 
     savePerson(person)
 //    savePerson(personWithoutName)
