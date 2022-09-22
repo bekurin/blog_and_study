@@ -8,7 +8,6 @@ fun savePerson(person: Human) {
             throw IllegalStateException("Can't save user ${person.id}: empty $fieldName")
         }
     }
-
     validate(person.name, "Name")
     validate(person.address, "Address")
     println("user save!")
