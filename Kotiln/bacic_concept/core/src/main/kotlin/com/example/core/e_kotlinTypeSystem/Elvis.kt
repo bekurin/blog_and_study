@@ -13,6 +13,9 @@ fun printShippingLabel(person: Person) {
     }
 }
 
+/**
+ * 엘비스 연산자를 사용하면 쉽게 null 타입 검사를 실행할 수 있다.
+ */
 fun main() {
     val address = Address("streetAddress", 34753, "Seoul", "Republic of korea")
     val jetBrains = Company("JetBrains", address)

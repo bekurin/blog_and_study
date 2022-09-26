@@ -17,6 +17,9 @@ fun Person.countryName(): String {
 
 fun manageName(employee: Employee): String? = employee.manager?.name
 
+/**
+ * .?를 통해 null 검사와 함수 호출을 동시에 진행할 수 있다.
+ */
 fun main() {
     val ceo = Employee("jake", null)
     val developer = Employee("hangman", ceo)
