@@ -44,19 +44,29 @@ fun main() {
         }
     }
 
+    val nothing = object : Feed<Nothing> {
+        override fun feed() {
+            println("nothing feeding!")
+        }
+    }
+
     // 무공변성
-    println("animalFeedOut(animal) = ${animalFeed(animal)}")
-    // println("animalFeedOut(cat) = ${animalFeed(cat)}") Type mismatch
+    // println("animalFeed(any) = ${animalFeed(any)}") Type mismatch
+    println("animalFeed(animal) = ${animalFeed(animal)}")
+    // println("animalFeed(cat) = ${animalFeed(cat)}") Type mismatch
+    // println("animalFeed(nothing) = ${animalFeed(nothing)}") Type mismatch
     printLine()
 
     // 공변성
+    // println("animalFeedOut(any) = ${animalFeedOut(any)}") Type mismatch
     println("animalFeedOut(animal) = ${animalFeedOut(animal)}")
     println("animalFeedOut(cat) = ${animalFeedOut(cat)}")
-    // println("animalFeedOut(any) = ${animalFeedOut(any)}") Type mismatch
+    println("animalFeedOut(nothing) = ${animalFeedOut(nothing)}")
     printLine()
 
     // 반공변성
-    println("animalFeedIn(animal) = ${animalFeedIn(animal)}")
     println("animalFeedIn(any) = ${animalFeedIn(any)}")
+    println("animalFeedIn(animal) = ${animalFeedIn(animal)}")
     // println("animalFeedIn(cat) = ${animalFeedIn(cat)}") Type mismatch
+    // println("animalFeedIn(nothing) = ${animalFeedIn(nothing)}") Type mismatch
 }
