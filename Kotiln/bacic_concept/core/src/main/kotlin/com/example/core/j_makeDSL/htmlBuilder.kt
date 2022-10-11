@@ -4,13 +4,19 @@ import com.example.core.g_hignOrderFunctionAndLambda.joinToString
 
 open class Tag(val name: String) {
     private val children = mutableListOf<Tag>()
+    private var content: String = ""
+
     protected fun <T: Tag> doInit(child: T, init: T.() -> Unit) {
         child.init()
         children.add(child)
     }
 
+    fun content(content: String) {
+        this.content = content
+    }
+
     override fun toString(): String {
-        return "<$name>${children.joinToString("")}</$name>"
+        return "<$name>$content${children.joinToString("")}</$name>"
     }
 }
 
@@ -32,10 +38,14 @@ class TD: Tag("td")
  */
 fun main() {
     val table = table {
+        content("테이블 추가")
         tr {
+            content("티알 추가")
             td {
+                content("티디1 추가")
             }
             td {
+                content("티디2 추가")
             }
         }
     }
