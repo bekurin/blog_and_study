@@ -17,7 +17,7 @@ class User(
     val name: String
 ) {
     override fun toString(): String {
-        return "User($id=id, $name=name)"
+        return "User(id=$id, name=$name)"
     }
 }
 
