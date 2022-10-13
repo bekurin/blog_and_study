@@ -1,7 +1,6 @@
-package com.example.core.l_tip
+package com.example.core.l_tip.dsl
 
 import com.example.core.a_kotlinBasic.iterator.printLine
-import com.example.core.l_tip.dsl.village
 
 class Village(
     val name: String,

@@ -1,10 +1,5 @@
 package com.example.core.l_tip.dsl
 
-import com.example.core.l_tip.Address
-import com.example.core.l_tip.Npc
-import com.example.core.l_tip.Type
-import com.example.core.l_tip.Village
-
 class VillageBuilder {
     var name: String = ""
     var address: Address? = null
