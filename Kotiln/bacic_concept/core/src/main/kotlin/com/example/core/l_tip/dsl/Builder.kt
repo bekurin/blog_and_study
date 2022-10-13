@@ -51,7 +51,3 @@ class NpcListBuilder {
 }
 
 fun village(builder: VillageBuilder.() -> Unit) = VillageBuilder().apply(builder).build()
-
-fun address(builder: AddressBuilder.() -> Unit) = AddressBuilder().apply(builder).build()
-
-fun npcs(builder: NpcListBuilder.() -> Unit) = NpcListBuilder().apply(builder).build()
