@@ -29,6 +29,12 @@ fun alphabetApply() = StringBuilder().apply {
         append(letter)
 }
 
+/**
+ * alphabetWith, alphabetApply 함수의 차이점은 다음과 같다.
+ * - 구문 내에서 this 사용 여부
+ * - return 의 여부
+ * apply 는 수신 객체를 지정하고 동작한다. 따라서 apply 연산을 마치고 해당 객체를 반환한다.
+ */
 fun main() {
     println("alphabet() = ${alphabet()}")
     println("alphabetWith() = ${alphabetWith()}")
