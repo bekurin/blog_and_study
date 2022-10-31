@@ -1,5 +1,7 @@
 package com.example.core.l_tip
 
+import com.example.core.a_kotlinBasic.iterator.printLine
+
 fun kakaoLogin() {
     println("kakao 로그인 중!")
 }
@@ -42,4 +44,6 @@ fun enumLogin(type: Type) {
 
 fun main() {
     originLogin("GOOGLE_LOGIN")
+    printLine()
+    enumLogin(Type.GOOGLE_LOGIN)
 }
