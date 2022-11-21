@@ -47,7 +47,7 @@ Dockerfile은 절차지향적으로 명령이 실행된다. 명령의 동작을 
 4.  3의 결과에 저장된 경로에 있는 파일을 현재 디렉터리에 app.jar 이름으로 저장한다.
 5.  java -jar /app 명령어를 실행하여 저장된 app.jar 파일을 실행한다.
 
-CI를 위한 Dockerfile까지 작성이 되었다. 이제 Actions를 사용하여 도커 image를 빌드하고, 도커 hub에 올리는 과정까지 자동화해보겠다. Actions의 코드는 job의 단계에 따라 코드를 설명하겠다.
+CI를 위한 Dockerfile까지 작성이 되었다. 이제 Actions를 사용하여 도커 image를 빌드하고, 도커 hub에 올리는 과정까지 자동화해보겠다.
 
 ```
 name: Automate Publishing Docker Image To Docker Hub  
@@ -137,7 +137,9 @@ buildx는 일반적은 build가 아닌 멀티플랫폼 build를 위해 사용된
           tags: ${{secrets.DOCKER_HUB_USERNAME}}/${{env.DOCKER_HUB_REPO}}:main
 ```
 
-앞의 workflow는 Build and push Docker image 작업을 위한 사전 작업이라고 봐도 무방하다. [docker/build-push-action](https://github.com/docker/build-push-action)를 사용하여 workflow를 실행한다. 해당 workflow를 위해 필요한 변수들의 내용은 다음과 같다.
+앞의 workflow는 Build and push Docker image 작업을 위한 사전 작업이라고 봐도 무방하다.
+
+위 단계는 [docker/build-push-action](https://github.com/docker/build-push-action)를 사용하여 workflow를 실행하는 것으로 도커 image를 만든 후에 도커 hub에 업로드하는 것까지 실행한다. 해당 workflow를 위해 필요한 변수들의 내용은 다음과 같다.
 
 -   context: work 디렉터리의 위치를 설정한다.
 -   file: Dockerfile의 위치를 설정한다.
@@ -170,4 +172,4 @@ Actions와 도커를 사용한 CI 작업을 진행해보았다. 이전에 사용
 2.  이미 많은 기업에서 사용하는 CI 솔루션인 도커를 사용하여 실행과 관리가 편한다.
 3.  도커 image를 통해 추후 실제 서비스를 한다면 쿠버네티스를 사용하여 분산 서비스를 만들기에 용이하다.
 
-CI/CD는 이벤트를 인지하고, 데이터베이스 연결, 도커 image 만들기, 도커 image 업로드하기 등 여러 작업들을 수행해야 한다. 그러한 점에서 보았을 때 이런 복잡한 작업들을 사전에 정의해놓고 간편하게 사용할 수 있다는 장점은 여러 기업에서 Actions를 많이 사용하는 가장 큰 이유일 것 같다.
+CI/CD는 이벤트를 인지, 데이터베이스 연결, 도커 image 만들기, 도커 image 업로드하기 등 여러 작업들을 수행해야 한다. 그러한 점에서 보았을 때 복잡한 작업들을 사전에 정의해놓고 간편하게 사용할 수 있다는 Actions의 장점은 여러 기업에서 많이 사용하는 가장 큰 이유일 것 같다.
