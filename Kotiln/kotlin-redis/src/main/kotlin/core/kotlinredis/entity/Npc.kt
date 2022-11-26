@@ -11,7 +11,7 @@ enum class NpcType(
     QUEST("퀘스트를 주는 Npc")
 }
 
-@RedisHash("reserve")
+@RedisHash("npc")
 class Npc(
     @Id
     val id: String,
