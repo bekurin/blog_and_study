@@ -1,6 +1,6 @@
-package chapter2
+package chapter02
 
-import chapter2.Listing2.*
+import chapter02.Listing2.*
 import org.mockito.Mockito.*
 import org.mockito.internal.verification.Times
 import kotlin.test.Test

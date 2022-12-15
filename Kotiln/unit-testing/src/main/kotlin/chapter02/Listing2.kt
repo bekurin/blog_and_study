@@ -1,21 +1,29 @@
-package chapter2
+package chapter02
 
-class Listing1 {
-    class Store {
-        private var inventory: MutableMap<Product, Int> = mutableMapOf()
+class Listing2 {
+    interface Store {
+        fun hasEnoughInventory(product: Product, quantity: Int): Boolean
+        fun removeInventory(product: Product, quantity: Int): Unit
+        fun addInventory(product: Product, quantity: Int): Unit
+        fun getInventory(product: Product): Int
+    }
 
-        fun hasEnoughInventory(product: Product, quantity: Int): Boolean {
+    class StoreImpl : Store {
+        private val inventory = mutableMapOf<Product, Int>()
+
+
+        override fun hasEnoughInventory(product: Product, quantity: Int): Boolean {
             return getInventory(product) >= quantity
         }
 
-        fun removeInventory(product: Product, quantity: Int) {
+        override fun removeInventory(product: Product, quantity: Int) {
             if (!hasEnoughInventory(product, quantity)) {
                 throw Exception("Not enough inventory")
             }
             inventory[product] = inventory[product]!!.minus(quantity)
         }
 
-        fun addInventory(product: Product, quantity: Int) {
+        override fun addInventory(product: Product, quantity: Int) {
             if (inventory.contains(product)) {
                 inventory[product] = inventory[product]!!.plus(quantity)
             } else {
@@ -23,14 +31,13 @@ class Listing1 {
             }
         }
 
-        fun getInventory(product: Product): Int {
+        override fun getInventory(product: Product): Int {
             return inventory[product] ?: 0
         }
     }
 
     enum class Product {
-        SHAMPOO,
-        BOOK
+        SHAMPOO, BOOK
     }
 
     class Customer {

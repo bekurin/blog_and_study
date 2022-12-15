@@ -1,6 +1,6 @@
-package chapter2
+package chapter02
 
-import chapter2.Listing1.*
+import chapter02.Listing1.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
