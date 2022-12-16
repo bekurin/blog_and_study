@@ -14,6 +14,7 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     testImplementation("org.mockito:mockito-core:4.8.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.1")
 }
 
 tasks.test {
