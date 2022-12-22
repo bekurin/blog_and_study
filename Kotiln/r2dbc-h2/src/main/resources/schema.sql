@@ -1,2 +1,12 @@
 DROP TABLE if exists customer;
 CREATE TABLE customer (id SERIAL PRIMARY KEY, first_name VARCHAR(255), last_name VARCHAR(255));
+INSERT INTO customer(id, first_name, last_name) values(2, 'sam', 'done');
+INSERT INTO customer(id, first_name, last_name) values(3, 'james', 'down');
+INSERT INTO customer(id, first_name, last_name) values(1, 'bob', 'west');
+INSERT INTO customer(id, first_name, last_name) values(4, 'john', 'up');
+INSERT INTO customer(id, first_name, last_name) values(5, 'michel', 'right');
+INSERT INTO customer(id, first_name, last_name) values(6, 'first', 'left');
+INSERT INTO customer(id, first_name, last_name) values(7, 'kafka', 'north');
+INSERT INTO customer(id, first_name, last_name) values(8, 'smith', 'south');
+INSERT INTO customer(id, first_name, last_name) values(9, 'puck', 'east');
+INSERT INTO customer(id, first_name, last_name) values(10, 'sweet', 'candy');
