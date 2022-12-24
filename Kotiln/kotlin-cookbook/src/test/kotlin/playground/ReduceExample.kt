@@ -32,22 +32,12 @@ class ReduceExample {
     private fun removeOne(
         result: MutableMap<String, Int>, key: String,
     ): MutableMap<String, Int> {
-        if (result.containsKey(key)) {
-            result[key] = result[key]?.minus(1)
-                ?: throw Exception("result[${key}] is null")
-        } else {
-            result[key] = -1
-        }
+        result[key] = result[key]?.minus(1) ?: -1
         return result
     }
 
     private fun addOne(result: MutableMap<String, Int>, key: String): MutableMap<String, Int> {
-        if (result.containsKey(key)) {
-            result[key] = result[key]?.plus(1)
-                ?: throw Exception("result[${key}] is null")
-        } else {
-            result[key] = 1
-        }
+        result[key] = result[key]?.plus(1) ?: 1
         return result
     }
 }
