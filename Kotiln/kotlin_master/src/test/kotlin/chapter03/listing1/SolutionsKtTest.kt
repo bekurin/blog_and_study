@@ -94,4 +94,16 @@ internal class SolutionsKtTest {
         //then
         assertEquals(48.0, result)
     }
+
+    @Test
+    fun `함수를 입력 받아 함수를 리턴할 수 있다`() {
+        //given
+        val f = { a: Int -> { b: Double -> a * (1 + b / 100) } }
+
+        //when
+        val result = exercise7(8, f)
+
+        //then
+        assertEquals(8.8, result(10.0))
+    }
 }
