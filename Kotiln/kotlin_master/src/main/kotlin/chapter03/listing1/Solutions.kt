@@ -20,3 +20,5 @@ val exercise4V3: (IntUnaryOp) -> (IntUnaryOp) -> IntUnaryOp =
     { x -> { y -> { z -> x(y(z)) } } }
 
 fun <T, U, V> exercise5(): ((U) -> V) -> ((T) -> U) -> (T) -> V = { f -> { g -> { x -> f(g(x)) } } }
+
+fun <A, B, C> exercise7(a: A, f: (A) -> (B) -> C): (B) -> C = f(a)
