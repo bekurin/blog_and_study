@@ -1,9 +1,11 @@
 package chapter03
 
+import chapter03.question04.IntUnaryOp
+
 fun square(n: Int) = n * n
 
 fun triple(n: Int) = n * 3
 
-fun compose(f: (Int) -> Int, g: (Int) -> Int): (Int) -> Int {
-    TODO("compose")
-}
+val square: IntUnaryOp = { it * it }
+
+val triple: IntUnaryOp = { it * 3 }
