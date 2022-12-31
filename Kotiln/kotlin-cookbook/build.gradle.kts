@@ -12,11 +12,16 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+    runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:1.6.0")
+
     testImplementation(kotlin("test"))
     testImplementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.junit.jupiter:junit-jupiter-params")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-debug:1.6.4")
 }
 
 tasks.test {
