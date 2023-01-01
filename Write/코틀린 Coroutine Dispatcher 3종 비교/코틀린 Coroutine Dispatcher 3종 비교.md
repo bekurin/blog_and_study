@@ -1,4 +1,4 @@
-참고사항
+참고문서
 - [kotlinx.coroutines 문서](https://kotlinlang.org/docs/coroutines-overview.html)
 
 launch, withContext, async 등 코틀린에서 coroutine을 사용하기 위해서는 Thrad를 어떻게 사용할지에 대한 정책을 설정해줘야합니다.
@@ -126,18 +126,16 @@ suspend fun dispatcherUnconfined(count: Int) {
 ```
 Before delay...의 출력문은 모두 main Thread에서 실행된 것에 비해 나머지 First delay..., Second delay... 는 DefaultExecutor에서 실행된 것을 볼 수 있습니다.
 
-이러한 특성 미뤄보았을 때 unconfined의 무분별한 사용은 하나의 Thread에 작업이 집중될 수 있습니다.
+이러한 특성 미뤄보았을 때 만약 모든 코루틴 작업을 unconfined로 정의하면 코루틴이 가지는 동시성 효과를 누릴 수 없습니다.
 
-또한 [When should I use `Dispatchers.Unconfined` vs `EmptyCoroutineContext`?](https://stackoverflow.com/questions/55169711/when-should-i-use-dispatchers-unconfined-vs-emptycoroutinecontext) 에서는 GlobalScope를 차단하는 경우 non-suspending API를 가로채는 경우에 유용하다고 설명합니다.
+또한 [When should I use `Dispatchers.Unconfined` vs `EmptyCoroutineContext`?](https://stackoverflow.com/questions/55169711/when-should-i-use-dispatchers-unconfined-vs-emptycoroutinecontext) 에서는 GlobalScope를 차단하는 경우 non-suspending API를 사용하는 경우에 유용하다고 합니다.
 
-하지만 GlobalScope로 만들어진 코루틴의 경우 취소 시켜주지 않으면 어플리케이션 전반에 걸쳐 실행이 되므로 사용을 권장하지 않고, Non-suspeding API의 경우 추후 suspend 로직이 추가되게 되면 Default 또는 IO로 변경해주어야하고,suspend가 없다고 하더라도 이 2가지 경우보다 좋은 성능을 내지 못할 것 같다고 생각합니다.
+하지만 GlobalScope로 만들어진 코루틴의 경우 취소 시켜주지 않으면 어플리케이션 전반에 걸쳐 실행이 되므로 사용을 권장하지 않고, Non-suspeding API의 경우 추후 suspend 로직이 추가되게 되면 Default 또는 IO로 변경해주어야하고, suspend 추가가 없다고 하더라도 Default와 IO를 적절하게 사용하는 것이 더 좋은 성능을 낼 수 있다고 생각합니다.
 
 위와 같은 이유로 unconfined를 "일반적으로 적합하지 않음" 이라고 판단했습니다.
 
-### 성능 비교
-Default와 IO의 성능을 비교합니다. 비교 방식은 dispatcherDefault()와 dispatcherIO() 함수에서 Dispatcher의 타입만 변경하여 전체 작업 실행 시간의 평균을 비교하는 방식으로 진행하였습니다.
-
-작업 실행 컴퓨터: 맥북 M1 Pro 16형
+### 성능 비교 (작업 컴퓨터: 맥북 M1 Pro 16형)
+Dispatcher에 따른 성능 차이를 비교합니다. 비교 방식은 dispatcherDefault()와 dispatcherIO() 함수에서 Dispatcher의 타입만 변경하여 전체 작업 실행 시간의 평균을 비교하는 방식으로 진행하였습니다.
 
 #### IO에 유리한 작업 비교 (실행 함수, Dispatcher 타입, 평균 작업 시간)
 평균 작업 시간의 경우 count의 값을 1000으로 설정하여 비교하였습니다.
@@ -147,17 +145,20 @@ Default와 IO의 성능을 비교합니다. 비교 방식은 dispatcherDefault()
 
 #### Default에 유리한 작업 비교 (실행 함수, Dispatcher 타입, 평균 작업 시간)
 평균 작업 시간의 경우 count의 값을 100으로 설정하여 비교하였습니다.
-- dispatcherDefault() / IO / 139ms  
+- dispatcherDefault() / IO / 77ms  
 - dispatcherDefault() / Default / 51ms
 - dispatcherDefault() / Unconfined / 70ms
 
 ### 결론
-3종류의 kotlin의 코루틴 Dispatcher 성능을 알아보았습니다.
+3종류의 kotlin의 코루틴 Dispatcher 개념과 성능을 알아보았습니다.
 
-그 중에서도 IO/Default의 성능을 비교하여 html 응답을 읽는 작업에서는 IO가 좋은 성능을 내고, CPU 연산이 많은 작업에서는 Default가 좋은 성능을 내주었습니다.
+그 중에서도 html 응답을 읽는 작업에서는 IO가 가장 좋은 성능을 내고, CPU 연산이 많은 작업에서는 Default가 가장 좋은 성능을 내주었습니다.
 
-시간만 놓고 봐도 IO에 유리한 작업의 경우 IO가 2.6배 더 빠르고, Default에 유리한 작업의 경우 Default 2.3배 더 빨라 해결해야하는 요구사항에 따라 사용해야할 Dispatcher가 달라질 것 같습니다.
+성능 비교를 분석하면 다음과 같습니다.
+- IO 작업은 IO를 사용하는 것이 좋은 성능을 낼 수 있다.
+- CPU 연산 작업은 Default가 좋은 성능을 낼 수 있다.
+- Unconfined는 IO 작업에 적합하지 않다.
+- CPU 연산 작업의 경우 IO를 사용하면 OutOfMemoryError가 발생할 수 있다. (Defalut에 유리한 작업에서 count를 1000으로 설정한 경우 Error가 발생함)
+- CPU 연산 작업에서 Unconfined가 IO 보다 좋은 성능을 낸다.
 
-하지만, Default에 유리한 작업에서 count의 값을 1000 이상으로 설정하면 IO의 경우 OutOfMemoryError가 발생하였습니다.
-
-따라서 만약 코루틴을 사용하여 요구사항을 구현하게 되었을 경우 IO 작업인지에 대한 확신이 없다면 Default를 기본으로 사용하는 것이 좋다고 생각합니다.
+IO 작업이 확실한 경우에만 IO를 사용하고, IO 작업이 아닌 경우 Default를 사용하는 것이 좋다고 생각합니다.
