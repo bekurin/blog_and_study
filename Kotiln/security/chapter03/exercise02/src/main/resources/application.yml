@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:chap3;
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+logging:
+  level:
+    org.hibernate.SQL: debug
