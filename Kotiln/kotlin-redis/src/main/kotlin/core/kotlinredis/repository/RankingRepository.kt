@@ -55,11 +55,15 @@ class RankingRepository(
         rankingSet.add(RANKING.key, objectMapper.writeValueAsString(entity), entity.point.score)
     }
 
-    fun findByScoreRange(range: LongRange): List<Member> {
+    fun findAllByScoreRange(range: LongRange): List<Member> {
         val result = rankingSet.range(RANKING.key, range.first, range.last) ?: return listOf<Member>()
         return result.map { item ->
             objectMapper.readValue(item, Member::class.java)
         }.toList()
+    }
+
+    fun findRankByEntity(entity: Member): Long? {
+        return rankingSet.reverseRank(RANKING.key, objectMapper.writeValueAsString(entity))
     }
 
     fun update(origin: Member, updated: Member) {
