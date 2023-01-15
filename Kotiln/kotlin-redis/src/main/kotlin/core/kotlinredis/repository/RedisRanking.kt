@@ -84,7 +84,6 @@ class RankingService(
 ) {
     fun save(entity: Member): Member {
         val result = rankingRepository.save(entity)
-        println("result = ${result}")
         if ((result == null) || (result == false)) {
             throw RuntimeException("${entity.id}를 저장할 수 없습니다")
         }

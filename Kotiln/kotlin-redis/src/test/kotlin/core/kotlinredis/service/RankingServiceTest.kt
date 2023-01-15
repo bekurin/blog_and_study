@@ -5,13 +5,11 @@ import core.kotlinredis.repository.Point
 import core.kotlinredis.repository.RankingService
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
-import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-@DisplayName("redis 통합 테스트 하나의 클래스에 모든 케이스 구현")
 internal class RankingServiceTest constructor(
     @Autowired
     val sut: RankingService,
