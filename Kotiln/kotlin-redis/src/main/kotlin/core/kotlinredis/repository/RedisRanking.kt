@@ -2,7 +2,6 @@ package core.kotlinredis.repository
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import core.kotlinredis.repository.RedisKey.RANKING
-import jakarta.annotation.PostConstruct
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.data.redis.core.ScanOptions
 import org.springframework.data.redis.core.ZSetOperations
@@ -35,7 +34,6 @@ data class Point(
 class PostConstruct(
     private val rankingRepository: RankingRepository,
 ) {
-    @PostConstruct
     fun init() {
         rankingRepository.save(Member("1", "Bob", Point(1234.0)))
         rankingRepository.save(Member("2", "Sam", Point(234.0)))
@@ -50,8 +48,8 @@ class RankingRepository(
 ) {
     private val rankingSet: ZSetOperations<String, String> by lazy { redisTemplate.opsForZSet() }
 
-    fun save(entity: Member) {
-        rankingSet.add(RANKING.key, objectMapper.writeValueAsString(entity), entity.point.score)
+    fun save(entity: Member): Boolean? {
+        return rankingSet.add(RANKING.key, objectMapper.writeValueAsString(entity), entity.point.score)
     }
 
     fun findAllByScoreRange(range: LongRange): List<Member> {
@@ -69,13 +67,14 @@ class RankingRepository(
         rankingSet.scan(RANKING.key, ScanOptions.scanOptions().count(count).build())
     }
 
-    fun update(origin: Member, updated: Member) {
+    fun update(origin: Member, updated: Member): Member {
         delete(origin)
         save(updated)
+        return updated
     }
 
-    fun delete(entity: Member): Long? {
-        return rankingSet.remove(RANKING.key, objectMapper.writeValueAsString(entity))
+    fun delete(entity: Member): Long {
+        return rankingSet.remove(RANKING.key, objectMapper.writeValueAsString(entity)) ?: 0
     }
 }
 
@@ -84,7 +83,11 @@ class RankingService(
     private val rankingRepository: RankingRepository,
 ) {
     fun save(entity: Member): Member {
-        rankingRepository.save(entity)
+        val result = rankingRepository.save(entity)
+        println("result = ${result}")
+        if ((result == null) || (result == false)) {
+            throw RuntimeException("${entity.id}를 저장할 수 없습니다")
+        }
         return entity
     }
 
@@ -93,14 +96,15 @@ class RankingService(
     }
 
     fun findByEntity(entity: Member): Long {
-        return rankingRepository.findByEntity(entity) ?: throw RuntimeException("${entity.id}를 찾을 수 없습니다")
+        return rankingRepository.findByEntity(entity)
+            ?: throw RuntimeException("${entity.id}를 찾을 수 없습니다")
     }
 
     fun findAllByRanking(count: Long) {
         return rankingRepository.findAllByRanking(count)
     }
 
-    fun update(entity: Member, score: Double) {
+    fun update(entity: Member, score: Double): Member {
         return rankingRepository.update(
             entity,
             entity.update(entity.nickname, Point(score))
@@ -108,6 +112,7 @@ class RankingService(
     }
 
     fun delete(entity: Member): Long {
-        return rankingRepository.delete(entity) ?: throw RuntimeException("${entity.id}를 가진 회원을 찾지 못했습니다")
+        val count = rankingRepository.delete(entity)
+        return if (count == 0L) throw RuntimeException("${entity.id}를 가진 회원을 찾지 못했습니다") else count
     }
 }
