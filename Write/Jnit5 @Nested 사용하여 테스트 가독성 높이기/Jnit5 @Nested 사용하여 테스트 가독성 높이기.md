@@ -1,0 +1,146 @@
+GWT(given-when-then) 구조의 테스트 코드를 짜다보면 기능 검증을 위해 데이터를 준비하는 코드(given)가 실행(when)과 검증(then)을 하는 코드보다 길어질 때가 있습니다. 이런 경우 테스트 코드를 짜면서도 "배보다 배꼽이 더 큰게 아닌가" 라는 생각을 종종하고는 했습니다.
+
+이런 경우에 적용해볼 수 있는 테스트 구조를 얼마전에 알게 되었는데, 바로 DCI(Describe Context It) 입니다.
+
+랭킹 보드 요구사항을 토대로 GWT와 절충 DCI, 완전 DCI를 사용하여 테스트 코드를 작성하고 비교해보겠습니다.
+
+### 랭킹보드 구현
+랭킹 보드는 Redis를 사용하여 구현하였습니다. (랭킹보드 구현에 대해서는 설명하지 않습니다) [구현 바로가기](https://github.com/bekurin/blog_and_study/blob/main/Kotiln/kotlin-redis/src/main/kotlin/core/kotlinredis/repository/RedisRanking.kt)
+
+## 테스트 코드 작성
+- 테스트의 대상이 되는 클래스의 이름을 sut(System Unter Test)로 설정하였습니다. 
+- 테스트 코드는 라인 수 관계로 랭키보드 생성에 대한 성공, 실패 케이스를 다룹니다.
+
+### 하나의 클래스에 모든 케이스 구현
+```kotlin
+@SpringBootTest     
+internal class RankingServiceTest constructor(  
+    @Autowired  
+    val sut: RankingService,  
+) {  
+    @Test  
+    fun `save()는 성공적으로 저장하면 저장된 회원을 반환한다`() {  
+        //given  
+        val entity = Member("3", "Bob", Point(123.0))  
+  
+        //when  
+        val save = sut.save(entity)  
+  
+        //then  
+        assertEquals(entity, save)  
+        sut.delete(entity)
+    }  
+  
+    @Test  
+    fun `save()는 저장에 실패하면 예외를 반환한다`() {  
+        //given  
+        val entity = Member("4", "Bob", Point(123.0))  
+        sut.save(entity)  
+  
+        //when  
+        //then        
+        assertThrows(RuntimeException::class.java) { sut.save(entity) }  
+        sut.delete(entity)
+    }
+	...
+}
+```
+
+위의 테스트를 실행하면 다음과 같이 테스트가 진행되게 됩니다.
+
+![[Screen Shot 2023-01-15 at 9.37.49 PM.png]]
+
+코드에서는 사용하지 않는 정보를 삭제해줘야한다. 리소스가 남아 있으면 테스트의 성능에 문제가 생길 수 있기 때문에
+테스트의 실행 순서가 보장되지 않기 때문에 수정, 삭제 등의 여러 상황에 대해 테스트를 진행할 때 출력의 순서가 뒤죽박죽일 수 있다.
+
+#### @Nested 사용하여 상황 분리
+```kotlin
+@Nested  
+@DisplayName("save()는 ")  
+inner class Save() {  
+    private val entity = subject()  
+  
+    @AfterEach  
+    fun cleanUp() {  
+        sut.delete(entity)  
+    }  
+  
+    @Test  
+    fun `성공적으로 저장하면 저장된 회원을 반환한다`() {  
+	    //given
+	    //when
+        val save = sut.save(entity)  
+        //then
+        assertEquals(entity, save)  
+    }  
+  
+    @Test  
+    fun `저장에 실패하면 예외를 반환한다`() {  
+	    //given
+	    //when
+        sut.save(entity)  
+        //thenb
+        assertThrows(RuntimeException::class.java) { sut.save(entity) }  
+    }  
+}
+```
+
+![[Screen Shot 2023-01-15 at 9.36.56 PM.png]]
+
+일반적인 GWT 구조와 다른 점을 비교해보면 given 절의 코드가 없는 것을 확인할 수 있다. save 함수를 검증하기 위한 entity를 공유하기 때문이다.
+
+여기서 테스트 코드를 작성하는 목적에 대한 생각을 이야기 해보자면 테스트 코드는 리팩토링, 요구사항 구현 등으로 발생한 코드가 올바르게 동작하고 있다는 것을 보증해주는 하나의 시스템이라고 생각한다. 그렇게 보았을 때 테스트에서 집중해야할 부분은 WT 즉, 실행과 실행을 결과로 발생한 상태를 검증하는 것이라고 생각한다.
+
+이러한 관점으로 보면 위의 절충 DCI는 given 절을 공유할 수 있다는 것에서 이점이 있다.
+-> 공유하기 때문에 GWT와는 다르게 다른 속성 값을 사용할 수는 없다.
+
+### DCI 패턴을 사용하여 테스트 구현
+```kotlin
+@Nested  
+@DisplayName("save()는 ")  
+inner class DescribeSave {  
+    private val entity = subject()  
+  
+    @AfterEach  
+    fun cleanUp() {  
+        sut.delete(entity)  
+    }  
+  
+    @Nested
+    @DisplayName("성공적으로 저장하면 ")
+    inner class ContextSuccess {  
+        @Test  
+        fun `저장된 회원을 반환한다`() {  
+            val save = sut.save(entity)  
+            assertEquals(entity, save)  
+        }  
+    }  
+  
+    @Nested  
+    @DisplayName("저장에 실패하면 ")  
+    inner class ContextFail {  
+        @Test  
+        fun `예외를 반환한다`() {  
+            sut.save(entity)  
+            assertThrows(RuntimeException::class.java) { sut.save(entity) }  
+        }  
+    }  
+}
+```
+![[Screen Shot 2023-01-15 at 11.47.04 AM.png]]
+
+save()는 어떤 함수를 실행 할지에 대한 설명(Describe), 성공 또는 실패에 대한 상황(Context), 각 상황에서 반환되는 (결과, 상태) (It)으로 이뤄져있다.
+위의 경우는 완전한 DCI의 구조로 작성된 테스트로 모든 단어를 이으면 말이 된다.
+
+
+### 마무리
+처음부터 DCI 구조로 코드를 작성하는 것은 과최적화라는 생각이 든다. 그렇다는 말은 구현에 시간이 꽤 걸린다는 것이다. 시간만 충분하다면 요구사항 구현, 테스트 코드 작성에 많은 시간을 투자하겠지만 현실의 세계는 그렇지 않다.
+그에 반해 GWT는 직관적이고, 이해하기 쉽다.
+DCI를 사용하면 분리된 context들에 대해 given 절을 통합하고, 실행과 검증에 몰입할 수 있다.
+
+GWT와 DCI는 자세하게 보면 사실 구조는 비슷하게 되어 있다는 것을 눈치챌 수 있을 것이다.
+
+따라서 앞으로 테스트 코드를 작성하게 된다면 DCI를 먼저 생각하는 것이 아니라 GWT로 테스트 코드를 작성하면서 given 절의 준비 코드가 실행과 검증보다 길어지고, 성공과 실패와 같이 나눠진 context에서 given절의 자원을 공유해도 문제가 될게 없다는 판단이 확고해지면 DCI로의 변환을 고려해볼 것 같다.
+
+
+
