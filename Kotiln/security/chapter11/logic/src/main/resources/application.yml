@@ -1,0 +1,11 @@
+server:
+  port: 9090
+
+auth:
+  server:
+    base:
+      url: http://localhost:8080
+
+jwt:
+  signing:
+    key: bPeShVmYq3t6w9y$B&E)H@McQfTjWnZr4u7x!A%C*F-JaNdRgUkXp2s5v8y/B?E(
