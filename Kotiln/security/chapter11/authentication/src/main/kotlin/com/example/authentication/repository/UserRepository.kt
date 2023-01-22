@@ -1,6 +1,6 @@
-package com.example.chapter11.repository
+package com.example.authentication.repository
 
-import com.example.chapter11.entity.Users
+import com.example.authentication.entity.Users
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 

@@ -1,8 +1,9 @@
 package com.example.chapter11.controller
 
-import com.example.chapter11.entity.Otp
-import com.example.chapter11.entity.Users
-import com.example.chapter11.service.UserService
+import com.example.authentication.controller.userDto
+import com.example.authentication.entity.Otp
+import com.example.authentication.entity.Users
+import com.example.authentication.service.UserService
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody

@@ -1,10 +1,10 @@
 package com.example.chapter11.service
 
-import com.example.chapter11.entity.Otp
-import com.example.chapter11.entity.Users
-import com.example.chapter11.repository.OtpRepository
-import com.example.chapter11.repository.UserRepository
-import com.example.chapter11.util.GenerateCodeUtil
+import com.example.authentication.entity.Otp
+import com.example.authentication.entity.Users
+import com.example.authentication.repository.OtpRepository
+import com.example.authentication.repository.UserRepository
+import com.example.authentication.util.GenerateCodeUtil
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service

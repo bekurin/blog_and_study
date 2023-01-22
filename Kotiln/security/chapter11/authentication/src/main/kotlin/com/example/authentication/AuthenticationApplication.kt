@@ -1,11 +1,11 @@
-package com.example.chapter11
+package com.example.authentication
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class Chapter11Application
+class AuthenticationApplication
 
 fun main(args: Array<String>) {
-    runApplication<Chapter11Application>(*args)
+    runApplication<AuthenticationApplication>(*args)
 }

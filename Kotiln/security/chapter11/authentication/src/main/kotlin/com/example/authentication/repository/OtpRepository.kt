@@ -1,6 +1,6 @@
-package com.example.chapter11.repository
+package com.example.authentication.repository
 
-import com.example.chapter11.entity.Otp
+import com.example.authentication.entity.Otp
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.Optional
 
