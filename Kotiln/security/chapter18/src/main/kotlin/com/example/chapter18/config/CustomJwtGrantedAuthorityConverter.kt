@@ -1,5 +1,6 @@
 package com.example.chapter18.config
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.core.convert.converter.Converter
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
@@ -9,10 +10,11 @@ class CustomJwtGrantedAuthorityConverter : Converter<Jwt, Collection<GrantedAuth
     private val AUTHORITIES_CLAIM_NAME = "authorities"
 
     override fun convert(source: Jwt): Collection<SimpleGrantedAuthority> {
-        return source.getClaimAsStringList(AUTHORITIES_CLAIM_NAME)
-            .fold(mutableListOf()) { result, current ->
-                result.add(SimpleGrantedAuthority(current))
-                result
-            }
+        return source.getClaimAsMap("realm_access").flatMap { item ->
+            item.value as? List<String> ?: listOf()
+        }.fold(mutableListOf()) {result, current ->
+            result.add(SimpleGrantedAuthority(current))
+            result
+        }
     }
 }

@@ -13,6 +13,7 @@ class WebSecurityConfig {
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         return http
             .authorizeHttpRequests { authorize ->
+                authorize.requestMatchers(HttpMethod.GET, "/**").permitAll()
                 authorize.requestMatchers(HttpMethod.DELETE, "/**").hasAuthority("fitnessadmin")
                 authorize.anyRequest().authenticated()
             }
