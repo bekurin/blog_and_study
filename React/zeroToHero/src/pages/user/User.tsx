@@ -1,4 +1,6 @@
 import { CallbacksType, StatesType } from "./UserContainer"
+import UserSearchForm from "./UserSearchForm"
+import UserList from "./UserList"
 
 
 type PropsType = {
@@ -9,8 +11,8 @@ type PropsType = {
 const User = ({states, callbacks}: PropsType) => {
     return (
         <>
-            <UserSearchForm />
-            <UserList />
+            <UserSearchForm callbacks={callbacks} />
+            <UserList callbacks={callbacks} states={states}/>
         </>
     )
 }

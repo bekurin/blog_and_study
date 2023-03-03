@@ -1,6 +1,10 @@
 import { UserType } from "./UserContainer"
 
-const UserItem = (user: UserType) => {
+type PropsType = {
+    user: UserType
+}
+
+const UserItem = ({user}: PropsType) => {
     return (
         <>
             <tr>
@@ -11,3 +15,5 @@ const UserItem = (user: UserType) => {
         </>
     )
 }
+
+export default UserItem

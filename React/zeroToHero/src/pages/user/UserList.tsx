@@ -1,4 +1,5 @@
 import { CallbacksType, StatesType } from "./UserContainer"
+import UserItem from "./UserItem"
 
 
 type PropsType = {
@@ -7,8 +8,23 @@ type PropsType = {
 }
 
 const UserList = ({states, callbacks}: PropsType) => {
+    const userItemList = states.userList.map((user) => {
+        return <UserItem user={user} />
+    })
     return (
         <>
+            <table>
+                <thead>
+                    <tr>
+                        <th>회원 아이디</th>
+                        <th>회원 이메일</th>
+                        <th>회원 이름</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {userItemList}
+                </tbody>
+            </table>
         </>
     )
 }
