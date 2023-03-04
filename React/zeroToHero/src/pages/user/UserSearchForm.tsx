@@ -6,10 +6,6 @@ type PropsType = {
     callbacks: CallbacksType
 }
 
-const UserSearchHandler = (event: FormDataEvent) => {
-    
-}
-
 const UserSearchForm = ({callbacks}: PropsType) => {
     const [username, setUsername] = useState("")
     return (
@@ -17,7 +13,7 @@ const UserSearchForm = ({callbacks}: PropsType) => {
             <form>
                 <label htmlFor="username">회원 이름: </label>
                 <input type="text" className="form-group" id="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
-                <button type="submit" />
+                <button type="submit">검색하기</button>
             </form>
         </>
     )

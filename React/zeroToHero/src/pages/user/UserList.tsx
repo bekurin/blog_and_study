@@ -8,6 +8,7 @@ type PropsType = {
 }
 
 const UserList = ({states, callbacks}: PropsType) => {
+    console.log(states)
     const userItemList = states.userList.map((user) => {
         return <UserItem user={user} />
     })

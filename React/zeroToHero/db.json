@@ -1,5 +1,9 @@
 {
     "users": {
+        "hasNext": false,
+        "hasPrevious": false,
+        "page": 0,
+        "size": 3,
         "contents": [
             {
                 "id": 1,
