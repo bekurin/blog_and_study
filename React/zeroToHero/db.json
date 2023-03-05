@@ -22,5 +22,62 @@
                 "email": "search@kakao.com"
             }
         ]
+    },
+    "users-page-1": {
+        "hasNext": true,
+        "hasPrevious": true,
+        "page": 1,
+        "size": 2,
+        "totalPage": 3,
+        "contents": [
+            {
+                "id": 1,
+                "name": "홍길동1",
+                "email": "test@naver.com"
+            },
+            {
+                "id": 2,
+                "name": "타이머2",
+                "email": "timer@google.com"
+            }
+        ]
+    },
+    "users-page-2": {
+        "hasNext": true,
+        "hasPrevious": true,
+        "page": 2,
+        "size": 2,
+        "totalPage": 3,
+        "contents": [
+            {
+                "id": 3,
+                "name": "홍길동3",
+                "email": "test@naver.com"
+            },
+            {
+                "id": 4,
+                "name": "타이머4",
+                "email": "timer@google.com"
+            }
+        ]
+    },
+    "users-page-3": {
+        "hasNext": false,
+        "hasPrevious": true,
+        "page": 3,
+        "size": 2,
+        "totalPage": 3,
+        "contents": [
+            {
+                "id": 5,
+                "name": "홍길동5",
+                "email": "test@naver.com"
+            },
+            {
+                "id": 6,
+                "name": "타이머6",
+                "email": "timer@google.com"
+            }
+        ]
     }
 }

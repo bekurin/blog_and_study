@@ -23,9 +23,14 @@ const UserContainer = () => {
         fetchUserList();
     }, []);
 
-    const fetchUserList = async () => {
+    const fetchUserList = async (username: string = "", page: number = 0) => {
+        // TODO: 변수를 입력 받아 BASE_URL을 나누고 요청을 보낸다.
         try {
-            const response = await axios.get(BASE_URL)
+            let url: string = ""
+            if (page !== 0) {
+                url = `${BASE_URL}-page-${page}`
+            }
+            const response = await axios.get(url === "" ? BASE_URL : url)
             setUserList(response.data.contents)
             setPage(bindingPageResult(response))
         } catch (e) {
