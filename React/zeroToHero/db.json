@@ -1,9 +1,10 @@
 {
     "users": {
-        "hasNext": false,
+        "hasNext": true,
         "hasPrevious": false,
         "page": 0,
         "size": 3,
+        "totalPage": 10,
         "contents": [
             {
                 "id": 1,

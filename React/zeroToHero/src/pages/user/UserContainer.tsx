@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { PageType } from "../../components/Pagination";
+import { bindingPageResult, PageType } from "../../components/Pagination";
 import User from "./User";
 
 export type UserType = {
@@ -8,6 +8,7 @@ export type UserType = {
     username: string,
     email: string
 }
+
 export type StatesType = {userList: Array<UserType>, page: PageType}
 export type CallbacksType = {
     fetchUserList: () => void;
@@ -16,7 +17,7 @@ export type CallbacksType = {
 const BASE_URL = "http://localhost:4000/users"
 const UserContainer = () => {
     const [userList, setUserList] = useState<Array<UserType>>([])
-    const [page, setPage] = useState<PageType>({hasNext:false, hasPrevious:false, size:10, page:0})
+    const [page, setPage] = useState<PageType>({hasNext:false, hasPrevious:false, size:10, page:0, totalPage:3})
 
     useEffect(() => {
         fetchUserList();
@@ -26,7 +27,7 @@ const UserContainer = () => {
         try {
             const response = await axios.get(BASE_URL)
             setUserList(response.data.contents)
-            setPage(response.data)
+            setPage(bindingPageResult(response))
         } catch (e) {
             if (e instanceof Error) console.error(e.message)
             else console.error(e)
