@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import userClient from "../../clients/user/UserClient";
 import { bindingPageResult, PageType } from "../../components/Pagination";
 import User from "./User";
 
@@ -22,6 +23,11 @@ const UserContainer = () => {
     useEffect(() => {
         fetchUserList();
     }, []);
+
+    const fetchUserById = (userId: number) => {
+        const user = userClient().getById(userId);
+        console.log(user)
+    }
 
     const fetchUserList = async (username: string = "", page: number = 0) => {
         // TODO: 변수를 입력 받아 BASE_URL을 나누고 요청을 보낸다.
