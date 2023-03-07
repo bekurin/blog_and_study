@@ -1,5 +1,6 @@
 import axios from "axios";
 import SERVER_URL from "../../constants/urls";
+import { PageResponse } from "../PageResponse";
 
 export type UserType = {
     id: number,
@@ -8,23 +9,15 @@ export type UserType = {
 }
 
 type UserClientType = {
-    getById: (userId: number) => Promise<UserType>
+    fetchPagedUsers: () => Promise<PageResponse<UserType>>
 }
 
 const userClient = (): UserClientType => {
-    const getById = async (userId: number): Promise<UserType> => {
-        try {
-            const response = await axios.get(SERVER_URL.USERS)
-            return response.data as UserType
-        } catch (e) {
-            if (e instanceof Error) {
-                alert(`error: ${e.message}`)
-            }
-            else console.error(e)
-        }
-        throw new Error(`cannot find the user id=${userId}`);
+    const fetchPagedUsers = async (): Promise<PageResponse<UserType>> => {
+        const response = await axios.get(SERVER_URL.USERS)
+        return response.data
     }
-    return {getById}
+    return {fetchPagedUsers}
 }
 
 export default userClient;

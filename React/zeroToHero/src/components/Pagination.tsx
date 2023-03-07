@@ -1,42 +1,29 @@
-import { AxiosResponse } from "axios"
+import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
+import { useState } from 'react';
 
 export type PageType = {
-    hasNext: boolean,
-    hasPrevious: boolean,
     page: number,
     size: number,
-    totalPage: number
 }
 
 type PropsType = {
-    activePage: number,
-    setActivePage: React.Dispatch<React.SetStateAction<number>>,
-    pageType: PageType
+    totalRecord: number
 }
 
-export const bindingPageResult = (response: AxiosResponse<any, any>): PageType => {
-    const payload = response.data
-    return {
-        hasNext: payload.hasNext,
-        hasPrevious: payload.hasPrevious,
-        page: payload.page,
-        size: payload.size,
-        totalPage: payload.totalPage
+const Pagination = ({totalRecord}: PropsType) => {
+    const [pageType, setPageType] = useState<PageType>({page: 0, size:20})
+
+    const onPageChange = (event: PaginatorPageChangeEvent) => {
+        setPageType({page: event.page, size: event.rows})
     }
-}
 
-const Pagination = ({activePage, setActivePage, pageType}: PropsType) => {
     return (
-        <>
-            <button onClick={() => {setActivePage(activePage - 1)}} >이전</button>
-            {
-                Array.from({length: pageType.totalPage}, (_, index) => (
-                    <button key={index + 1} value={index + 1} onClick={(e) => setActivePage(e.target.value)}>{index + 1}</button>
-                ))
-
-            }
-            <button onClick={() => {setActivePage(activePage + 1)}} >이후</button>
-        </>
+        <Paginator 
+            rows={pageType.size}
+            rowsPerPageOptions={[20, 30, 50]}
+            totalRecords={totalRecord}
+            onPageChange={onPageChange}
+        />
     )
 }
 

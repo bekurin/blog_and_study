@@ -13,6 +13,8 @@
     "axis": "^1.0.0",
     "bootstrap": "^5.2.3",
     "immer": "^9.0.19",
+    "primeicons": "^6.0.1",
+    "primereact": "^9.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.8.2",

@@ -1,8 +1,8 @@
-import { CallbacksType, StatesType } from "./UserContainer"
 import UserSearchForm from "./UserSearchForm"
 import UserList from "./UserList"
-import Pagination from "../../components/Pagination"
 import { useState, useEffect } from "react"
+import Pagination from "../../components/Pagination"
+import type { StatesType, CallbacksType } from "./types"
 
 
 type PropsType = {
@@ -21,11 +21,7 @@ const User = ({states, callbacks}: PropsType) => {
         <>
             <UserSearchForm callbacks={callbacks} />
             <UserList callbacks={callbacks} states={states}/>
-            <Pagination 
-                activePage={activePage}
-                setActivePage={setActivePage}
-                pageType={states.page}
-            />
+            <Pagination totalRecord={states} />
         </>
     )
 }
