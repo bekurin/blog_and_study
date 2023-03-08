@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
-import { CallbacksType, StatesType } from "./UserContainer"
+import { UserSearchParam } from "./types"
 
 
 type PropsType = {
-    callbacks: CallbacksType
+    setSearchParam: React.Dispatch<React.SetStateAction<UserSearchParam>>
 }
 
-const UserSearchForm = ({callbacks}: PropsType) => {
+const UserSearchForm = ({setSearchParam}: PropsType) => {
     const [formData, setFormData] = useState<FormData>()
 
     const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -17,13 +17,11 @@ const UserSearchForm = ({callbacks}: PropsType) => {
     }
 
     return (
-        <>
             <form onSubmit={handleFormSubmit}>
                 <label htmlFor="username">회원 이름: </label>
                 <input type="text" className="form-group" id="username"/>
                 <button type="submit">검색하기</button>
             </form>
-        </>
     )
 }
 

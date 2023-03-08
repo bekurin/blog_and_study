@@ -1,4 +1,4 @@
-import { UserType } from "./UserContainer"
+import type { UserType } from "./types"
 
 type PropsType = {
     user: UserType

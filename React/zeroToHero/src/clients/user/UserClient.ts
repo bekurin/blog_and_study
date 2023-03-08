@@ -13,7 +13,7 @@ type UserClientType = {
 }
 
 const userClient = (): UserClientType => {
-    const fetchPagedUsers = async (): Promise<PageResponse<UserType>> => {
+    const fetchPagedUsers = async () => {
         const response = await axios.get(SERVER_URL.USERS)
         return response.data
     }

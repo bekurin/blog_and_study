@@ -14,7 +14,7 @@ const userType = [
     ["email", "회원 이메일"]
 ]
 
-const UserList = ({states, callbacks}: PropsType) => {
+const UserList = ({states}: PropsType) => {
 
     const columnList = Object.entries(userType).map((value, key) => {
         return <Column key={key} header={value[1]} field={value[0]} />
