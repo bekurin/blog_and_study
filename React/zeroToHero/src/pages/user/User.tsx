@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import Pagination, { PageType } from "../../components/Pagination"
 import type { StatesType, CallbacksType, UserSearchParam } from "./types"
 
-
 type PropsType = {
     states: StatesType,
     callbacks: CallbacksType

@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:"
+const BASE_URL = "http://localhost:4000"
 const SERVER_URL = {
     USERS: `${BASE_URL}/users`
 }

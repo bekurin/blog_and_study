@@ -1,7 +1,7 @@
-import type { UserType } from "./types"
+import type { IUser } from "./types"
 
 type PropsType = {
-    user: UserType
+    user: IUser
 }
 
 const UserItem = ({user}: PropsType) => {
