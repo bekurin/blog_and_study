@@ -36,5 +36,18 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.withType<Test> {
+    group = "verification"
     useJUnitPlatform()
+}
+
+tasks.register<Test>("integrationTest") {
+    filter {
+        includeTestsMatching("*IT")
+    }
+}
+
+tasks.register<Test>("unitTest") {
+    filter {
+        includeTestsMatching("*Test")
+    }
 }
