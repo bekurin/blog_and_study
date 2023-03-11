@@ -1,1 +1,8 @@
-
+spring:
+  batch:
+    job:
+      name: ${job.name:NONE}
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
