@@ -10,6 +10,8 @@ services:
       TZ: Asia/Seoul
     ports:
       - '3306:3306'
+    volumes:
+      - ./init.sql/:/mysql/initdb.d:/docker-entrypoint-initdb.d
     command:
       - --lower_case_table_names=1
       - --character-set-server=utf8mb4
