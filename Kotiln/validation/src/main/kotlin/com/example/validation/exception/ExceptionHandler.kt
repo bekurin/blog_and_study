@@ -11,23 +11,45 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 @RestControllerAdvice
 class ExceptionHandler {
-    @ExceptionHandler(MethodArgumentNotValidException::class)
-    fun handleMethodArgumentNotValidException(exception: MethodArgumentNotValidException): ResponseEntity<ErrorResponse> {
-        val message = exception
-            .allErrors
-            .map { it.defaultMessage }
-            .joinToString(", ")
+
+    /**
+     * MethodArgumentNotValidException: body 검증에 문제가 발생한 경우 예외 발생
+     * ConstraintViolationException: RequestParam or PathVariable 검증에 문제가 발생한 경우 예외 발생
+     */
+    @ExceptionHandler(value = [MethodArgumentNotValidException::class, ConstraintViolationException::class])
+    fun handleNotValidException(exception: Exception): ResponseEntity<ErrorResponse> {
         return ResponseEntity
             .status(HttpStatus.BAD_REQUEST)
-            .body(ErrorResponse(message))
+            .body(ErrorResponse(getValidationMessageOrEmpty(exception)))
     }
 
-    @ExceptionHandler(value = [ConstraintViolationException::class, MethodArgumentTypeMismatchException::class, HttpMessageNotReadableException::class])
-    fun handleValidationException(exception: Exception): ResponseEntity<ErrorResponse> {
+    /**
+     * MethodArgumentTypeMismatchException: RequestParam or PathVariable 타입이 맞지 않은 경우 발생
+     * HttpMessageNotReadableException: body 파라미터의 타입이 맞지 않은 경우 발생
+     */
+    @ExceptionHandler(value = [MethodArgumentTypeMismatchException::class, HttpMessageNotReadableException::class])
+    fun handleTypeMismatchException(exception: Exception): ResponseEntity<ErrorResponse> {
         return ResponseEntity
             .status(HttpStatus.BAD_REQUEST)
             .body(ErrorResponse(exception.message ?: ""))
     }
+
+    private fun getValidationMessageOrEmpty(exception: Exception): String {
+        return when (exception) {
+            is MethodArgumentNotValidException -> {
+                exception.allErrors.map { it.defaultMessage }
+            }
+
+            is ConstraintViolationException -> {
+                exception.constraintViolations.map { it.message }
+            }
+
+            else -> {
+                listOf("")
+            }
+        }.joinToString(", ")
+    }
+
 }
 
 data class ErrorResponse(
