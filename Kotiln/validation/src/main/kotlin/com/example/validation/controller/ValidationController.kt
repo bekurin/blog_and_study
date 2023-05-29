@@ -13,7 +13,7 @@ class ValidationController {
 
     @GetMapping("/validate/path-variable/{id}")
     fun validatePathVariable(
-        @PathVariable @Min(0) id: Long
+        @PathVariable @Min(1, message = "id는 1이상이어야 합니다") id: Long
     ): ResponseEntity<Map<String, Long>> {
         return ResponseEntity
             .ok()
@@ -22,7 +22,7 @@ class ValidationController {
 
     @GetMapping("/validate/request-params")
     fun validateRequestParams(
-        @RequestParam @Min(1) id: Long
+        @RequestParam @Min(1, message = "id는 1이상이어야 합니다") id: Long
     ): ResponseEntity<Map<String, Long>> {
         return ResponseEntity
             .ok()

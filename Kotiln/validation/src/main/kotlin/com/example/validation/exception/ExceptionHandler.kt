@@ -11,15 +11,22 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 @RestControllerAdvice
 class ExceptionHandler {
-    @ExceptionHandler(value = [MethodArgumentNotValidException::class, ConstraintViolationException::class, MethodArgumentTypeMismatchException::class, HttpMessageNotReadableException::class])
-    fun handleMethodArgumentNotValidException(exception: Exception): ResponseEntity<ErrorResponse> {
+    @ExceptionHandler(MethodArgumentNotValidException::class)
+    fun handleMethodArgumentNotValidException(exception: MethodArgumentNotValidException): ResponseEntity<ErrorResponse> {
         val message = exception
-            .suppressed
-            .map { error -> error.message }
+            .allErrors
+            .map { it.defaultMessage }
             .joinToString(", ")
         return ResponseEntity
             .status(HttpStatus.BAD_REQUEST)
             .body(ErrorResponse(message))
+    }
+
+    @ExceptionHandler(value = [ConstraintViolationException::class, MethodArgumentTypeMismatchException::class, HttpMessageNotReadableException::class])
+    fun handleValidationException(exception: Exception): ResponseEntity<ErrorResponse> {
+        return ResponseEntity
+            .status(HttpStatus.BAD_REQUEST)
+            .body(ErrorResponse(exception.message ?: ""))
     }
 }
 
