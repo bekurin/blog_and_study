@@ -1,6 +1,7 @@
 package com.example.validation.controller
 
-import com.example.validation.controller.dto.ValidationTestRequest
+import com.example.validation.controller.dto.SpringValidationRequest
+import com.example.validation.controller.dto.ValidationRequest
 import com.example.validation.support.IntegrationTestBase
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -18,7 +19,7 @@ import java.util.*
 import kotlin.random.Random
 import kotlin.random.nextLong
 
-class ValidationControllerIT : IntegrationTestBase() {
+class SpringValidationControllerIT : IntegrationTestBase() {
 
     @Nested
     inner class `path variable 유효성 검증을 할 때` {
@@ -108,7 +109,7 @@ class ValidationControllerIT : IntegrationTestBase() {
                 ]
             )
             fun `400 에러가 발생한다`(id: Long, message: String) {
-                val givenRequest = ValidationTestRequest(id, message)
+                val givenRequest = SpringValidationRequest(id, message)
 
                 // when
                 val result = mvc.perform(
@@ -129,7 +130,7 @@ class ValidationControllerIT : IntegrationTestBase() {
             @Test
             fun `입력받은 body를 응답한다`() {
                 val (givenId, givenMessage) = Random.nextLong(1000L) to UUID.randomUUID().toString()
-                val givenRequest = ValidationTestRequest(givenId, givenMessage)
+                val givenRequest = SpringValidationRequest(givenId, givenMessage)
 
                 // when
                 val result = mvc.perform(
@@ -142,7 +143,7 @@ class ValidationControllerIT : IntegrationTestBase() {
                 // then
                 val response = jacksonObjectMapper().readValue(
                     result.andReturn().response.contentAsString,
-                    object : TypeReference<Map<String, ValidationTestRequest>>() {})
+                    object : TypeReference<Map<String, ValidationRequest>>() {})
                 SoftAssertions.assertSoftly { softly ->
                     softly.assertThat(response["body"]?.id).isEqualTo(givenId)
                     softly.assertThat(response["body"]?.message).isEqualTo(givenMessage)
