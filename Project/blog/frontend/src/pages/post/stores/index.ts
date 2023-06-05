@@ -3,7 +3,6 @@ import { useState } from "react";
 import { PageResponse } from "../../../apis/PageResponse";
 import { IPost } from "../types";
 import { create } from "zustand";
-import { useQueryParams, usePaginate } from "../../../hooks";
 import fetchAllPostApi from "../../../apis/post/fetchAllPostApi";
 
 const usePostStore = create<PostStates & PostCallbacks>((set) => ({
