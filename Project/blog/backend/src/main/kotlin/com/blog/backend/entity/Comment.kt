@@ -3,6 +3,7 @@ package com.blog.backend.entity
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
+import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 
 @Entity
@@ -21,6 +22,7 @@ class Comment(
         protected set
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id")
     var post: Post = post
         protected set
 }

@@ -1,10 +1,6 @@
 package com.blog.backend.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.FetchType
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.OneToMany
+import jakarta.persistence.*
 
 @Entity
 class Post(
@@ -20,8 +16,7 @@ class Post(
     var description: String = description
         protected set
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post_id")
-    @JoinColumn(name = "comment")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = [CascadeType.ALL])
     var comment: MutableSet<Comment> = comments
         protected set
 }
