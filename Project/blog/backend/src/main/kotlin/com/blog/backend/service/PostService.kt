@@ -1,7 +1,7 @@
 package com.blog.backend.service
 
 import com.blog.backend.controller.dto.CreatePostDto
-import com.blog.backend.controller.dto.PageResponse
+import com.blog.backend.controller.dto.PageDto
 import com.blog.backend.controller.dto.PostDto
 import com.blog.backend.exception.ClientBadRequestException
 import com.blog.backend.repository.PostRepository
@@ -16,25 +16,17 @@ import org.springframework.transaction.annotation.Transactional
 class PostService(
     private val postRepository: PostRepository,
 ) {
-    fun findPagedPost(page: Int, size: Int): PageResponse<PostDto> {
-        val pageable = PageRequest.of(page, size)
-        return PageResponse(
-            postRepository.findAll(pageable)
-                .map { post -> PostDto(post) }
+    fun findPagedPost(page: Int, size: Int, title: String?): PageDto<PostDto> {
+        val pageable = PageRequest.of(page, size, Sort.Direction.DESC, "id")
+        return PageDto(
+            postRepository.findPagedPost(pageable, title)
+                .map { PostDto(it) }
         )
     }
 
     fun findPostById(id: Long): PostDto {
         val findPost = postRepository.findByIdOrThrow(id)
         return PostDto(findPost)
-    }
-
-    fun findPostByTitleLike(page: Int, size: Int, title: String): PageResponse<PostDto> {
-        val pageable = PageRequest.of(page, size, Sort.Direction.DESC, "id")
-        return PageResponse(
-            postRepository.findByTitleLike(title, pageable)
-                .map { post -> PostDto(post) }
-        )
     }
 
     @Transactional

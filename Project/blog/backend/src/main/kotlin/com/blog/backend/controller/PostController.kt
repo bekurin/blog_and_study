@@ -1,7 +1,7 @@
 package com.blog.backend.controller
 
 import com.blog.backend.controller.dto.CreatePostDto
-import com.blog.backend.controller.dto.PageResponse
+import com.blog.backend.controller.dto.PageDto
 import com.blog.backend.controller.dto.PostDto
 import com.blog.backend.service.PostService
 import org.springframework.http.HttpStatus
@@ -17,8 +17,9 @@ class PostController(
     fun findPagedPost(
         @PathVariable page: Int,
         @RequestParam(defaultValue = "20") size: Int,
-    ): PageResponse<PostDto> {
-        return postService.findPagedPost(page, size)
+        @RequestParam(required = false) title: String?
+    ): PageDto<PostDto> {
+        return postService.findPagedPost(page, size, title)
     }
 
     @GetMapping("/posts/{id}")

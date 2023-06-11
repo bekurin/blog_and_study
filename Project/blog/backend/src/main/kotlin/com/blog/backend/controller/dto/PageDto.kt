@@ -2,7 +2,7 @@ package com.blog.backend.controller.dto
 
 import org.springframework.data.domain.Page
 
-data class PageResponse<T>(
+data class PageDto<T>(
     val totalCount: Long,
     val currentPage: Int,
     val nextPage: Int,
