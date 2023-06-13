@@ -25,7 +25,7 @@ dependencies {
     implementation("org.springframework.data:spring-data-jdbc")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    runtimeOnly("com.mysql:mysql-connector-j")
+    runtimeOnly("com.h2database:h2")
 
     // querydsl
     implementation("com.querydsl:querydsl-jpa:$querydslVersion:jakarta")

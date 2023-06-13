@@ -13,6 +13,7 @@ open class BaseEntity : TimestampBaseEntity() {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     var id: Long = 0L
+        protected set
 }
 
 @MappedSuperclass
@@ -22,8 +23,10 @@ open class TimestampBaseEntity {
     @CreatedDate
     @Column(nullable = false, updatable = false)
     var createdAt: LocalDateTime = LocalDateTime.now()
+        protected set
 
     @LastModifiedDate
     @Column(nullable = false)
     var updatedAt: LocalDateTime = LocalDateTime.now()
+        protected set
 }
