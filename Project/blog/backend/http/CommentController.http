@@ -1,0 +1,16 @@
+### 페이징 댓글 조회
+GET {{base_url}}/v1/comments/by-post-id/1/page/0?size=20
+
+### 댓글 등록
+POST {{base_url}}/v1/comments
+content-type: application/json
+
+{
+  "author": "홍길동",
+  "description": "댓글 내용, 댓글 내용",
+  "postId": 1
+}
+
+### 댓글 삭제
+DELETE {{base_url}}/v1/comments/10
+

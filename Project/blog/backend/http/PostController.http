@@ -1,0 +1,17 @@
+### 페이징 글 조회
+GET {{base_url}}/v1/posts/page/0?size=20
+
+### 글 단건 조회
+GET {{base_url}}/v1/posts/10
+
+### 글 등록
+POST {{base_url}}/v1/posts
+content-type: application/json
+
+{
+  "title": "글 제목",
+  "description": "글 내용, 글 내용, 글 내용"
+}
+
+### 글 단건 삭제
+DELETE {{base_url}}/v1/posts/10
