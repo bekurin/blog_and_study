@@ -11,26 +11,25 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/v1")
 class PostController(
     private val postService: PostService,
-) {
-
+) : PostControllerSpec {
     @GetMapping("/posts/page/{page}")
-    fun findPagedPost(
+    override fun findPagedPost(
         @PathVariable page: Int,
         @RequestParam(defaultValue = "20") size: Int,
-        @RequestParam(required = false) title: String?
+        @RequestParam(required = false) title: String?,
     ): PageDto<PostDto> {
         return postService.findPagedPost(page, size, title)
     }
 
     @GetMapping("/posts/{id}")
-    fun findPostById(
+    override fun findPostById(
         @PathVariable id: Long,
     ): PostDto {
         return postService.findPostById(id)
     }
 
     @PostMapping("/posts")
-    fun createPost(
+    override fun createPost(
         @RequestBody request: CreatePostDto,
     ): PostDto {
         return postService.createPost(request)
@@ -38,10 +37,9 @@ class PostController(
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/posts/{id}")
-    fun deleteById(
+    override fun deleteById(
         @PathVariable id: Long,
     ) {
         return postService.deleteById(id)
     }
-
 }

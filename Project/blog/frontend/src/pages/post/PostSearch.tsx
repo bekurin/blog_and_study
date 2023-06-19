@@ -3,7 +3,6 @@ import {Button} from "primereact/button"
 import { FormEvent } from "react"
 
 const PostSearch = () => {
-
     const handleSubmitAction = (event: FormEvent) => {
         event.preventDefault()
         console.log(event.currentTarget.title.value)

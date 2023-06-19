@@ -1,6 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val querydslVersion: String = "5.0.0"
+val springdocVersion: String = "2.1.0"
 
 plugins {
     id("org.springframework.boot") version "3.1.0"
@@ -31,6 +32,8 @@ dependencies {
     implementation("com.querydsl:querydsl-jpa:$querydslVersion:jakarta")
     kapt("com.querydsl:querydsl-apt:$querydslVersion:jakarta")
 
+    // spring doc
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocVersion")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
@@ -48,6 +51,7 @@ tasks.withType<Test> {
 
 allOpen {
     annotation("jakarta.persistence.Entity")
+    annotation("jakarta.persistence.MappedSuperclass")
 }
 
 noArg {

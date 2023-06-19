@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/v1")
 class CommentController(
     private val commentService: CommentService,
-) {
+) : CommentControllerSpec {
 
     @GetMapping("/comments/by-post-id/{postId}/page/{page}")
-    fun findPagedCommentByPostId(
+    override fun findPagedCommentByPostId(
         @PathVariable postId: Long,
         @PathVariable page: Int,
         @RequestParam size: Int,
@@ -23,7 +23,7 @@ class CommentController(
     }
 
     @PostMapping("/comments")
-    fun createComment(
+    override fun createComment(
         @RequestBody dto: CreateCommentDto,
     ): CommentDto {
         return commentService.createComment(dto)
@@ -31,7 +31,7 @@ class CommentController(
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/comments/{id}")
-    fun deleteById(
+    override fun deleteById(
         @PathVariable id: Long,
     ) {
         commentService.deleteCommentById(id)

@@ -1,1 +1,8 @@
+springdoc:
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  swagger-ui:
+    path: "index.html"
 
+server:
+  port: 8080
