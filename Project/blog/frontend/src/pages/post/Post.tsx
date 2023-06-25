@@ -1,10 +1,16 @@
 import {Card} from "primereact/card"
 import PostList from "./PostList";
 import PostSearch from "./PostSearch";
+import { PostCallbacks, PostStates } from "./types";
 
-const Post = () => {
+type PropType = {
+    states: PostStates,
+    callbacks: PostCallbacks
+}
+
+const Post = ({states, callbacks}: PropType) => {
     return <Card title="블로그 글 목록">
-        <PostSearch />
+        <PostSearch states={states} callbacks={callbacks} />
         <PostList />
     </Card>
 }

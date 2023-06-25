@@ -1,22 +1,26 @@
 import {InputText} from "primereact/inputtext"
 import {Button} from "primereact/button"
-import { FormEvent } from "react"
+import { ChangeEvent, useState } from "react"
+import { PostCallbacks, PostQueryParams, PostStates } from "./types"
 
-const PostSearch = () => {
-    const handleSubmitAction = (event: FormEvent) => {
-        event.preventDefault()
-        console.log(event.currentTarget.title.value)
+type PropType = {
+    states: PostStates,
+    callbacks: PostCallbacks
+}
+
+const PostSearch = ({states, callbacks}: PropType) => {
+    const [queryParams, setQueryParams] = useState<PostQueryParams>(states.params)
+
+    const handleSubmit = () => {
+        callbacks.updateQueryParams(queryParams)
     }
 
     return (
-        <form className="" onSubmit={handleSubmitAction}>
-            <div className="form-group">
-                <label id="title">제목</label>
-                <input className="form-control" id="title" name="title" type="text" placeholder="제목을 입력해주세요" />
-            </div>
-            <Button className="btn btn-primary" type="submit">검색하기</Button>
-        </form>
-        )
+        <>
+            <InputText placeholder="제목을 입력해주세요" value={queryParams?.title} onChange={(event) => setQueryParams({title: event.target.value})}></InputText>
+            <Button size="small" type="submit" onClick={handleSubmit}>검색하기</Button>
+        </>
+    )
 }
 
 export default PostSearch
