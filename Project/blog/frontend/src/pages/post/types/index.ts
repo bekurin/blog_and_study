@@ -9,8 +9,8 @@ export interface PostStates {
 
 export interface PostCallbacks {
     fetchAllPost: (queryParams: PostQueryParams, paginate: Paginate) => void;
-    updatePaginate: (paginate: Paginate) => void;
-    updateQueryParams: (queryParams: PostQueryParams) => void;
+    updatePaginate: (newPaginate: Paginate) => void;
+    updateQueryParams: (newQueryParams: PostQueryParams) => void;
 }
 
 export interface IPost {
