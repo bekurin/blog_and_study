@@ -1,5 +1,7 @@
 package com.blog.backend.controller
 
-import org.junit.jupiter.api.Assertions.*
+import com.blog.backend.support.IntegrationTestBase
 
-class CommentControllerTest
+class CommentControllerTest : IntegrationTestBase() {
+
+}

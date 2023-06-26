@@ -22,7 +22,6 @@ import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
 import java.util.*
 
-@ExtendWith(MockitoExtension::class)
 class CommentServiceTest : UnitTestBase() {
 
     @InjectMocks
