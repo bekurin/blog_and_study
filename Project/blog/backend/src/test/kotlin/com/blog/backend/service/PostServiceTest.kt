@@ -5,7 +5,6 @@ import com.blog.backend.entity.Post
 import com.blog.backend.repository.PostRepository
 import com.blog.backend.support.FakeSubject.PostSubject
 import com.blog.backend.support.UnitTestBase
-import org.assertj.core.api.SoftAssertions
 import org.assertj.core.api.SoftAssertions.assertSoftly
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -15,7 +14,6 @@ import org.mockito.BDDMockito.given
 import org.mockito.BDDMockito.times
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.verify
 import java.util.*
 
