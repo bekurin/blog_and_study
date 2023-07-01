@@ -1,4 +1,11 @@
 package com.jpa.kotlinjpa.controller.dto
 
-class TeacherDto {
+import com.jpa.kotlinjpa.entity.Teacher
+
+data class TeacherResponseDto(
+        val name: String
+) {
+    constructor(entity: Teacher) : this(
+            name = entity.name
+    )
 }

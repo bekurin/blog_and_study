@@ -1,4 +1,5 @@
 package com.jpa.kotlinjpa.exception
 
-class HttpException {
-}
+open class HttpException(
+        message: String? = null
+): RuntimeException(message)

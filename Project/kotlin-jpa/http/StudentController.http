@@ -1,0 +1,15 @@
+### 회원 ID 조회
+GET {{base-url}}/v1/members/1
+
+### 전체 회원 조회
+GET {{base-url}}/v1/members
+
+### 회원 등록
+POST {{base-url}}/v1/member
+content-type: application/json
+
+{
+  "name": "파이어",
+  "email": "fire@naver.com",
+  "phone": "01012989321"
+}

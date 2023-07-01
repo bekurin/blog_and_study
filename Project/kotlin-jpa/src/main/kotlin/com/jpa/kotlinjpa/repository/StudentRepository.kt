@@ -1,4 +1,6 @@
 package com.jpa.kotlinjpa.repository
 
-interface StudentRepository {
-}
+import com.jpa.kotlinjpa.entity.Student
+import org.springframework.data.jpa.repository.JpaRepository
+
+interface StudentRepository: JpaRepository<Student, Long>
