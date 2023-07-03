@@ -2,6 +2,7 @@ package com.jpa.kotlinjpa
 
 import com.jpa.kotlinjpa.entity.Student
 import com.jpa.kotlinjpa.repository.StudentRepository
+import com.jpa.kotlinjpa.util.Fixture.StudentFixture
 import jakarta.persistence.EntityManager
 import jakarta.persistence.PersistenceContext
 import org.assertj.core.api.Assertions.assertThat
@@ -27,7 +28,7 @@ class StudentRepositoryTest {
 
     @Test
     fun `저장 후 영속 상태 확인`() {
-        val student = Student("홍길동", "test@gmail.com", "01012341234")
+        val student = StudentFixture.anyStudent()
         println("새로운 객체인가? = ${entityInformation.isNew(student)}")
         println("현재 ID는 무엇인가? = ${student.getId()}")
         studentRepository.save(student)
@@ -40,7 +41,7 @@ class StudentRepositoryTest {
 
     @Test
     fun `save 호출 후 ID로 찾으면`() {
-        val student = Student("홍길동", "test@gmail.com", "01012341234")
+        val student = StudentFixture.anyStudent()
         studentRepository.save(student)
 
         val findStudent = studentRepository.findById(student.getId()).get()
@@ -50,7 +51,7 @@ class StudentRepositoryTest {
 
     @Test
     fun `더티 체킹이 정상동작하는지 확인`() {
-        val student = Student("홍길동", "test@gmail.com", "01012341234")
+        val student = StudentFixture.anyStudent()
         println("현재 영속 상태인가? = ${entityInformation.isNew(student)}")
         println("현재 ID는 무엇인가? = ${student.getId()}")
         studentRepository.save(student)
