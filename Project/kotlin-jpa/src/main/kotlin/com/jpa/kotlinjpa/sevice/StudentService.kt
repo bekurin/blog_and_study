@@ -13,7 +13,7 @@ class StudentService(
         private val studentRepository: StudentRepository
 ) {
 
-//    @Transactional
+    @Transactional
     fun signIn(dto: StudentSignInDto): StudentResponseDto {
         return StudentResponseDto(studentRepository.save(dto.toEntity()))
     }

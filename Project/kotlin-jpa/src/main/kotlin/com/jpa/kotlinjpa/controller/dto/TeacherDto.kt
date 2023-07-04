@@ -9,3 +9,11 @@ data class TeacherResponseDto(
             name = entity.name
     )
 }
+
+data class HireDto(
+        val name: String
+) {
+    fun toEntity(): Teacher {
+        return Teacher(name)
+    }
+}
