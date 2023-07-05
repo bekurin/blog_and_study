@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val springdocVersion: String = "2.1.0"
 val fixtureMonkeyVersion: String = "0.5.9"
+val mariadbJavaClientVersion: String = "3.1.4"
 
 plugins {
     id("org.springframework.boot") version "3.1.1"
@@ -32,6 +33,9 @@ dependencies {
 
     // Swagger
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocVersion")
+
+    // mariadb connector
+    runtimeOnly("org.mariadb.jdbc:mariadb-java-client:$mariadbJavaClientVersion")
 
     testImplementation("com.navercorp.fixturemonkey:fixture-monkey-starter-kotlin:$fixtureMonkeyVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

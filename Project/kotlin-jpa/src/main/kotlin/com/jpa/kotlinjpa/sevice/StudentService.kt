@@ -21,6 +21,7 @@ class StudentService(
     fun findMemberById(id: Long): StudentResponseDto {
         val findStudent = studentRepository.findById(id)
                 .orElseThrow { throw ClientBadRequestException("회원을 찾을 수 없습니다. (id=$id)") }
+        findStudent.update("test@gmail.comasdasd")
         return StudentResponseDto(findStudent)
     }
 
