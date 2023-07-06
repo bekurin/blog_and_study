@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  mariaDb:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: 'jpa'
+      MYSQL_ROOT_USER: 'sa'
+      MYSQL_USER: 'sa'
+      MYSQL_ROOT_PASSWORD: '1234'
+      MYSQL_PASSWORD: '1234'
+      TZ: Asia/Seoul
+    ports:
+      - "3306:3306"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
