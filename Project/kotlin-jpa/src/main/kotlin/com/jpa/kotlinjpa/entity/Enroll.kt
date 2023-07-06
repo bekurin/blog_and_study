@@ -7,7 +7,7 @@ import jakarta.persistence.*
 class Enroll(
         course: Course,
         student: Student
-) : BaseEntity() {
+) : PrimaryKeyEntity() {
     init {
         student.register(this)
     }

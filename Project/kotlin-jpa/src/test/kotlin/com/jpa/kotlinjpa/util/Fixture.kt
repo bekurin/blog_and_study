@@ -14,6 +14,10 @@ object Fixture {
     private val fixtureMonkey: FixtureMonkey = FixtureMonkey.builder().plugin(KotlinPlugin()).build()
 
     object StudentFixture {
+        fun of(name: String = "홍길동", email: String = "test@gmail.com", phone: String = "01011112222"): Student {
+            return Student(name, email, phone)
+        }
+
         fun anyStudent(): Student {
             return fixtureMonkey.giveMeOne()
         }

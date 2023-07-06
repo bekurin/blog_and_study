@@ -7,7 +7,7 @@ class Course(
         teacher: Teacher,
         name: String,
         capacity: Int,
-) : BaseEntity() {
+) : PrimaryKeyEntity() {
     @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST, CascadeType.MERGE])
     @JoinColumn(name = "teacher_id")
     var teacher: Teacher = teacher

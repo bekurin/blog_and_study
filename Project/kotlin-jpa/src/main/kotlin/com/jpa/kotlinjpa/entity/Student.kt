@@ -10,7 +10,7 @@ class Student(
         name: String,
         email: String,
         phone: String,
-) : BaseEntity() {
+) : PrimaryKeyEntity() {
     @Column(nullable = false, length = 50)
     var name: String = name
         protected set

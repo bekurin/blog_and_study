@@ -64,4 +64,14 @@ class StudentRepositoryTest {
         entityManager.flush()
         assertThat(findStudent.email).isEqualTo(studentRepository.findById(findStudent.getId()).get().email)
     }
+
+    @Test
+    fun `2개 이상 Update 쿼리 확인`() {
+        val students = (1..10).map { StudentFixture.of() }
+        studentRepository.saveAllAndFlush(students)
+
+        val findStudents = studentRepository.findAll()
+        findStudents.map { it.update("test123123123@gmail.com") }
+        entityManager.flush()
+    }
 }
