@@ -7,6 +7,7 @@ val mariadbJavaClientVersion: String = "3.1.4"
 plugins {
     id("org.springframework.boot") version "3.1.1"
     id("io.spring.dependency-management") version "1.1.0"
+    id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
     kotlin("jvm") version "1.8.22"
     kotlin("plugin.spring") version "1.8.22"
     kotlin("plugin.jpa") version "1.8.22"
@@ -50,6 +51,13 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+ktlint {
+    enableExperimentalRules.set(true)
+    filter {
+        exclude { projectDir.toURI().relativize(it.file.toURI()).path.contains("/generated/ø") }
+    }
 }
 
 allOpen {

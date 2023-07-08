@@ -24,8 +24,8 @@ object Fixture {
 
         fun enrolledStudent(enrolls: List<Enroll> = listOf()): Student {
             return fixtureMonkey.giveMeBuilder<Student>()
-                    .setExp(Student::enrolls, enrolls)
-                    .sample()
+                .setExp(Student::enrolls, enrolls)
+                .sample()
         }
     }
 

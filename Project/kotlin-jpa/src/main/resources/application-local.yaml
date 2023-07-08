@@ -8,8 +8,3 @@ spring:
       username: sa
       password:
       read-only: true
-  jpa:
-    show-sql: true
-    hibernate:
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy

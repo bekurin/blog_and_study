@@ -23,7 +23,7 @@ class StudentRepositoryTest {
 
     private val entityInformation: JpaEntityInformation<Student, *> by lazy {
         JpaEntityInformationSupport
-                .getEntityInformation(Student::class.java, entityManager)
+            .getEntityInformation(Student::class.java, entityManager)
     }
 
     @Test

@@ -9,5 +9,4 @@ class KotlinJpaApplicationTests {
     @Test
     fun contextLoads() {
     }
-
 }
