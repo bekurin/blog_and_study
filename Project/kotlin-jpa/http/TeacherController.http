@@ -1,0 +1,10 @@
+### 선생님 ID 조회
+GET {{base-url}}/v1/teachers/1
+
+### 선생님 고용
+POST {{base-url}}/v1/teachers
+content-type: application/json
+
+{
+  "name": "홍길길"
+}
