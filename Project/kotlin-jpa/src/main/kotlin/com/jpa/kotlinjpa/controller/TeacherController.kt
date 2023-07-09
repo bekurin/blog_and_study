@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/v1")
 class TeacherController(
         private val teacherService: TeacherService
-) {
+) : TeacherControllerSpec {
     @GetMapping("/teachers/{id}")
-    fun findById(
+    override fun findById(
             @PathVariable id: Long
     ): TeacherResponseDto {
         return teacherService.findByIdOrThrow(id)
     }
 
     @PostMapping("/teachers")
-    fun signIn(
+    override fun hire(
             @RequestBody dto: HireDto
     ): TeacherResponseDto {
         return teacherService.hire(dto)
