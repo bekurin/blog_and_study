@@ -3,8 +3,12 @@ package com.jpa.kotlinjpa.controller
 import com.jpa.kotlinjpa.controller.dto.StudentResponseDto
 import com.jpa.kotlinjpa.controller.dto.StudentSignInDto
 import com.jpa.kotlinjpa.sevice.StudentService
+import jakarta.validation.Valid
+import jakarta.validation.constraints.Min
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 
+@Validated
 @RestController
 @RequestMapping("/v1")
 class StudentController(
@@ -12,14 +16,14 @@ class StudentController(
 ) : StudentControllerSpec {
     @PostMapping("/member")
     override fun create(
-            @RequestBody dto: StudentSignInDto
+            @RequestBody @Valid dto: StudentSignInDto
     ): StudentResponseDto {
         return studentService.signIn(dto)
     }
 
     @GetMapping("/members/{id}")
     override fun findById(
-            @PathVariable id: Long
+            @PathVariable @Min(1) id: Long
     ): StudentResponseDto {
         return studentService.findMemberById(id)
     }

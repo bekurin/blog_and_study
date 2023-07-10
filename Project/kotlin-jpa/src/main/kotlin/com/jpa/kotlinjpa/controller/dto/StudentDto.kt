@@ -1,10 +1,14 @@
 package com.jpa.kotlinjpa.controller.dto
 
 import com.jpa.kotlinjpa.entity.Student
+import jakarta.validation.constraints.NotBlank
 
 data class StudentSignInDto(
+        @field:NotBlank
         val name: String,
+        @field:NotBlank
         val email: String,
+        @field:NotBlank
         val phone: String
 ) {
     fun toEntity(): Student {
