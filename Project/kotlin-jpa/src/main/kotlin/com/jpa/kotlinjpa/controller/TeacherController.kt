@@ -18,13 +18,13 @@ class TeacherController(
     override fun findById(
             @PathVariable @Min(1) id: Long
     ): TeacherResponseDto {
-        return teacherService.findByIdOrThrow(id)
+        return TeacherResponseDto(teacherService.findByIdOrThrow(id))
     }
 
     @PostMapping("/teachers")
     override fun hire(
             @RequestBody @Valid dto: HireDto
     ): TeacherResponseDto {
-        return teacherService.hire(dto)
+        return TeacherResponseDto(teacherService.hire(dto))
     }
 }

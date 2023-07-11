@@ -18,18 +18,20 @@ class StudentController(
     override fun create(
             @RequestBody @Valid dto: StudentSignInDto
     ): StudentResponseDto {
-        return studentService.signIn(dto)
+        return StudentResponseDto(studentService.signIn(dto))
     }
 
     @GetMapping("/members/{id}")
     override fun findById(
             @PathVariable @Min(1) id: Long
     ): StudentResponseDto {
-        return studentService.findMemberById(id)
+        return StudentResponseDto(studentService.findMemberById(id))
     }
 
     @GetMapping("/members")
     override fun findAll(): List<StudentResponseDto> {
-        return studentService.findAll()
+        return studentService
+                .findAll()
+                .map { StudentResponseDto(it) }
     }
 }
