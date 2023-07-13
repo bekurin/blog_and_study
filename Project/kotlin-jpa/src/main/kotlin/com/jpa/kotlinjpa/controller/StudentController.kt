@@ -25,7 +25,7 @@ class StudentController(
     override fun findById(
             @PathVariable @Min(1) id: Long
     ): StudentResponseDto {
-        return StudentResponseDto(studentService.findMemberById(id))
+        return StudentResponseDto(studentService.findByIdOrThrow(id))
     }
 
     @GetMapping("/members")
