@@ -1,8 +1,6 @@
 package com.jpa.kotlinjpa.controller
 
-import org.springframework.beans.propertyeditors.StringTrimmerEditor
 import org.springframework.validation.annotation.Validated
-import org.springframework.web.bind.WebDataBinder
 import org.springframework.web.bind.annotation.*
 
 @Validated
@@ -37,7 +35,6 @@ class HelloController {
     fun helloRequestBody(
             @RequestBody dto: HelloDto
     ): Map<String, String> {
-        println()
         return mapOf("message" to "hello ${dto.name}")
     }
 }
