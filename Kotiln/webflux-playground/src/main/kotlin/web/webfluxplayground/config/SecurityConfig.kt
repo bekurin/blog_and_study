@@ -17,19 +17,19 @@ class SecurityConfig {
     @Bean
     fun securityWebFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
         return http
-                .cors { corsSpec -> corsSpec.disable() }
-                .csrf { csrfSpec -> csrfSpec.disable() }
-                .formLogin { formLoginSpec -> formLoginSpec.disable() }
-                .logout { logoutSpec -> logoutSpec.disable() }
-                .authorizeExchange { exchange ->
-                    exchange.apply {
-                        matchers(ServerWebExchangeMatchers.pathMatchers("/api/v1/admin/**")).hasAuthority("admin")
-                        matchers(ServerWebExchangeMatchers.pathMatchers("/api/**")).hasAuthority("user")
-                        anyExchange().authenticated()
-                    }
+            .cors { corsSpec -> corsSpec.disable() }
+            .csrf { csrfSpec -> csrfSpec.disable() }
+            .formLogin { formLoginSpec -> formLoginSpec.disable() }
+            .logout { logoutSpec -> logoutSpec.disable() }
+            .authorizeExchange { exchange ->
+                exchange.apply {
+                    matchers(ServerWebExchangeMatchers.pathMatchers("/api/v1/admin/**")).hasAuthority("admin")
+                    matchers(ServerWebExchangeMatchers.pathMatchers("/api/**")).hasAuthority("user")
+                    anyExchange().permitAll()
                 }
-                .securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
-                .build()
+            }
+            .securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
+            .build()
     }
 
     @Bean
