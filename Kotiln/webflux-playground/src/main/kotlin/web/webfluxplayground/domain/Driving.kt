@@ -13,7 +13,7 @@ import java.time.LocalDateTime
 @Entity
 class Driving(
     drivingAt: LocalDateTime,
-    routId: String,
+    routeId: String,
     drivingRecords: List<DrivingRecord>
 ) : BaseEntity() {
     @Column(nullable = false)
@@ -21,7 +21,7 @@ class Driving(
         protected set
 
     @Column(nullable = false)
-    var routeId: String = routId
+    var routeId: String = routeId
         protected set
 
     @Column(nullable = false, columnDefinition = "json")

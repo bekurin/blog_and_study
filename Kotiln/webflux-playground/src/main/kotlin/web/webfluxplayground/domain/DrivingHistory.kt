@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 @Entity
 class DrivingHistory(
     drivingAt: LocalDateTime,
-    routId: String,
+    routeId: String,
     passenger: Int,
     drivingRecords: List<DrivingRecord>
 ) : BaseEntity() {
@@ -17,7 +17,7 @@ class DrivingHistory(
         protected set
 
     @Column(nullable = false)
-    var routeId: String = routId
+    var routeId: String = routeId
         protected set
 
     @Column(nullable = false)
