@@ -9,7 +9,7 @@ import java.time.LocalDateTime
 open class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private val id: Int = 0
+    private val id: Long = 0L
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
