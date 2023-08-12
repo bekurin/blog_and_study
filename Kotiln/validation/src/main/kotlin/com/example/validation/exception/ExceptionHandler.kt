@@ -16,11 +16,18 @@ class ExceptionHandler {
      * MethodArgumentNotValidException: body 검증에 문제가 발생한 경우 예외 발생
      * ConstraintViolationException: RequestParam or PathVariable 검증에 문제가 발생한 경우 예외 발생
      */
-    @ExceptionHandler(value = [MethodArgumentNotValidException::class, ConstraintViolationException::class])
-    fun handleNotValidException(exception: Exception): ResponseEntity<ErrorResponse> {
+//    @ExceptionHandler(value = [MethodArgumentNotValidException::class, ConstraintViolationException::class])
+//    fun handleNotValidException(exception: Exception): ResponseEntity<ErrorResponse> {
+//        return ResponseEntity
+//            .status(HttpStatus.BAD_REQUEST)
+//            .body(ErrorResponse(getValidationMessageOrEmpty(exception)))
+//    }
+
+    @ExceptionHandler(value = [ValidatorException::class])
+    fun handleNotValidException(exception: ValidatorException): ResponseEntity<ErrorResponse> {
         return ResponseEntity
             .status(HttpStatus.BAD_REQUEST)
-            .body(ErrorResponse(getValidationMessageOrEmpty(exception)))
+            .body(exception.message?.let { ErrorResponse(it) })
     }
 
     /**
