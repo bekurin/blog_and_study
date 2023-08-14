@@ -2,7 +2,7 @@
 GET {{base-url}}/validate/path-variable/15
 
 ### Request Params 유효성 검사
-GET {{base-url}}/validate/request-params?id=15
+GET {{base-url}}/validate/request-params?id=0
 
 ### Request Body 유효성 검사
 POST {{base-url}}/validate/request-body

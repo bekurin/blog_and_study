@@ -1,16 +1,19 @@
 ### Path variable 유효성 검사
 GET {{base-url}}/spring-validation/v2/path-variable/15
 
+### Path variable 유효성 검사
+GET {{base-url}}/spring-validation/v2/path-variable/15?range=5
+
 ### Request Params 유효성 검사
-GET {{base-url}}/spring-validation/v2/request-params?id=15
+GET {{base-url}}/spring-validation/v2/request-params?id=0
 
 ### Request Body 유효성 검사
 POST {{base-url}}/spring-validation/v2/request-body
 Content-Type: application/json
 
 {
-  "id": 0,
-  "message": ""
+  "id": 10,
+  "message": "메세ㅈ"
 }
 
 
