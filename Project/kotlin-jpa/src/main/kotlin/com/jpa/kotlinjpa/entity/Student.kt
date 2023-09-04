@@ -26,10 +26,6 @@ class Student(
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "student")
     var enrolls: MutableSet<Enroll> = mutableSetOf()
 
-    fun register(enroll: Enroll) {
-        enrolls.add(enroll)
-    }
-
     fun update(email: String) {
         this.email = email
     }

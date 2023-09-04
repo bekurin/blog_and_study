@@ -8,10 +8,6 @@ class Enroll(
         course: Course,
         student: Student
 ) : PrimaryKeyEntity() {
-    init {
-        student.register(this)
-    }
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")
     var course: Course = course
@@ -20,4 +16,14 @@ class Enroll(
     @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST, CascadeType.MERGE])
     @JoinColumn(name = "student_id")
     var student: Student = student
+
+    fun setCourse(course: Course) {
+        this.course = course
+    }
+
+    fun setStudent(student: Student) {
+        this.student.enrolls.remove(this)
+        this.student = student
+        student.enrolls.add(this)
+    }
 }

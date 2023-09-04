@@ -20,4 +20,10 @@ class Course(
     @Column(nullable = false)
     var capacity: Int = capacity
         protected set
+
+    fun setTeacher(teacher: Teacher) {
+        this.teacher.courses.remove(this)
+        this.teacher = teacher
+        teacher.courses.add(this)
+    }
 }
