@@ -17,11 +17,11 @@ class Enroll(
     @JoinColumn(name = "student_id")
     var student: Student = student
 
-    fun setCourse(course: Course) {
+    fun updateCourse(course: Course) {
         this.course = course
     }
 
-    fun setStudent(student: Student) {
+    fun updateStudent(student: Student) {
         this.student.enrolls.remove(this)
         this.student = student
         student.enrolls.add(this)

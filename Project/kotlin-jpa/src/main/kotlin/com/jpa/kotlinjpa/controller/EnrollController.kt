@@ -3,8 +3,6 @@ package com.jpa.kotlinjpa.controller
 import com.jpa.kotlinjpa.controller.dto.EnrollDto
 import com.jpa.kotlinjpa.controller.dto.EnrollResponseDto
 import com.jpa.kotlinjpa.facade.EnrollFacade
-import com.jpa.kotlinjpa.repository.EnrollRepository
-import com.jpa.kotlinjpa.sevice.EnrollService
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody

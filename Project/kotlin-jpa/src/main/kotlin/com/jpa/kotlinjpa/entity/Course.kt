@@ -21,7 +21,7 @@ class Course(
     var capacity: Int = capacity
         protected set
 
-    fun setTeacher(teacher: Teacher) {
+    fun updateTeacher(teacher: Teacher) {
         this.teacher.courses.remove(this)
         this.teacher = teacher
         teacher.courses.add(this)

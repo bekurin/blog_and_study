@@ -1,8 +1,14 @@
 package com.jpa.kotlinjpa
 
+import com.jpa.kotlinjpa.entity.Course
+import com.jpa.kotlinjpa.entity.Enroll
 import com.jpa.kotlinjpa.entity.Student
+import com.jpa.kotlinjpa.entity.Teacher
+import com.jpa.kotlinjpa.repository.EnrollRepository
 import com.jpa.kotlinjpa.repository.StudentRepository
+import com.jpa.kotlinjpa.util.Fixture
 import com.jpa.kotlinjpa.util.Fixture.StudentFixture
+import com.jpa.kotlinjpa.util.Fixture.TeacherFixture
 import jakarta.persistence.EntityManager
 import jakarta.persistence.PersistenceContext
 import org.assertj.core.api.Assertions.assertThat

@@ -1,0 +1,7 @@
+### hello!
+POST {{base_url}}/hello
+Content-Type: application/json
+
+{
+    "name": null
+}
