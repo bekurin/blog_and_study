@@ -10,6 +10,7 @@ class Student(
         name: String,
         email: String,
         phone: String,
+        enrolls: MutableSet<Enroll> = mutableSetOf()
 ) : PrimaryKeyEntity() {
     @Column(nullable = false, length = 50)
     var name: String = name
@@ -24,7 +25,7 @@ class Student(
         protected set
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "student")
-    var enrolls: MutableSet<Enroll> = mutableSetOf()
+    var enrolls: MutableSet<Enroll> = enrolls
 
     fun update(email: String) {
         this.email = email
