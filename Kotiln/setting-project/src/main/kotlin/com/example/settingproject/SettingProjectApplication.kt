@@ -1,0 +1,13 @@
+package com.example.settingproject
+
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing
+
+@SpringBootApplication
+@EnableJpaAuditing
+class SettingProjectApplication
+
+fun main(args: Array<String>) {
+    runApplication<SettingProjectApplication>(*args)
+}

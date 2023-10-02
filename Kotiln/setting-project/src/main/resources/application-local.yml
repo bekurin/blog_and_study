@@ -1,0 +1,14 @@
+spring:
+  docker:
+    compose:
+      file: "./docker-compose.yml"
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3307/core?useUnicode=true&characterEncoding=UTF-8
+      username: root
+      password:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
