@@ -1,0 +1,5 @@
+### collection
+GET {{base-url}}/v1/collection
+
+### sequence
+GET {{base-url}}/v1/sequence

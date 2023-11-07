@@ -47,8 +47,11 @@ class Initializer(
         val enroll1 = Enroll(course1, student1)
         val enroll2 = Enroll(course1, student2)
         val enroll3 = Enroll(course2, student3)
-        enrollRepository.saveAll(listOf(enroll1, enroll2, enroll3))
 
-        println()
+        val studentList = (5..10000000L).map {
+            Student("홍길동$it", "test$it@gmail.com", "010112341$it")
+        }
+        studentRepository.saveAll(studentList)
+        enrollRepository.saveAll(listOf(enroll1, enroll2, enroll3))
     }
 }
