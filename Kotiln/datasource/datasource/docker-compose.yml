@@ -11,6 +11,8 @@ services:
       TZ: Asia/Seoul
     ports:
       - "3306:3306"
+    volumes:
+      - ./init-script.sql:/docker-entrypoint-initdb.d/init-script.sql
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
