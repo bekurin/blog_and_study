@@ -20,28 +20,17 @@ enum class Value(val value: Int) {
     KING(13)
 }
 
-data class Member(val nickname: String)
-
 data class Card(val value: Value, val pattern: Pattern)
 
-class Deck() {
-    private var cards: MutableList<Card> = mutableListOf()
-
-    init {
-        initDeck()
-    }
-
-    private fun initDeck(): List<Card> {
-        cards.clear()
-        cards = Pattern.values()
-            .flatMap { pattern ->
-                return@flatMap Value.values()
-                    .map { value ->
-                        return@map Card(value, pattern)
-                    }
-            }.toMutableList()
-        return cards
-    }
+data class Deck(
+    private val cards: MutableList<Card> = Pattern.values()
+        .flatMap { pattern ->
+            return@flatMap Value.values()
+                .map { value ->
+                    return@map Card(value, pattern)
+                }
+        }.toMutableList()
+) : List<Card> by cards {
 
     fun shuffle(): List<Card> {
         cards.shuffle()
@@ -55,29 +44,12 @@ class Deck() {
         }
         throw RuntimeException("카드가 없습니다. $first")
     }
-
-    fun isEmpty(): Boolean {
-        return cards.isEmpty()
-    }
-}
-
-class GameManager {
-    private val deck = mutableListOf<Card>()
-    private val member = mutableListOf<Member>()
-
-    fun addCard(card: Card) {
-
-    }
-
-    fun getWinner() {
-
-    }
 }
 
 fun main() {
     val deck = Deck()
     println(deck.shuffle())
-    while (deck.isEmpty().not()) {
+    while (deck.isNotEmpty()) {
         println(deck.drawCard())
     }
 }
