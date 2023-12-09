@@ -22,14 +22,12 @@ enum class Value(val value: Int) {
 
 data class Card(val value: Value, val pattern: Pattern)
 
+/**
+ * List<Card>를 합성하여 Deck의 내부에서는 Cards를 mutableList로 다루지만 Deck의 외부에서는 List<Card>로 다루도록 한다.
+ * 이렇게 하지 않았다면 MutableList로 Cards를 선언하여 언제 어디서 변경되어도 이상하지 않았지만 일급 컬렉션을 사용하므로써 내부에서만 값이 변경될 수 있다.
+ */
 data class Deck(
-    private val cards: MutableList<Card> = Pattern.values()
-        .flatMap { pattern ->
-            return@flatMap Value.values()
-                .map { value ->
-                    return@map Card(value, pattern)
-                }
-        }.toMutableList()
+    private val cards: MutableList<Card>
 ) : List<Card> by cards {
 
     fun shuffle(): List<Card> {
@@ -47,7 +45,14 @@ data class Deck(
 }
 
 fun main() {
-    val deck = Deck()
+    val cards = Pattern.values()
+        .flatMap { pattern ->
+            return@flatMap Value.values()
+                .map { value ->
+                    return@map Card(value, pattern)
+                }
+        }.toMutableList()
+    val deck = Deck(cards)
     println(deck.shuffle())
     while (deck.isNotEmpty()) {
         println(deck.drawCard())
