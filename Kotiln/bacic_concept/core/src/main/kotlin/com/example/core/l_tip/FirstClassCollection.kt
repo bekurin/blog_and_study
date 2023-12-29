@@ -45,16 +45,18 @@ data class Deck(
 }
 
 fun main() {
-    val cards = Pattern.values()
-        .flatMap { pattern ->
-            return@flatMap Value.values()
-                .map { value ->
-                    return@map Card(value, pattern)
-                }
-        }.toMutableList()
+    val cards = getCards()
     val deck = Deck(cards)
     println(deck.shuffle())
     while (deck.isNotEmpty()) {
         println(deck.drawCard())
     }
+}
+
+private fun getCards(): MutableList<Card> {
+    return Pattern.values().flatMap { pattern ->
+            return@flatMap Value.values().map { value ->
+                    return@map Card(value, pattern)
+                }
+        }.toMutableList()
 }

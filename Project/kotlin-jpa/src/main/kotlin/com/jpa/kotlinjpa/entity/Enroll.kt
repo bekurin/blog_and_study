@@ -25,5 +25,5 @@ class Enroll(
         this.student.enrolls.remove(this)
         this.student = student
         student.enrolls.add(this)
-    }
+    } 
 }
