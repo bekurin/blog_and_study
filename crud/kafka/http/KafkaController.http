@@ -1,0 +1,2 @@
+# GET
+GET {{base_url}}/send?message=Test_test
