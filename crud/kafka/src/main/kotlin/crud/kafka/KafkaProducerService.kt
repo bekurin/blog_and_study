@@ -3,7 +3,7 @@ package crud.kafka
 import org.apache.kafka.clients.producer.RecordMetadata
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Service
-import java.util.UUID
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 @Service
