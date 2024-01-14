@@ -6,16 +6,11 @@ import org.springframework.batch.core.JobParametersValidator
 import org.springframework.batch.core.configuration.support.DefaultBatchConfiguration
 import org.springframework.batch.core.job.CompositeJobParametersValidator
 import org.springframework.batch.core.job.DefaultJobParametersValidator
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
 class CompositeValidateParamJobConfig : DefaultBatchConfiguration() {
-
-    @Value("\${spring.batch.job.name}")
-    private lateinit var jobName: String
-
     @Bean
     fun compositeValidateParamJob(): CompositeJobParametersValidator {
         // optional keys 가 선언된 경우 required, optional 이외에 선언된 job parameter가 있다면 예외가 발생한다.
