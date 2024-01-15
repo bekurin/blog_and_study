@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  mysql:
+  database-a:
     image: mysql:8.0
     environment:
       MYSQL_DATABASE: spring-batch
@@ -10,6 +10,21 @@ services:
       TZ: Asia/Seoul
     ports:
       - '3306:3306'
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init-script.sql
+    command:
+      - --lower_case_table_names=1
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+  database-b:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: spring-batch
+      MYSQL_ROOT_USER: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      TZ: Asia/Seoul
+    ports:
+      - '3310:3306'
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init-script.sql
     command:
