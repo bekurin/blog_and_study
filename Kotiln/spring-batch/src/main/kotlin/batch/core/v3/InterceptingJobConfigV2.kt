@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Configuration
 
 
 // annotation based after, before job processing
-@Configuration
+//@Configuration
 class InterceptingJobConfigV2 : DefaultBatchConfiguration() {
     private val log: Logger = LoggerFactory.getLogger(this::class.java)
 
