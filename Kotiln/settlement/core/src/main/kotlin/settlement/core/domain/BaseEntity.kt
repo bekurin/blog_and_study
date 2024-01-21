@@ -17,11 +17,7 @@ class BaseEntity : TimestampEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
-    private val id: Long = 0L
-
-    fun getId(): Long {
-        return id
-    }
+    var id: Int = 0
 }
 
 @MappedSuperclass

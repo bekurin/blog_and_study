@@ -1,0 +1,11 @@
+spring:
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      # ?????? ?? ? ?? ???? ??? ??
+      enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true

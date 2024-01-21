@@ -1,0 +1,7 @@
+### psot
+POST {{base_url}}/v1/settlements
+Content-Type: application/json
+
+{
+  "settlementYearMonth": "2024-01"
+}
