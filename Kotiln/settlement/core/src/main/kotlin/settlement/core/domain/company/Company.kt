@@ -1,6 +1,7 @@
-package settlement.core.domain
+package settlement.core.domain.company
 
 import jakarta.persistence.Entity
+import settlement.core.domain.BaseEntity
 
 @Entity
 class Company(

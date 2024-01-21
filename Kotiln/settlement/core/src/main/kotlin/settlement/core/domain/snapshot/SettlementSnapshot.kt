@@ -34,11 +34,9 @@ class DailySettlementsConverter : AttributeConverter<List<DailySettlement>, Stri
     override fun convertToDatabaseColumn(attribute: List<DailySettlement>): String {
         return objectMapper.writeValueAsString(attribute)
     }
-
     override fun convertToEntityAttribute(dbData: String): List<DailySettlement> {
         return objectMapper.readValue<List<DailySettlement>>(dbData)
     }
-
 }
 
 data class DailySettlement(

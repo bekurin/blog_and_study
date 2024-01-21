@@ -1,4 +1,4 @@
-package settlement.core.configuration
+package settlement.core.config
 
 import jakarta.persistence.EntityManagerFactory
 import org.springframework.batch.core.Job
@@ -12,10 +12,11 @@ import org.springframework.batch.item.ItemProcessor
 import org.springframework.batch.item.ItemReader
 import org.springframework.batch.item.database.JpaItemWriter
 import org.springframework.batch.item.database.builder.JpaPagingItemReaderBuilder
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.transaction.PlatformTransactionManager
-import settlement.core.domain.Company
+import settlement.core.domain.company.Company
 import settlement.core.domain.settlement.repository.DeliverySettlementRepository
 import settlement.core.domain.settlement.repository.PackagingSettlementRepository
 import settlement.core.domain.settlement.repository.ShippingSettlementRepository
@@ -23,19 +24,22 @@ import settlement.core.domain.snapshot.SettlementSummary
 import java.time.YearMonth
 
 @Configuration
-class SettlementJobConfiguration(
+class SettlementJobConfig(
     private val transactionManager: PlatformTransactionManager,
     private val entityManagerFactory: EntityManagerFactory,
     private val deliverySettlementRepository: DeliverySettlementRepository,
     private val packagingSettlementRepository: PackagingSettlementRepository,
-    private val shippingSettlementRepository: ShippingSettlementRepository
+    private val shippingSettlementRepository: ShippingSettlementRepository,
 ) : DefaultBatchConfiguration() {
-    private val chunkSize = 500
+
+    private val chunkSize = 10
 
     @Bean
     fun settlementJob(): Job {
         return JobBuilder("settlementJob", jobRepository())
+            .preventRestart()
             .start(companyStep())
+            .incrementer(DailyJobTimeStamper())
             .build()
     }
 
@@ -45,7 +49,7 @@ class SettlementJobConfiguration(
         return StepBuilder("companyStep", jobRepository())
             .chunk<Company, SettlementSummary>(chunkSize, transactionManager)
             .reader(readChunkedDeliverySettlement())
-            .processor(processorSettlement())
+            .processor(processorSettlement(null))
             .writer(writeSettlementSummary())
             .build()
     }
@@ -56,17 +60,36 @@ class SettlementJobConfiguration(
             .name("readChunkedDeliverySettlement")
             .entityManagerFactory(entityManagerFactory)
             .pageSize(chunkSize)
-            .queryString("select * from company")
+            .queryString("SELECT c FROM Company c")
             .build()
     }
 
+    /**
+     * jobParameters를 사용하려면 StepScope가 정의되어 있어야한다.
+     */
     @Bean
-    fun processorSettlement(): ItemProcessor<Company, SettlementSummary> {
+    @StepScope
+    fun processorSettlement(
+        @Value("#{jobParameters[settlementYearMonth]}") settlementYearMonth: String?
+    ): ItemProcessor<Company, SettlementSummary> {
+        val yearMonth = YearMonth.parse(settlementYearMonth)
+        val (settlementStartDate, settlementEndDate) = yearMonth.atDay(1) to yearMonth.atEndOfMonth()
         return ItemProcessor { company ->
-            val deliverySettlements = deliverySettlementRepository.findByCompanyId(company.id)
-            val packagingSettlements = packagingSettlementRepository.findByCompanyId(company.id)
-            val shippingSettlements = shippingSettlementRepository.findByCompanyId(company.id)
-
+            val deliverySettlements = deliverySettlementRepository.findByCompanyIdAndDeliveryDateBetween(
+                company.id,
+                settlementStartDate,
+                settlementEndDate
+            )
+            val packagingSettlements = packagingSettlementRepository.findByCompanyIdAndPackagingDateBetween(
+                company.id,
+                settlementStartDate,
+                settlementEndDate
+            )
+            val shippingSettlements = shippingSettlementRepository.findByCompanyIdAndShippingDateBetween(
+                company.id,
+                settlementStartDate,
+                settlementEndDate
+            )
             val totalUnitPrice = deliverySettlements
                 .zip(packagingSettlements)
                 .zip(shippingSettlements)
@@ -74,7 +97,7 @@ class SettlementJobConfiguration(
                     val (deliverySettlement, packagingSettlement) = deliveryAndPackagingSettlement
                     (deliverySettlement.unitPrice + packagingSettlement.unitPrice + shippingSettlement.unitPrice).toLong()
                 }
-            SettlementSummary(company, YearMonth.now(), totalUnitPrice)
+            SettlementSummary(company, yearMonth, totalUnitPrice)
         }
     }
 
