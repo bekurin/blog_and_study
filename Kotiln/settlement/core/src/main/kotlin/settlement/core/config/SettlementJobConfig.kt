@@ -97,15 +97,20 @@ class SettlementJobConfig(
                     val (deliverySettlement, packagingSettlement) = deliveryAndPackagingSettlement
                     (deliverySettlement.unitPrice + packagingSettlement.unitPrice + shippingSettlement.unitPrice).toLong()
                 }
-            SettlementSummary(company, yearMonth, totalUnitPrice)
+            if (totalUnitPrice == 0L) {
+                null
+            } else {
+                SettlementSummary(company, yearMonth, totalUnitPrice)
+            }
         }
     }
 
     @Bean
     fun writeSettlementSummary(): JpaItemWriter<SettlementSummary> {
-        val writer = JpaItemWriter<SettlementSummary>()
-        writer.setEntityManagerFactory(entityManagerFactory)
-        writer.setUsePersist(true)
-        return writer
+        return JpaItemWriter<SettlementSummary>()
+            .apply {
+                setEntityManagerFactory(entityManagerFactory)
+                setUsePersist(false)
+            }
     }
 }
