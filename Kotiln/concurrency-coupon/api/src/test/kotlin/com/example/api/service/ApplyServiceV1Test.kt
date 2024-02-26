@@ -1,7 +1,7 @@
-package com.example.concurrencycoupon.service
+package com.example.api.service
 
-import com.example.concurrencycoupon.repository.CouponRepository
-import org.assertj.core.api.Assertions
+import com.example.api.repository.CouponRepository
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -9,10 +9,10 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
 
 @SpringBootTest
-class ApplyServiceV2Test {
+class ApplyServiceV1Test {
 
     @Autowired
-    private lateinit var applyServiceV2: ApplyServiceV2
+    private lateinit var applyServiceV1: ApplyServiceV1
 
     @Autowired
     private lateinit var couponRepository: CouponRepository
@@ -23,11 +23,11 @@ class ApplyServiceV2Test {
         val userId = 100L
 
         // when
-        applyServiceV2.apply(userId)
+        applyServiceV1.apply(userId)
 
         // then
         val count = couponRepository.count()
-        Assertions.assertThat(count).isOne()
+        assertThat(count).isOne()
     }
 
     @Test
@@ -41,7 +41,7 @@ class ApplyServiceV2Test {
         repeat((0..threadCount).count()) { userId ->
             executorService.submit {
                 try {
-                    applyServiceV2.apply(userId.toLong())
+                    applyServiceV1.apply(userId.toLong())
                 } finally {
                     latch.countDown()
                 }
@@ -51,6 +51,6 @@ class ApplyServiceV2Test {
 
         // then
         val count = couponRepository.count()
-        Assertions.assertThat(count).isEqualTo(100)
+        assertThat(count).isEqualTo(100)
     }
 }

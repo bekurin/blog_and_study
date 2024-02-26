@@ -1,7 +1,7 @@
-package com.example.concurrencycoupon.service
+package com.example.api.service
 
-import com.example.concurrencycoupon.domain.Coupon
-import com.example.concurrencycoupon.repository.CouponRepository
+import com.example.api.domain.Coupon
+import com.example.api.repository.CouponRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

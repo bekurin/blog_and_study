@@ -1,4 +1,4 @@
-package com.example.concurrencycoupon.repository
+package com.example.api.repository
 
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Repository
