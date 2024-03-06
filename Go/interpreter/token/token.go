@@ -34,15 +34,25 @@ const (
 
 	FUNCTION = "FUNCTION"
 	LET      = "LET"
+	TRUE     = "TRUE"
+	FALSE    = "FALSE"
+	IF       = "IF"
+	ELSE     = "ELSE"
+	RETURN   = "RETURN"
 )
 
-var keyworkds = map[string]TokenType{
-	"fn":  FUNCTION,
-	"let": LET,
+var keyWords = map[string]TokenType{
+	"fn":     FUNCTION,
+	"let":    LET,
+	"TRUE":   TRUE,
+	"FALSE":  FALSE,
+	"IF":     IF,
+	"ELSE":   ELSE,
+	"RETURN": RETURN,
 }
 
 func LookupIdent(ident string) TokenType {
-	if tok, ok := keyworkds[ident]; ok {
+	if tok, ok := keyWords[ident]; ok {
 		return tok
 	}
 	return IDENT
