@@ -42,7 +42,7 @@ let result = add(five, ten);
 		{token.PLUS, "+"},
 		{token.IDENT, "y"},
 		{token.SEMICOLON, ";"},
-		{token.RBRACE, "="},
+		{token.RBRACE, "}"},
 		{token.SEMICOLON, ";"},
 		{token.LET, "let"},
 		{token.IDENT, "result"},
