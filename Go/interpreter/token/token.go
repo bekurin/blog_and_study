@@ -39,16 +39,19 @@ const (
 	IF       = "IF"
 	ELSE     = "ELSE"
 	RETURN   = "RETURN"
+
+	EQ     = "=="
+	NOT_EQ = "!="
 )
 
 var keyWords = map[string]TokenType{
 	"fn":     FUNCTION,
 	"let":    LET,
-	"TRUE":   TRUE,
-	"FALSE":  FALSE,
-	"IF":     IF,
-	"ELSE":   ELSE,
-	"RETURN": RETURN,
+	"true":   TRUE,
+	"false":  FALSE,
+	"if":     IF,
+	"else":   ELSE,
+	"return": RETURN,
 }
 
 func LookupIdent(ident string) TokenType {
