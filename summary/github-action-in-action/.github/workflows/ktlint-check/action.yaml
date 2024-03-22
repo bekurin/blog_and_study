@@ -1,0 +1,27 @@
+name: ktlint-check
+author: bekurin
+description: 'run ktlint check tasks'
+
+inputs:
+  JAVA_VERSION:
+    description: 'java version (ex. 17, 21)'
+    required: true
+    default: '17'
+  DISTRIBUTION:
+    description: 'distribution'
+    required: true
+    default: 'temurin'
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-java@v4
+      with:
+        java-version: ${{ inputs.JAVA_VERSION }}
+        distribution: ${{ inputs.DISTRIBUTION }}
+    - name: Grand execute permission for gradlew
+      shell: bash
+      run: chmod +x gradlew
+    - name: ktlint check
+      shell: bash
+      run: ./gradlew clean ktlintCheck

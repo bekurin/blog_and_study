@@ -1,0 +1,46 @@
+# mysql, redis, testcontainers 각각 cache를 만들어야한다.
+name: caching-docker-image
+author: bekurin
+description: 'caching docker image'
+
+inputs:
+  MYSQL_VERSION:
+    description: 'mysql version'
+    default: ''
+    required: false
+  REDIS_VERSION:
+    description: 'redis version'
+    default: ''
+    required: false
+  TESTCONTAINERS_VERSION:
+    description: 'testcontainers version'
+    default: ''
+    required: false
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/cache@v4
+      id: image-cache
+      with:
+        path: |
+          ~/.docker
+        key: docker-image-${{ runner.os }}
+        restore-keys: |
+          docker-image-${{ runner.os }}
+    - name: Pull and save docker images
+      if: steps.image-cache.outputs.cache-hit != 'true'
+      shell: bash
+      run: |
+        if [ "${{ inputs.MYSQL_VERSION }}" != "" ]; then
+          docker pull mysql:${{ inputs.MYSQL_VERSION }}
+          docker save -o ~/.docker/mysql.tar mysql:${{ inputs.MYSQL_VERSION }}
+        fi
+        if [ "${{ inputs.REDIS_VERSION }}" != "" ]; then
+          docker pull redis:${{ inputs.REDIS_VERSION }}
+          docker save -o ~/.docker/redis.tar redis:${{ inputs.REDIS_VERSION }}
+        fi
+        if [ "${{ inputs.TESTCONTAINERS_VERSION }}" != "" ]; then
+          docker pull testcontainers/ryuk:${{ inputs.TESTCONTAINERS_VERSION }}
+          docker save -o ~/.docker/testcontainers.tar mysql:${{ inputs.TESTCONTAINERS_VERSION }}
+        fi

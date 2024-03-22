@@ -1,0 +1,36 @@
+name: environment v1
+on:
+  workflow_dispatch
+
+env:
+  level: workflow
+
+jobs:
+  get-env-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check env
+        run: echo "LEVEL ${{ env.level }}
+  get-env-job:
+    runs-on: ubuntu-latest
+    env:
+      level: job
+    steps:
+      - name: check env
+        run: echo "LEVEL ${{ env.level }}
+  get-env-step:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check env
+        run: echo "LEVEL ${{ env.level }}
+        env:
+          level: step
+  get-env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: create env
+        run: |
+          echo "level=job" >> $GITHUB_ENV
+      - name: check env
+        run: echo ${{ env.level }}
+

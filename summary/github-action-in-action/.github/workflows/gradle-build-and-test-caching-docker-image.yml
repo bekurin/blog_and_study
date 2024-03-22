@@ -1,0 +1,71 @@
+name: gradle build test caching docker image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  set-up:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        id: image-cache
+        with:
+          path: |
+            ~/.docker
+          key: mysql-and-redis-and-testcontainers-image-${{ runner.os }}
+          restore-keys: |
+            mysql-and-redis-and-testcontainers-image-${{ runner.os }}
+      - name: Pull and save docker images
+        if: steps.image-cache.outputs.cache-hit != 'true'
+        run: |
+          docker pull mysql:8.0
+          docker pull redis:7.0.7
+          docker pull testcontainers/ryuk:0.6.0
+          docker save -o ~/.docker/mysql.tar mysql:8.0
+          docker save -o ~/.docker/redis.tar redis:7.0.7
+          docker save -o ~/.docker/testcontainers.tar testcontainers/ryuk:0.6.0
+  ktlint-check:
+    needs: [set-up]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Grand execute permission for gradlew
+        run: chmod +x gradlew
+      - name: ktlint check
+        run: ./gradlew clean ktlintCheck
+  run-test:
+    needs: [set-up]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        id: image-cache
+        with:
+          path: |
+            ~/.docker
+          key: mysql-and-redis-and-testcontainers-image-${{ runner.os }}
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Grand execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Load mysql and redis and testcontainers image in cache
+        if: steps.image-cache.outputs.cache-hit == 'true'
+        run: |
+          docker load -i ~/.docker/mysql.tar
+          docker load -i ~/.docker/redis.tar
+          docker load -i ~/.docker/testcontainers.tar
+      - name: execute test
+        run: ./gradlew clean test --info
+  complete:
+    needs: [ktlint-check, run-test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo complete
+        run: echo "complete"

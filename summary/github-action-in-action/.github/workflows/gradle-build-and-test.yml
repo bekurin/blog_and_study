@@ -1,0 +1,42 @@
+name: gradle build test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  set-up:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+  ktlint-check:
+    needs: [set-up]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Grand execute permission for gradlew
+        run: chmod +x gradlew
+      - name: ktlint check
+        run: ./gradlew clean ktlintCheck
+  run-test:
+    needs: [set-up]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Grand execute permission for gradlew
+        run: chmod +x gradlew
+      - name: execute test
+        run: ./gradlew clean test --info
+  complete:
+    needs: [ktlint-check, run-test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo complete
+        run: echo "complete"

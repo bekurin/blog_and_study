@@ -1,0 +1,12 @@
+name: trigger using issue event
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  issue-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: hello world
+        run: echo hello world

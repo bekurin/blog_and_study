@@ -1,0 +1,14 @@
+# using: node를 사용하면 추가적인 step 정의는 할 수 없다.
+name: 'javascript echo action'
+author: bekurin
+description: 'echo input message'
+
+inputs:
+  MESSAGE:
+    description: "message to echo"
+    required: true
+    default: 'complete'
+
+runs:
+  using: node20
+  main: 'action.js'

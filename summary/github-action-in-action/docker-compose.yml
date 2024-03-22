@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: 'test'
+      MYSQL_ROOT_USER: 'username'
+      MYSQL_USER: 'username'
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_PASSWORD: 'password'
+      TZ: Asia/Seoul
+    ports:
+      - "3306:3306"
+  redis:
+    image: redis:7.0.7
+    restart: always

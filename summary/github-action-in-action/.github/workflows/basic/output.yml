@@ -1,0 +1,22 @@
+name: output
+# job 실행 과정에서 생성된 데이터 동일한 job 내에서 또는 다른 job 에서 데이터 공유
+
+jobs:
+  create-output:
+    runs-on: ubuntu-latest
+    outputs:
+      test: ${{ steps.check-output.outputs.test }}
+    steps:
+      - name: echo output
+        id: check-output # output 을 사용하는 고유 키
+        run: |
+          echo "test=hello" >> $GITHUB_OUTPUT
+      - name: check output
+        run: |˚
+          echo ${{ steps.check-output.outputs.test }}
+  get-output:
+    needs: [create-output]
+    runs-on: ubuntu-latest
+    steps:
+      - name: get output
+        run: echo ${{ needs.create-output.outputs.test }}

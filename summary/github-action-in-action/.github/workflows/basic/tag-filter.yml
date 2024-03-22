@@ -1,0 +1,12 @@
+name: tag-filter
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  tag-filter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo tag
+        run: echo tag

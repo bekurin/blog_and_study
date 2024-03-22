@@ -1,0 +1,19 @@
+name: review reminder
+
+on:
+  workflow_dispatch:
+
+jobs:
+  review-reminder:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm ci
+      - uses: ./.github/workflows/opened-pull-request
+        with:
+          REVIEW_REMIND_TOKEN: ${{ secrets.REVIEW_REMIND_TOKEN }}

@@ -1,0 +1,29 @@
+name: artifact
+# 워크플로 실행 과정에서 생성된 파일을 저장할 수 있게 하는 기능
+# 서로 다른 job 사이에서 데이터 공유 가능
+
+on:
+  workflow_dispatch
+
+jobs:
+  upload-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo hello world
+        run: echo hello-world > hello-world.txt
+      - name: upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifact-test
+          path: ./hello.txt
+  download-artifact:
+    runs-on: ubuntu-latest
+    needs: [upload-artifact]
+    steps:
+      - name: download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: artifact-test
+          path: ./
+      - name: check
+        run: cat hello.txt

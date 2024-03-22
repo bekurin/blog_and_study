@@ -1,0 +1,14 @@
+name: path filter
+on:
+  push:
+    paths:
+      - '.github/workflows/*' # 해당 디렉터리 경로에 변경이 가해지는 경우
+      - '!.github/workflows/trigger-event/*' # 해당 디렉터리 제외
+  workflow_dispatch:
+
+jobs:
+  path-filter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo hello world
+        run: echo hello world
