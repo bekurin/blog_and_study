@@ -1,0 +1,15 @@
+[submodule "in-action"]
+	path = in-action
+	url = https://github.com/bekurin/redis-in-action.git
+[submodule "summary/summary/mysql-in-action"]
+	path = summary/summary/mysql-in-action
+	url = https://github.com/bekurin/mysql-in-action.git
+[submodule "summary/summary/redis-in-action"]
+	path = summary/summary/redis-in-action
+	url = https://github.com/bekurin/redis-in-action.git
+[submodule "summary/summary/github-action-in-action"]
+	path = summary/summary/github-action-in-action
+	url = https://github.com/bekurin/github-actions-in-action.git
+[submodule "summary/summary/github-in-action"]
+	path = summary/summary/github-in-action
+	url = https://github.com/bekurin/github-in-action.git
