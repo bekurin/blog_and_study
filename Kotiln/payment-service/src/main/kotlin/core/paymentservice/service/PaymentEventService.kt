@@ -1,10 +1,8 @@
 package core.paymentservice.service
 
 import core.paymentservice.domain.PaymentEvent
-import core.paymentservice.domain.PaymentOrder
 import core.paymentservice.repository.PaymentEventRepository
 import core.paymentservice.repository.PaymentOrderRepository
-import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 class PaymentEventService(
