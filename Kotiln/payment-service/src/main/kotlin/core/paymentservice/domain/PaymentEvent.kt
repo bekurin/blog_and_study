@@ -50,6 +50,10 @@ class PaymentEvent(
         this.paymentOrders.addAll(paymentOrders)
         return this
     }
+
+    fun totalAmount(): Long {
+        return paymentOrders.sumOf { it.amount }
+    }
 }
 
 enum class PaymentType(description: String) {
