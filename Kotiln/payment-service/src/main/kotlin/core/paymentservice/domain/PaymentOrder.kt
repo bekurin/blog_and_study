@@ -1,15 +1,42 @@
 package core.paymentservice.domain
 
-data class PaymentOrder(
-    val paymentEventId: Int,
-    val sellerId: Int,
-    val productId: Int,
-    val orderKey: String,
-    val amount: Long,
-    val paymentStatus: PaymentStatus,
-    private val isLedgerUpdated: Boolean = false,
-    private val isWalletUpdated: Boolean = false
-) : BaseEntity()
+import org.springframework.data.relational.core.mapping.Table
+
+@Table("payment_order")
+class PaymentOrder(
+    paymentEventId: Int,
+    sellerId: Int,
+    productId: Int,
+    orderKey: String,
+    amount: Long,
+    paymentStatus: PaymentStatus,
+    isLedgerUpdated: Boolean = false,
+    isWalletUpdated: Boolean = false,
+) : BaseEntity() {
+    var paymentEventId: Int = paymentEventId
+        private set
+
+    var sellerId: Int = sellerId
+        private set
+
+    var productId: Int = productId
+        private set
+
+    var orderKey: String = orderKey
+        private set
+
+    var amount: Long = amount
+        private set
+
+    var paymentStatus: PaymentStatus = paymentStatus
+        private set
+
+    var isLedgerUpdated: Boolean = false
+        private set
+
+    var isWalletUpdated: Boolean = false
+        private set
+}
 
 enum class PaymentStatus(description: String) {
     NOT_STARTED("결제 처리 시작 전"),

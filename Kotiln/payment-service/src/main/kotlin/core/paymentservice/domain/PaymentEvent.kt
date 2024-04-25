@@ -1,19 +1,54 @@
 package core.paymentservice.domain
 
+import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
 
-data class PaymentEvent(
-    val buyerId: Int,
-    val orderName: String,
-    val orderKey: String,
-    val paymentKey: String,
-    val paymentType: PaymentType,
-    val paymentMethod: PaymentMethod,
-    val approvedAt: LocalDateTime,
-    private var isPaymentDone: Boolean = false
+@Table("payment_event")
+class PaymentEvent(
+    buyerId: Int,
+    orderName: String,
+    orderKey: String,
+    paymentKey: String,
+    paymentType: PaymentType,
+    paymentMethod: PaymentMethod,
+    approvedAt: LocalDateTime,
+    isPaymentDone: Boolean = false,
 ) : BaseEntity() {
+    var buyerId: Int = buyerId
+        private set
+
+    var orderName: String = orderName
+        private set
+
+    var orderKey: String = orderKey
+        private set
+
+    var paymentKey: String = paymentKey
+        private set
+
+    var paymentType: PaymentType = paymentType
+        private set
+
+    var paymentMethod: PaymentMethod = paymentMethod
+        private set
+
+    var approvedAt: LocalDateTime = approvedAt
+        private set
+
+    var isPaymentDone: Boolean = isPaymentDone
+        private set
+
+    @Transient
+    var paymentOrders: MutableList<PaymentOrder> = mutableListOf()
+        private set
+
     fun isDone(): Boolean {
         return isPaymentDone
+    }
+
+    fun addPaymentOrders(paymentOrders: List<PaymentOrder>): PaymentEvent {
+        this.paymentOrders.addAll(paymentOrders)
+        return this
     }
 }
 
