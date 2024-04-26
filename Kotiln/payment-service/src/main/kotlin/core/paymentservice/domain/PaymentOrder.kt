@@ -1,10 +1,12 @@
 package core.paymentservice.domain
 
+import core.paymentservice.domain.PaymentStatus.FAILURE
+import core.paymentservice.domain.PaymentStatus.SUCCESS
+import core.paymentservice.domain.PaymentStatus.UNKNOWN
 import org.springframework.data.relational.core.mapping.Table
 
 @Table("payment_order")
 class PaymentOrder(
-    paymentEventId: Int,
     sellerId: Int,
     productId: Int,
     orderKey: String,
@@ -13,9 +15,6 @@ class PaymentOrder(
     isLedgerUpdated: Boolean = false,
     isWalletUpdated: Boolean = false,
 ) : BaseEntity() {
-    var paymentEventId: Int = paymentEventId
-        private set
-
     var sellerId: Int = sellerId
         private set
 
@@ -31,11 +30,23 @@ class PaymentOrder(
     var paymentStatus: PaymentStatus = paymentStatus
         private set
 
-    var isLedgerUpdated: Boolean = false
+    var isLedgerUpdated: Boolean = isLedgerUpdated
         private set
 
-    var isWalletUpdated: Boolean = false
+    var isWalletUpdated: Boolean = isWalletUpdated
         private set
+
+    fun isSuccess(): Boolean {
+        return paymentStatus == SUCCESS
+    }
+
+    fun isFailure(): Boolean {
+        return paymentStatus == FAILURE
+    }
+
+    fun isUnknown(): Boolean {
+        return paymentStatus == UNKNOWN
+    }
 }
 
 enum class PaymentStatus(description: String) {

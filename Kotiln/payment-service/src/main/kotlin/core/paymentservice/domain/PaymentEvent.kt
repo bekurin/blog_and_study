@@ -8,10 +8,10 @@ class PaymentEvent(
     buyerId: Int,
     orderName: String,
     orderKey: String,
-    paymentKey: String,
-    paymentType: PaymentType,
-    paymentMethod: PaymentMethod,
-    approvedAt: LocalDateTime,
+    paymentKey: String? = null,
+    paymentType: PaymentType? = null,
+    paymentMethod: PaymentMethod? = null,
+    approvedAt: LocalDateTime? = null,
     isPaymentDone: Boolean = false,
 ) : BaseEntity() {
     var buyerId: Int = buyerId
@@ -23,16 +23,16 @@ class PaymentEvent(
     var orderKey: String = orderKey
         private set
 
-    var paymentKey: String = paymentKey
+    var paymentKey: String? = paymentKey
         private set
 
-    var paymentType: PaymentType = paymentType
+    var paymentType: PaymentType? = paymentType
         private set
 
-    var paymentMethod: PaymentMethod = paymentMethod
+    var paymentMethod: PaymentMethod? = paymentMethod
         private set
 
-    var approvedAt: LocalDateTime = approvedAt
+    var approvedAt: LocalDateTime? = approvedAt
         private set
 
     var isPaymentDone: Boolean = isPaymentDone
@@ -53,6 +53,18 @@ class PaymentEvent(
 
     fun totalAmount(): Long {
         return paymentOrders.sumOf { it.amount }
+    }
+
+    fun isSuccess(): Boolean {
+        return paymentOrders.all { paymentOrder -> paymentOrder.isSuccess() }
+    }
+
+    fun isFailure(): Boolean {
+        return paymentOrders.any { paymentOrder -> paymentOrder.isFailure() }
+    }
+
+    fun isUnknown(): Boolean {
+        return paymentOrders.any { paymentOrder -> paymentOrder.isUnknown() }
     }
 }
 

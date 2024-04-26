@@ -3,9 +3,21 @@ package core.paymentservice.domain
 import org.springframework.data.relational.core.mapping.Table
 
 @Table("product")
-data class Product(
-    val amount: String,
-    val quantity: Int,
-    val name: String,
-    val sellerId: Long
-) : BaseEntity()
+class Product(
+    amount: Long,
+    quantity: Int,
+    name: String,
+    sellerId: Int
+) : BaseEntity() {
+    var amount: Long = amount
+        private set
+
+    var quantity: Int = quantity
+        private set
+
+    var name: String = name
+        private set
+
+    var sellerId: Int = sellerId
+        private set
+}
