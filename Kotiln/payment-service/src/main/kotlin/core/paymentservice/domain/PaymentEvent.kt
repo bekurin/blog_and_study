@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 class PaymentEvent(
     buyerId: Int,
     orderName: String,
-    orderKey: String,
+    orderId: String,
     paymentKey: String? = null,
     paymentType: PaymentType? = null,
     paymentMethod: PaymentMethod? = null,
@@ -20,7 +20,7 @@ class PaymentEvent(
     var orderName: String = orderName
         private set
 
-    var orderKey: String = orderKey
+    var orderId: String = orderId
         private set
 
     var paymentKey: String? = paymentKey
@@ -47,7 +47,8 @@ class PaymentEvent(
     }
 
     fun addPaymentOrders(paymentOrders: List<PaymentOrder>): PaymentEvent {
-        this.paymentOrders.addAll(paymentOrders)
+        val updatedPaymentOrders = paymentOrders.map { paymentOrder -> paymentOrder.updatePaymentEventId(this.id) }
+        this.paymentOrders.addAll(updatedPaymentOrders)
         return this
     }
 

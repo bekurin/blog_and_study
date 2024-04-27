@@ -4,12 +4,12 @@ import core.paymentservice.domain.PaymentEvent
 
 data class CheckoutResponse(
     val amount: Long,
-    val orderKey: String,
+    val orderId: String,
     val orderName: String,
 ) {
     constructor(paymentEvent: PaymentEvent) : this(
         amount = paymentEvent.totalAmount(),
-        orderKey = paymentEvent.orderKey,
+        orderId = paymentEvent.orderId,
         orderName = paymentEvent.orderName,
     )
 }

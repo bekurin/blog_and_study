@@ -15,7 +15,7 @@ data class CheckoutCreationDto(
         val paymentOrders = products.map { product ->
             PaymentOrder(
                 sellerId = product.sellerId,
-                orderKey = idempotencyKey,
+                orderId = idempotencyKey,
                 productId = product.id,
                 amount = product.amount,
                 paymentStatus = NOT_STARTED
@@ -23,7 +23,7 @@ data class CheckoutCreationDto(
         }
         return PaymentEvent(
             buyerId = buyerId,
-            orderKey = idempotencyKey,
+            orderId = idempotencyKey,
             orderName = products.joinToString { product -> product.name },
         )
             .addPaymentOrders(paymentOrders)

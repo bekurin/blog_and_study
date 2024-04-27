@@ -1,1 +1,21 @@
-spring.application.name=payment-service
+spring:
+  r2dbc:
+    url: r2dbc:mysql://localhost:3306/payment
+    username: root
+    password: 1234
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  thymeleaf:
+    cache: false
+
+logging:
+  level:
+    org.springframework:
+      web: DEBUG
+      r2dbc: DEBUG
+      transaction: DEBUG
+
+toss-payment:
+  base-url: https://api.tosspayments.com
+  confirm: /v1/payments/confirm
+  secret-key: ${toss-payment.secret-key}

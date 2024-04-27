@@ -1,15 +1,12 @@
 package core.paymentservice.controller.payment.request
 
-import core.paymentservice.exception.ClientBadRequestException
+import jakarta.validation.constraints.NotBlank
 
 data class TossPaymentConfirmRequest(
+    @get:NotBlank
     val paymentKey: String,
+    @get:NotBlank
     val orderId: String,
+    @get:NotBlank
     val amount: String
-) {
-    init {
-        if (orderId.isBlank() || paymentKey.isBlank() || amount.isBlank()) {
-            throw ClientBadRequestException("")
-        }
-    }
-}
+)
