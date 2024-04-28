@@ -1,4 +1,4 @@
-package core.paymentservice.controller.payment.response
+package core.paymentservice.controller.dto
 
 import core.paymentservice.domain.PaymentEvent
 

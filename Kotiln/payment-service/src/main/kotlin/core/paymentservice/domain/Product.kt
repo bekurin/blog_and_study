@@ -7,7 +7,7 @@ class Product(
     amount: Long,
     quantity: Int,
     name: String,
-    sellerId: Int
+    sellerId: Long
 ) : BaseEntity() {
     var amount: Long = amount
         private set
@@ -18,6 +18,6 @@ class Product(
     var name: String = name
         private set
 
-    var sellerId: Int = sellerId
+    var sellerId: Long = sellerId
         private set
 }

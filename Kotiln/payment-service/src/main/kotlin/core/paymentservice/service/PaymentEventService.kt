@@ -9,7 +9,7 @@ class PaymentEventService(
     private val paymentEventRepository: PaymentEventRepository,
     private val paymentOrderRepository: PaymentOrderRepository,
 ) {
-    fun findOrderEventById(id: Int): Mono<PaymentEvent> {
+    fun findOrderEventById(id: Long): Mono<PaymentEvent> {
         return paymentEventRepository.findById(id)
             .flatMap { paymentEvent ->
                 paymentOrderRepository.findByPaymentEventId(paymentEvent.id)

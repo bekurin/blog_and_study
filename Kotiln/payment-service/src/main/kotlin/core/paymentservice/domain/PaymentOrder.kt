@@ -7,21 +7,21 @@ import org.springframework.data.relational.core.mapping.Table
 
 @Table("payment_order")
 class PaymentOrder(
-    sellerId: Int,
-    productId: Int,
+    sellerId: Long,
+    productId: Long,
     orderId: String,
     amount: Long,
     paymentStatus: PaymentStatus,
     isLedgerUpdated: Boolean = false,
     isWalletUpdated: Boolean = false,
 ) : BaseEntity() {
-    var paymentEventId: Int = 0
+    var paymentEventId: Long = 0
         private set
 
-    var sellerId: Int = sellerId
+    var sellerId: Long = sellerId
         private set
 
-    var productId: Int = productId
+    var productId: Long = productId
         private set
 
     var orderId: String = orderId
@@ -39,7 +39,7 @@ class PaymentOrder(
     var isWalletUpdated: Boolean = isWalletUpdated
         private set
 
-    fun updatePaymentEventId(paymentEventId: Int): PaymentOrder {
+    fun updatePaymentEventId(paymentEventId: Long): PaymentOrder {
         this.paymentEventId = paymentEventId
         return this
     }

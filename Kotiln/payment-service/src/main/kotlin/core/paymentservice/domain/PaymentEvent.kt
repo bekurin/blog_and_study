@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 
 @Table("payment_event")
 class PaymentEvent(
-    buyerId: Int,
+    buyerId: Long,
     orderName: String,
     orderId: String,
     paymentKey: String? = null,
@@ -14,7 +14,7 @@ class PaymentEvent(
     approvedAt: LocalDateTime? = null,
     isPaymentDone: Boolean = false,
 ) : BaseEntity() {
-    var buyerId: Int = buyerId
+    var buyerId: Long = buyerId
         private set
 
     var orderName: String = orderName

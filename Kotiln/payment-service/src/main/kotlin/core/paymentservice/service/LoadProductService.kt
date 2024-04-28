@@ -9,7 +9,7 @@ import reactor.core.publisher.Flux
 class LoadProductService(
     private val productClient: ProductClient
 ) {
-    fun getProducts(cartId: Int, productIds: List<Int>): Flux<Product> {
+    fun getProducts(cartId: Long, productIds: List<Long>): Flux<Product> {
         return productClient.getProducts(cartId, productIds)
     }
 }

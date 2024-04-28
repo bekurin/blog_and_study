@@ -1,4 +1,4 @@
-package core.paymentservice.controller.view
+package core.paymentservice.controller
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping

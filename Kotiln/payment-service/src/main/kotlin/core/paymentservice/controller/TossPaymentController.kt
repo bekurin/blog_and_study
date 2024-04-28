@@ -1,6 +1,6 @@
-package core.paymentservice.controller.payment
+package core.paymentservice.controller
 
-import core.paymentservice.controller.payment.request.TossPaymentConfirmRequest
+import core.paymentservice.controller.dto.TossPaymentConfirmRequest
 import core.paymentservice.service.TossPaymentApiClient
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -16,6 +16,6 @@ class TossPaymentController(
 
     @PostMapping("/confirm")
     fun confirm(@RequestBody request: TossPaymentConfirmRequest): Mono<String> {
-        return tossPaymentApiClient.confirm(request)
+        return tossPaymentApiClient.confirm(request.toPaymentConfirmCommand())
     }
 }

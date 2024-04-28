@@ -6,12 +6,12 @@ import reactor.core.publisher.Flux
 
 @Service
 class MockProductClient() : ProductClient {
-    override fun getProducts(cartId: Int, productIds: List<Int>): Flux<Product> {
+    override fun getProducts(cartId: Long, productIds: List<Long>): Flux<Product> {
         return Flux.fromIterable(
             productIds.map { productId ->
                 Product(
                     amount = productId * 10_000L,
-                    quantity = productId,
+                    quantity = 2,
                     name = "상품#$productId",
                     sellerId = 1
                 )

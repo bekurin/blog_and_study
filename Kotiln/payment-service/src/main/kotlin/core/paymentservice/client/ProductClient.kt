@@ -4,5 +4,5 @@ import core.paymentservice.domain.Product
 import reactor.core.publisher.Flux
 
 interface ProductClient {
-    fun getProducts(cartId: Int, productIds: List<Int>): Flux<Product>
+    fun getProducts(cartId: Long, productIds: List<Long>): Flux<Product>
 }

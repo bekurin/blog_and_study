@@ -1,7 +1,7 @@
 package core.paymentservice.service
 
 import core.paymentservice.configuration.property.TossPaymentProperty
-import core.paymentservice.controller.payment.request.TossPaymentConfirmRequest
+import core.paymentservice.service.dto.PaymentConfirmCommand
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 import reactor.core.publisher.Mono
@@ -11,7 +11,7 @@ class TossPaymentApiClient(
     private val tossPaymentWebClient: WebClient,
     private val tossPaymentProperty: TossPaymentProperty,
 ) {
-    fun confirm(request: TossPaymentConfirmRequest): Mono<String> {
+    fun confirm(request: PaymentConfirmCommand): Mono<String> {
         return tossPaymentWebClient
             .post()
             .uri(tossPaymentProperty.confirm)
