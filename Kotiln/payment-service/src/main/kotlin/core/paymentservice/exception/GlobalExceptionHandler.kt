@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 class GlobalExceptionHandler(
     private val localizedMessageSource: LocalizedMessageSource
 ) {
-
     @ExceptionHandler(HttpException::class)
     fun handleHttpException(httpException: HttpException): ResponseEntity<ExceptionResponse> {
         val responseStatus =
             httpException::class.annotations.firstOrNull { annotation -> annotation is ResponseStatus } as? ResponseStatus
-        localizedMessageSource.getMessage(httpException.messageSourceCode, httpException.getArguments())
+        val message = localizedMessageSource.getMessage(httpException.messageSourceCode, httpException.getArguments())
         return ResponseEntity
             .status(responseStatus?.value ?: HttpStatus.INTERNAL_SERVER_ERROR)
-            .body(ExceptionResponse(httpException.message))
+            .body(ExceptionResponse(message))
     }
 }
