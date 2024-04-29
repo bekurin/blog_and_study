@@ -1,5 +1,6 @@
 package core.paymentservice.domain
 
+import org.springframework.data.annotation.Transient
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
 
@@ -66,6 +67,11 @@ class PaymentEvent(
 
     fun isUnknown(): Boolean {
         return paymentOrders.any { paymentOrder -> paymentOrder.isUnknown() }
+    }
+
+    fun updatePaymentKey(paymentKey: String): PaymentEvent {
+        this.paymentKey = paymentKey
+        return this
     }
 }
 

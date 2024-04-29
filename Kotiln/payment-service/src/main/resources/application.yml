@@ -2,7 +2,7 @@ spring:
   r2dbc:
     url: r2dbc:mysql://localhost:3306/payment
     username: root
-    password: 1234
+    password:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
   thymeleaf:

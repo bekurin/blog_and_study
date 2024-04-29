@@ -14,7 +14,8 @@ class SavePaymentService(
     fun save(paymentEvent: PaymentEvent): Mono<PaymentEvent> {
         return paymentEventRepository.save(paymentEvent)
             .flatMap { savedPaymentEvent ->
-                paymentOrderRepository.saveAll(savedPaymentEvent.paymentOrders)
+                val updatedPaymentOrders = savedPaymentEvent.paymentOrders.map { it.updatePaymentEventId(savedPaymentEvent.id) }
+                paymentOrderRepository.saveAll(updatedPaymentOrders)
                     .collectList()
                     .map { savedPaymentEvent }
             }

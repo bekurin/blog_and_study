@@ -39,9 +39,9 @@
     const generateRandomString = () => window.btoa(Math.random()).slice(0, 20);
 
     /*<![CDATA[*/
-    const orderId = "123lkfsad"
-    const orderName = "샘플 주문"
-    var amount = 5000
+    const orderId = "[[${orderId}]]"
+    const orderName = "[[${orderName}]]"
+    var amount = [[${amount}]]
     /*]]>*/
 
     console.log("orderId: " + orderId)

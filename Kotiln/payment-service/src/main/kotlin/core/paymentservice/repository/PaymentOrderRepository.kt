@@ -5,5 +5,5 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository
 import reactor.core.publisher.Flux
 
 interface PaymentOrderRepository : ReactiveCrudRepository<PaymentOrder, Long> {
-    fun findByPaymentEventId(paymentEventId: Long): Flux<PaymentOrder>
+    fun findByOrderId(orderId: String): Flux<PaymentOrder>
 }

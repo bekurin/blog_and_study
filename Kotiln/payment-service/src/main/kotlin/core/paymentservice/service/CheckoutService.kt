@@ -15,8 +15,6 @@ class CheckoutService(
             .collectList()
             .map { products -> checkoutCommand.toPaymentEvent(products) }
             .flatMap { paymentEvent -> savePaymentService.save(paymentEvent) }
-            .map { savedPaymentEvent ->
-                CheckoutResponse(savedPaymentEvent)
-            }
+            .map { savedPaymentEvent -> CheckoutResponse(savedPaymentEvent) }
     }
 }

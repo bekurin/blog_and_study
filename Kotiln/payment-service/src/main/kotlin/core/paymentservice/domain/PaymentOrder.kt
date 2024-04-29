@@ -44,6 +44,11 @@ class PaymentOrder(
         return this
     }
 
+    fun updatePaymentStatus(paymentStatus: PaymentStatus): PaymentOrder {
+        this.paymentStatus = paymentStatus
+        return this
+    }
+
     fun isSuccess(): Boolean {
         return paymentStatus == SUCCESS
     }
