@@ -1,5 +1,6 @@
 import 'package:daily_cats_app/model/cat.dart';
 import 'package:daily_cats_app/screen/detail_screen.dart';
+import 'package:daily_cats_app/screen/upload_screen.dart';
 import 'package:flutter/material.dart';
 
 class ListScreen extends StatefulWidget {
@@ -16,7 +17,9 @@ class _ListScreenState extends State<ListScreen> {
       appBar: AppBar(
         title: const Text("간단 SNS 앱"),
         actions: [
-          IconButton(icon: const Icon(Icons.camera_alt), onPressed: () {})
+          IconButton(icon: const Icon(Icons.camera_alt), onPressed: () {
+            showDialog(context: context, builder: (_) => const UploadScreen());
+          })
         ],
       ),
       body: GridView.builder(
