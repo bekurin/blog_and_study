@@ -16,10 +16,14 @@ class SecurityConfig {
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         return http
-            .formLogin(Customizer.withDefaults())
             .authorizeHttpRequests { auth ->
-                auth.requestMatchers("/").permitAll()
+                auth
+                    .requestMatchers("/").permitAll()
+                    .requestMatchers("/css/**", "/images/**", "/js/**", "/*/icon-*").permitAll()
                     .anyRequest().authenticated()
+            }
+            .formLogin { form ->
+                form.loginPage("/login").permitAll()
             }
             .build()
     }
