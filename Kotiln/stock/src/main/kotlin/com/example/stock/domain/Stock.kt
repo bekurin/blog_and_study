@@ -1,5 +1,7 @@
 package com.example.stock.domain
 
+import com.example.stock.exception.ClientBadRequestException
+import com.example.stock.support.ErrorCode.NOT_ENOUGH_QUANTITY
 import jakarta.persistence.Entity
 
 @Entity
@@ -16,7 +18,7 @@ class Stock(
 
     fun decrease(quantity: Long) {
         if (this.quantity - quantity <= 0) {
-            throw RuntimeException()
+            throw ClientBadRequestException(NOT_ENOUGH_QUANTITY)
         }
         this.quantity -= quantity
     }
