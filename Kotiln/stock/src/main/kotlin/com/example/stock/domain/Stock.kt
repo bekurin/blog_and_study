@@ -16,10 +16,11 @@ class Stock(
     var quantity: Long = quantity
         protected set
 
-    fun decrease(quantity: Long) {
+    fun decrease(quantity: Long): Stock {
         if (this.quantity - quantity <= 0) {
             throw ClientBadRequestException(NOT_ENOUGH_QUANTITY)
         }
         this.quantity -= quantity
+        return this
     }
 }
