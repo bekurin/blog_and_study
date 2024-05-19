@@ -11,9 +11,9 @@ class StockService(
 
     @Transactional
     fun decrease(id: Long, quantity: Long) {
-        val stock = stockRepository.findById(id)
-            .orElseThrow()
+        val stock = stockRepository.findById(id).orElseThrow()
         val updatedStock = stock.decrease(quantity)
+        println("stock = ${updatedStock.quantity}")
         stockRepository.saveAndFlush(updatedStock)
     }
 }

@@ -3,6 +3,8 @@ package com.example.stock.config
 import org.junit.jupiter.api.extension.BeforeAllCallback
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.testcontainers.containers.MySQLContainer
+import org.testcontainers.containers.wait.strategy.Wait
+import org.testcontainers.containers.wait.strategy.WaitStrategy
 import org.testcontainers.junit.jupiter.Container
 
 class MysqlContainerExtension : BeforeAllCallback {
@@ -19,6 +21,8 @@ class MysqlContainerExtension : BeforeAllCallback {
             .withUsername(USERNAME)
             .withPassword(PASSWORD)
             .withExposedPorts(EXPOSED_PORT)
+            .withReuse(true)
+            .waitingFor(Wait.forListeningPort())
     }
 
     override fun beforeAll(context: ExtensionContext?) {

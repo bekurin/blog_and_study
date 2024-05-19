@@ -13,6 +13,7 @@ class RedisContainerExtension: BeforeAllCallback {
         @Container
         private val redisContainer = GenericContainer(REDIS_VERSION)
             .withExposedPorts(EXPOSED_PORT)
+            .withReuse(true)
     }
 
     override fun beforeAll(context: ExtensionContext?) {

@@ -1,29 +1,29 @@
 package com.example.stock.facade
 
-import com.example.stock.config.IntegrationTestBase
+import com.example.stock.config.RepositoryTestBase
 import com.example.stock.domain.Stock
 import com.example.stock.exception.ClientBadRequestException
 import com.example.stock.repository.StockRepository
-import com.example.stock.service.OptimisticLockStockService
 import com.example.stock.support.ErrorCode
+import jakarta.persistence.EntityManager
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.SoftAssertions
-import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
 
-class OptimisticLockStockFacadeTest : IntegrationTestBase() {
 
+class OptimisticLockStockFacadeTest : RepositoryTestBase() {
     @Autowired
     private lateinit var optimisticLockStockFacade: OptimisticLockStockFacade
 
     @Autowired
     private lateinit var stockRepository: StockRepository
 
-    @BeforeEach
+    @AfterEach
     fun cleanUp() {
         stockRepository.deleteAll()
     }
@@ -33,7 +33,7 @@ class OptimisticLockStockFacadeTest : IntegrationTestBase() {
         // given
         val (productId, quantity, decreaseQuantity) = Triple(1L, 100L, 20L)
         val stock = Stock(productId, quantity)
-        stockRepository.save(stock)
+        stockRepository.saveAndFlush(stock)
 
         // when
         optimisticLockStockFacade.decrease(stock.id, decreaseQuantity)
@@ -51,7 +51,7 @@ class OptimisticLockStockFacadeTest : IntegrationTestBase() {
         // given
         val (productId, quantity, decreaseQuantity) = Triple(2L, 20L, 100L)
         val stock = Stock(productId, quantity)
-        stockRepository.save(stock)
+        stockRepository.saveAndFlush(stock)
 
         // when & then
         assertThrows<ClientBadRequestException> {
@@ -67,14 +67,14 @@ class OptimisticLockStockFacadeTest : IntegrationTestBase() {
         // given
         val (productId, quantity) = Pair(3L, 100L)
         val stock = Stock(productId, quantity)
-        stockRepository.save(stock)
+        stockRepository.saveAndFlush(stock)
 
-        val (threadCount, nThreads) = Pair(100, 32)
+        val nThreads = 32
         val executorService = Executors.newFixedThreadPool(nThreads)
-        val latch = CountDownLatch(threadCount)
+        val latch = CountDownLatch(quantity.toInt())
 
         // when
-        for (i in 1..threadCount) {
+        repeat((1..quantity).count()) {
             executorService.submit {
                 try {
                     optimisticLockStockFacade.decrease(stock.id, 1)
@@ -86,7 +86,7 @@ class OptimisticLockStockFacadeTest : IntegrationTestBase() {
         latch.await()
 
         // then
-        val foundStock = stockRepository.findById(productId).get()
+        val foundStock = stockRepository.findById(stock.id).get()
         SoftAssertions.assertSoftly { softly ->
             softly.assertThat(foundStock.quantity).isZero
         }
