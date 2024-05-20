@@ -1,6 +1,5 @@
-package com.example.stock.service
+package com.example.stock.facade
 
-import com.example.stock.config.IntegrationTestBase
 import com.example.stock.config.RepositoryTestBase
 import com.example.stock.domain.Stock
 import com.example.stock.exception.ClientBadRequestException
@@ -8,22 +7,21 @@ import com.example.stock.repository.StockRepository
 import com.example.stock.support.ErrorCode
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.SoftAssertions
-import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
 
-class StockServiceTest : RepositoryTestBase() {
-
+class LettuceLockStockFacadeTest : RepositoryTestBase() {
     @Autowired
-    private lateinit var stockService: StockService
+    private lateinit var lettuceLockStockFacade: LettuceLockStockFacade
 
     @Autowired
     private lateinit var stockRepository: StockRepository
 
-    @BeforeEach
+    @AfterEach
     fun cleanUp() {
         stockRepository.deleteAll()
     }
@@ -33,10 +31,10 @@ class StockServiceTest : RepositoryTestBase() {
         // given
         val (productId, quantity, decreaseQuantity) = Triple(1L, 100L, 20L)
         val stock = Stock(productId, quantity)
-        stockRepository.save(stock)
+        stockRepository.saveAndFlush(stock)
 
         // when
-        stockService.decrease(stock.id, decreaseQuantity)
+        lettuceLockStockFacade.decrease(stock.id, decreaseQuantity)
 
         // then
         val foundStock = stockRepository.findById(stock.id).get()
@@ -51,11 +49,11 @@ class StockServiceTest : RepositoryTestBase() {
         // given
         val (productId, quantity, decreaseQuantity) = Triple(2L, 20L, 100L)
         val stock = Stock(productId, quantity)
-        stockRepository.save(stock)
+        stockRepository.saveAndFlush(stock)
 
         // when & then
         assertThrows<ClientBadRequestException> {
-            stockService.decrease(stock.id, decreaseQuantity)
+            lettuceLockStockFacade.decrease(stock.id, decreaseQuantity)
         }
             .also { throwable ->
                 assertThat(throwable.errorCode).isEqualTo(ErrorCode.NOT_ENOUGH_QUANTITY)
@@ -63,7 +61,7 @@ class StockServiceTest : RepositoryTestBase() {
     }
 
     @Test
-    fun `동시에 여러 명이 주문하면 동시성 이슈가 발생한다`() {
+    fun `동시에 여러 명이 주문해도 동시성 이슈가 발생하지 않는다`() {
         // given
         val (productId, quantity) = Pair(3L, 100L)
         val stock = Stock(productId, quantity)
@@ -77,7 +75,7 @@ class StockServiceTest : RepositoryTestBase() {
         repeat((1..quantity).count()) {
             executorService.submit {
                 try {
-                    stockService.decrease(stock.id, 1)
+                    lettuceLockStockFacade.decrease(stock.id, 1)
                 } finally {
                     latch.countDown()
                 }
@@ -88,7 +86,7 @@ class StockServiceTest : RepositoryTestBase() {
         // then
         val foundStock = stockRepository.findById(stock.id).get()
         SoftAssertions.assertSoftly { softly ->
-            softly.assertThat(foundStock.quantity).isNotZero
+            softly.assertThat(foundStock.quantity).isZero
         }
     }
 }

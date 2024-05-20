@@ -5,7 +5,6 @@ import com.example.stock.domain.Stock
 import com.example.stock.exception.ClientBadRequestException
 import com.example.stock.repository.StockRepository
 import com.example.stock.support.ErrorCode
-import jakarta.persistence.EntityManager
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.SoftAssertions
 import org.junit.jupiter.api.AfterEach
