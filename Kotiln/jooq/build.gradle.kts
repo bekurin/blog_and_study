@@ -1,6 +1,4 @@
-import org.jooq.meta.jaxb.ForcedType
-import org.jooq.meta.jaxb.Generate
-import org.jooq.meta.jaxb.Strategy
+import org.jooq.meta.jaxb.*
 
 val jooqVersion: String = "3.19.5"
 
@@ -35,8 +33,6 @@ dependencies {
 	jooqCodegen("org.jooq:jooq:${jooqVersion}")
 	jooqCodegen("org.jooq:jooq-meta:${jooqVersion}")
 	jooqCodegen("org.jooq:jooq-codegen:${jooqVersion}")
-	jooqCodegen("org.flywaydb:flyway-core:10.8.1")
-	jooqCodegen("org.flywaydb:flyway-mysql:10.8.1")
 
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -52,6 +48,12 @@ dependencies {
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
+buildscript {
+	dependencies {
+		classpath("com.mysql:mysql-connector-j:8.3.0")
+	}
+}
+
 kotlin {
 	compilerOptions {
 		freeCompilerArgs.addAll("-Xjsr305=strict")
@@ -62,8 +64,16 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
+sourceSets {
+	main {
+		java {
+			srcDirs(listOf("src/main/java", "src/generated"))
+		}
+	}
+}
+
 jooq {
-	version = "${jooqVersion}"
+	version = jooqVersion
 	withContainer {
 		image {
 			name = "mysql:8.0.29"
