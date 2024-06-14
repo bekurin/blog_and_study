@@ -9,12 +9,7 @@ import org.springframework.boot.runApplication
 import org.springframework.data.domain.Sort.Order
 
 @SpringBootApplication
-class JooqApplication(
-    private val dslContext: DSLContext
-) {
-    fun test() {
-    }
-}
+class JooqApplication
 
 fun main(args: Array<String>) {
     runApplication<JooqApplication>(*args)

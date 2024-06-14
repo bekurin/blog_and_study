@@ -120,3 +120,15 @@ tasks.register("jooqCodegen") {
 tasks.withType<KotlinCompile> {
 	dependsOn("jooqCodegen")
 }
+
+tasks.named<Delete>("clean") {
+	doFirst {
+		val generatedDir = file("src/generated")
+		if (generatedDir.exists()) {
+			generatedDir.deleteRecursively()
+			println("Deleted generated directory: $generatedDir")
+		} else {
+			println("Generated directory does not exist: $generatedDir")
+		}
+	}
+}
