@@ -1,5 +1,6 @@
 package core.kotlinredis.repository
 
+import core.kotlinredis.repository.BitMapConstant.BITFIELD_TYPE
 import org.springframework.data.redis.connection.BitFieldSubCommands
 import org.springframework.data.redis.connection.BitFieldSubCommands.BitFieldSet
 import org.springframework.data.redis.connection.BitFieldSubCommands.BitFieldType
@@ -14,17 +15,21 @@ class BitMapRepository(
     private val redisTemplate: RedisTemplate<String, String>
 ) {
     fun executeBitfieldCommand(key: String, bitfieldValues: List<BitfieldValue>): List<Long> {
-        if (bitfieldValues.isEmpty()) {
+        if (isExecutable(bitfieldValues)) {
             return emptyList()
         }
+        val subCommands = getSubCommandsFrom(bitfieldValues)
+        return executeBitFieldCommand(key, subCommands)
+    }
 
-        val subCommands = bitfieldValues.map { segment ->
-            BitFieldSet.create(
-                BitFieldType.INT_32,
-                Offset.offset(segment.offset),
-                segment.value
-            )
-        }
+    private fun isExecutable(bitfieldValues: List<BitfieldValue>): Boolean {
+        return bitfieldValues.isEmpty()
+    }
+
+    private fun executeBitFieldCommand(
+        key: String,
+        subCommands: List<BitFieldSet>
+    ): List<Long> {
         return redisTemplate.opsForValue()
             .bitField(
                 key,
@@ -33,12 +38,23 @@ class BitMapRepository(
                 )
             ) ?: throw RuntimeException("redis 명령어 실행 중에 예상치 못한 에러가 발생했습니다")
     }
+
+    private fun getSubCommandsFrom(bitfieldValues: List<BitfieldValue>): List<BitFieldSet> {
+        return bitfieldValues.map { value ->
+            BitFieldSet.create(
+                BITFIELD_TYPE,
+                Offset.offset(value.offset),
+                value.value
+            )
+        }
+    }
 }
 
 object BitMapConstant {
     val REFERENCE_TIME = LocalDateTime.of(2024, 1, 1, 0, 0, 0)
     val TIME_QUARTER_SECOND = 600
     val BITFIELD_SEGMENT_SIZE = 32
+    val BITFIELD_TYPE = BitFieldType.INT_32
 }
 
 
@@ -66,6 +82,7 @@ data class TimeIndex(
     val start: Long,
     val end: Long
 ) {
+
     fun calculateBitfieldValues(): List<BitfieldValue> {
         var currentFrom = start
         val result = mutableListOf<BitfieldValue>()
@@ -90,8 +107,3 @@ data class BitfieldValue(
     val offset: Long,
     val value: Long
 )
-
-fun main() {
-    val timeIndex = TimeIndex(100, 105)
-    println()
-}
