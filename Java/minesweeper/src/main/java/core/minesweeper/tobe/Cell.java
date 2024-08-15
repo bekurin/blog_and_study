@@ -76,5 +76,4 @@ public class Cell {
 
         return UNCHECKED_SIGN;
     }
-
 }
