@@ -1,5 +1,7 @@
 package core.minesweeper.tobe;
 
+import core.minesweeper.tobe.gamelevel.GameLevel;
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -7,9 +9,11 @@ public class GameBoard {
     private final Cell[][] board;
     private final int landMineCount;
 
-    public GameBoard(int rowSize, int colSize, int landMineCount) {
+    public GameBoard(GameLevel gameLevel) {
+        int colSize = gameLevel.getColSize();
+        int rowSize = gameLevel.getRowSize();
         this.board = new Cell[rowSize][colSize];
-        this.landMineCount = landMineCount;
+        this.landMineCount = gameLevel.getLandMineCount();
     }
 
     public void initializeGame() {
