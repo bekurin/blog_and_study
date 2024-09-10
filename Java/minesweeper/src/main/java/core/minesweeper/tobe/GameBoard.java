@@ -1,9 +1,6 @@
 package core.minesweeper.tobe;
 
-import core.minesweeper.tobe.cell.Cell;
-import core.minesweeper.tobe.cell.EmptyCell;
-import core.minesweeper.tobe.cell.LandMineCell;
-import core.minesweeper.tobe.cell.NumberCell;
+import core.minesweeper.tobe.cell.*;
 import core.minesweeper.tobe.gamelevel.GameLevel;
 
 import java.util.Arrays;
