@@ -13,4 +13,7 @@ func main() {
 
 	config := config.NewConfig(*pathFlag)
 	app := app.NewApp(config)
+
+	go app.Wait()
+	app.Run()
 }
