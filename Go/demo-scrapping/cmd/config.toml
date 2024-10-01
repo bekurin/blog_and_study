@@ -1,0 +1,12 @@
+[network]
+port = ":8080"
+
+[authenticator]
+secret = "secret"
+account = ""
+issuer = "issuer"
+fileName = "test.jpeg"
+
+[database]
+database = "mysql"
+url = "root:root@tcp(localhost:3306)/Scrapping?multiStatements=true&parseTime=true"
