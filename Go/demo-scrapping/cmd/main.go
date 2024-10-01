@@ -1,5 +1,15 @@
 package main
 
+import (
+	"flag"
+	"fmt"
+)
+
+var pathFlag = flag.String("config", "./config.toml", "set toml path")
+
 func main() {
-	println("hello world")
+	flag.Parse()
+
+	fmt.Println(*pathFlag)
+	fmt.Println("hello world")
 }
