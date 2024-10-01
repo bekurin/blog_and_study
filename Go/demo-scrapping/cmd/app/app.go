@@ -28,6 +28,7 @@ func NewApp(config *config.Config) *App {
 		stop:   make(chan struct{}),
 	}
 
+	app.network = network.NewNetwork(config, app.service, app.authenticator)
 	channel := make(chan os.Signal, 1)
 	signal.Notify(channel, syscall.SIGINT)
 
@@ -49,5 +50,5 @@ func (app *App) Exit() {
 }
 
 func (app *App) Run() {
-
+	app.network.Run()
 }
