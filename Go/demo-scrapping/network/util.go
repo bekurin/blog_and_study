@@ -18,22 +18,22 @@ const (
 )
 
 type header struct {
-	result int    `json:"result"`
-	data   string `json:"data"`
+	Result int    `json:"result"`
+	Data   string `json:"data"`
 }
 
 type response struct {
 	*header
-	result interface{} `json:"result"`
+	Result interface{} `json:"result"`
 }
 
 func res(context *gin.Context, code int, res interface{}, data ...string) {
 	context.JSON(code, &response{
 		header: &header{
-			result: code,
-			data:   strings.Join(data, " ,"),
+			Result: code,
+			Data:   strings.Join(data, " ,"),
 		},
-		result: res,
+		Result: res,
 	})
 }
 

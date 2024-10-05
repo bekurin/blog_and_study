@@ -26,6 +26,7 @@ func NewNetwork(
 		authenticator: authenticator,
 		engine:        gin.New(),
 	}
+	newAdmin(network)
 	return network
 }
 
