@@ -1,6 +1,8 @@
 package network
 
 import (
+	"demo-scrapping/types"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -22,15 +24,30 @@ func newAdmin(network *Network) {
 }
 
 func (admin *admin) add(context *gin.Context) {
-	res(context, http.StatusCreated, "생성 입니다.", "테스트 입니다.")
+	var req types.AddReq
+	if err := context.ShouldBindJSON(&req); err != nil {
+		res(context, http.StatusUnprocessableEntity, nil, err.Error())
+	} else {
+		res(context, http.StatusCreated, "생성 입니다.", "테스트 입니다.")
+	}
 }
 
 func (admin *admin) update(context *gin.Context) {
-	res(context, http.StatusOK, "수정 입니다.", "테스트 입니다.")
+	var req types.UpdateReq
+	if err := context.ShouldBindJSON(&req); err != nil {
+		res(context, http.StatusUnprocessableEntity, nil, err.Error())
+	} else {
+		res(context, http.StatusOK, "수정 입니다.", "테스트 입니다.")
+	}
 }
 
 func (admin *admin) view(context *gin.Context) {
-	res(context, http.StatusOK, "조회 입니디.", "테스트 입니다.")
+	var req types.ViewReq
+	if err := context.ShouldBindQuery(&req); err != nil {
+		res(context, http.StatusUnprocessableEntity, nil, err.Error())
+	} else {
+		res(context, http.StatusOK, "조회 입니디.", "테스트 입니다.")
+	}
 }
 
 func (admin *admin) viewAll(context *gin.Context) {
@@ -38,5 +55,10 @@ func (admin *admin) viewAll(context *gin.Context) {
 }
 
 func (admin *admin) delete(context *gin.Context) {
-	res(context, http.StatusNoContent, "삭제 입니다.", "테스트 입니다.")
+	var req types.DeleteReq
+	if err := context.ShouldBindQuery(&req); err != nil {
+		res(context, http.StatusUnprocessableEntity, nil, err.Error())
+	} else {
+		res(context, http.StatusNoContent, "삭제 입니다.", "테스트 입니다.")
+	}
 }

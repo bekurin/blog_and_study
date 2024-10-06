@@ -18,7 +18,7 @@ const (
 )
 
 type header struct {
-	Result int    `json:"result"`
+	Result int    `json:"status"`
 	Data   string `json:"data"`
 }
 
