@@ -1,10 +1,10 @@
-package core.musinsaclone
+package core.productfetching
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class MusinsaCloneApplicationTests {
+class ProductFetchingApplicationTests {
 
     @Test
     fun contextLoads() {

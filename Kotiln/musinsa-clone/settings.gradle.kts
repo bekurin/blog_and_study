@@ -1,1 +1,1 @@
-rootProject.name = "musinsa-clone"
+rootProject.name = "product-fetching"
