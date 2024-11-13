@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:movie_website/api/movieApi.dart';
+import 'package:movie_website/model/movie_model.dart';
 import 'package:movie_website/skeleton_loading/carousel_skeleton.dart';
 import 'package:movie_website/skeleton_loading/now_skeleton.dart';
 import 'package:movie_website/skeleton_loading/popular_skeleton.dart';
 import 'package:movie_website/widget/icon_searchbar.dart';
 import 'package:movie_website/widget/main_drawer.dart';
+import 'package:movie_website/widget/main_widget/main_carousel_slier.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,6 +16,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<MovieModel> _topRatedMovies = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timestap) {
+      getMovieData();
+    });
+  }
+
+  getMovieData() async {
+    var data = MovieData();
+    _topRatedMovies = await data.fetchTopRatedMovie();
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,20 +54,22 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Flexible(
                   flex: 2,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 16),
-                    child: CarouselSkeleton(),
+                    padding: const EdgeInsets.only(left: 16),
+                    child: isLoading
+                        ? const CarouselSkeleton()
+                        : MainCarouselSlier(topRatedMovies: _topRatedMovies),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Flexible(
+                const Flexible(
                   flex: 1,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
