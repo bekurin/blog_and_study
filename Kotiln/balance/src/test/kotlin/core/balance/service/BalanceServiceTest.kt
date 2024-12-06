@@ -2,10 +2,12 @@ package core.balance.service
 
 import core.balance.database.InMemoryDatabase
 import core.balance.domain.Account
+import core.balance.exception.BadRequestException
 import core.balance.repository.AccountRepository
 import org.assertj.core.api.SoftAssertions
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
 
@@ -128,6 +130,67 @@ class BalanceServiceTest {
             SoftAssertions.assertSoftly { softly ->
                 softly.assertThat(fromAccount.balance).isEqualTo(expectFromBalance)
                 softly.assertThat(toAccount.balance).isEqualTo(expectToBalance)
+            }
+        }
+
+        @Test
+        fun `같은 계좌로는 돈을 옮길 수 없다`() {
+            // given
+            val accountId = 1L
+
+            val fromAccount = Account(accountId, 1000)
+            val toAccount = Account(accountId, 1000)
+
+            inMemoryDatabase.save(fromAccount)
+            inMemoryDatabase.save(toAccount)
+
+            // when
+            val action = { balanceService.transfer(fromAccount.id, toAccount.id, 1000L) }
+
+            // then
+            assertThrows<BadRequestException> {
+                action()
+            }
+        }
+
+        @Test
+        fun `출금 계좌에 돈이 충분하지 않다면 예외가 발생한다`() {
+            // given
+            val amount = 100000L
+            val fromBalance = 10L
+
+            val fromAccount = Account(1, fromBalance)
+            val toAccount = Account(2, 1000)
+
+            inMemoryDatabase.save(fromAccount)
+            inMemoryDatabase.save(toAccount)
+
+            // when
+            val action = { balanceService.transfer(fromAccount.id, toAccount.id, amount) }
+
+            // then
+            assertThrows<BadRequestException> {
+                action()
+            }
+        }
+
+        @Test
+        fun `출금 하고자 하는 돈의 금액이 음수일 수 없다`() {
+            // given
+            val negativeAmount = -1L
+
+            val fromAccount = Account(1, 1000)
+            val toAccount = Account(2, 1000)
+
+            inMemoryDatabase.save(fromAccount)
+            inMemoryDatabase.save(toAccount)
+
+            // when
+            val action = { balanceService.transfer(fromAccount.id, toAccount.id, negativeAmount) }
+
+            // then
+            assertThrows<BadRequestException> {
+                action()
             }
         }
     }
