@@ -5,9 +5,9 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ResponseStatus
 
 open class ServerException : RuntimeException {
-    private var translatedMessage: String = ""
-    private var messageSourceCode: MessageSourceCode? = null
-    private var arguments: Array<out String> = emptyArray<String>()
+    var translatedMessage: String = ""
+    var messageSourceCode: MessageSourceCode? = null
+    var arguments: Array<out String> = emptyArray<String>()
 
     override val message: String?
         get() = translatedMessage.ifBlank { super.message }
@@ -18,6 +18,10 @@ open class ServerException : RuntimeException {
     }
 
     constructor(message: String) : super(message)
+
+    fun isLocalized(): Boolean {
+        return messageSourceCode != null
+    }
 }
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
