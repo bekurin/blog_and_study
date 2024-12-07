@@ -2,8 +2,10 @@ package core.balance.service
 
 import core.balance.database.InMemoryDatabase
 import core.balance.domain.Account
-import core.balance.util.exception.BadRequestException
 import core.balance.repository.AccountRepository
+import core.balance.util.exception.BadRequestException
+import core.balance.util.message.MessageSourceCode
+import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.SoftAssertions
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -101,6 +103,7 @@ class BalanceServiceTest {
             // given
             val (fromId, fromBalance) = 1L to 1000L
             val (toId, toBalance) = 2L to 1000L
+            val (expectFromBalance, expectToBalance) = 0L to 2000L
 
             val fromAccount = Account(fromId, fromBalance)
             val toAccount = Account(toId, toBalance)
@@ -125,8 +128,6 @@ class BalanceServiceTest {
             executor.shutdown()
 
             // then
-            val expectFromBalance = 0L
-            val expectToBalance = 2000L
             SoftAssertions.assertSoftly { softly ->
                 softly.assertThat(fromAccount.balance).isEqualTo(expectFromBalance)
                 softly.assertThat(toAccount.balance).isEqualTo(expectToBalance)
@@ -151,6 +152,9 @@ class BalanceServiceTest {
             assertThrows<BadRequestException> {
                 action()
             }
+                .also { exception ->
+                    assertThat(exception.messageSourceCode).isEqualTo(MessageSourceCode.NOT_SAME_ACCOUNT)
+                }
         }
 
         @Test
@@ -172,6 +176,9 @@ class BalanceServiceTest {
             assertThrows<BadRequestException> {
                 action()
             }
+                .also { exception ->
+                    assertThat(exception.messageSourceCode).isEqualTo(MessageSourceCode.INSUFFICIENT_BALANCE)
+                }
         }
 
         @Test
@@ -192,6 +199,9 @@ class BalanceServiceTest {
             assertThrows<BadRequestException> {
                 action()
             }
+                .also { exception ->
+                    assertThat(exception.messageSourceCode).isEqualTo(MessageSourceCode.NEGATIVE_AMOUNT)
+                }
         }
     }
 }
