@@ -1,5 +1,9 @@
 package core.balance.domain
 
+import core.balance.util.exception.BadRequestException
+import core.balance.util.message.MessageSourceCode.INSUFFICIENT_BALANCE
+import core.balance.util.message.MessageSourceCode.NEGATIVE_AMOUNT
+import core.balance.util.message.MessageSourceCode.NEGATIVE_BALANCE
 import java.time.LocalDateTime
 
 open class Account(
@@ -27,7 +31,10 @@ open class Account(
     fun withdraw(amount: Long): Account {
         val remainBalance = balance - amount
         if (remainBalance < 0) {
-            throw IllegalStateException("잔액이 부족합니다.")
+            throw BadRequestException(INSUFFICIENT_BALANCE)
+        }
+        if (amount < 0) {
+            throw BadRequestException(NEGATIVE_AMOUNT)
         }
         this.balance -= amount
         return this
@@ -40,16 +47,9 @@ open class Account(
     }
 
 
-
-    private fun validateIsSameAccount(account: Account) {
-        if (this.id != account.id) {
-            throw IllegalStateException("같은 계좌만 수정할 수 있습니다")
-        }
-    }
-
     private fun validateBalanceIsPositive() {
         if (balance < 0) {
-            throw IllegalArgumentException("올바르지 않은 잔액입니다.")
+            throw BadRequestException(NEGATIVE_BALANCE)
         }
     }
 }

@@ -2,7 +2,7 @@ package core.balance.service
 
 import core.balance.database.InMemoryDatabase
 import core.balance.domain.Account
-import core.balance.exception.BadRequestException
+import core.balance.util.exception.BadRequestException
 import core.balance.repository.AccountRepository
 import org.assertj.core.api.SoftAssertions
 import org.junit.jupiter.api.Nested
