@@ -1,5 +1,8 @@
 package chapter03;
 
+/**
+ * vm option: -Xlog:gc*
+ */
 public class FinalizeEscapeGc {
     public static FinalizeEscapeGc SAVE_HOOK = null;
 

@@ -1,5 +1,8 @@
 package chapter03;
 
+/**
+ * vm option: -Xlog:gc*
+ */
 public class ReferenceCountingGc {
     public Object instance = null;
     private static final int _1MB = 1024 * 1024;
