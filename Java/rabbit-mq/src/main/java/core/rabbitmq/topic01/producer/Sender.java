@@ -1,5 +1,6 @@
-package core.rabbitmq.topic01;
+package core.rabbitmq.topic01.producer;
 
+import core.rabbitmq.topic01.config.RabbitMQConfig;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 

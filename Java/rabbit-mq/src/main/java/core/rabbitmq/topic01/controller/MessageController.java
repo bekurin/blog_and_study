@@ -1,5 +1,6 @@
-package core.rabbitmq.topic01;
+package core.rabbitmq.topic01.controller;
 
+import core.rabbitmq.topic01.producer.Sender;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
