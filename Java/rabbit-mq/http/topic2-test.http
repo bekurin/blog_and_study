@@ -1,0 +1,8 @@
+### topic 2 example
+POST {{base_url}}/work-queue?message=Task1&duration=1000
+
+### topic 2 example
+POST {{base_url}}/work-queue?message=Task2&duration=3000
+
+### topic 2 example
+POST {{base_url}}/work-queue?message=Task3&duration=5000
