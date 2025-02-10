@@ -1,6 +1,6 @@
 package core.rabbitmq.topic02.config;
 
-import core.rabbitmq.topic01.consumer.Receiver;
+import core.rabbitmq.topic02.consumer.WorkQueueConsumer;
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -38,8 +38,8 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public MessageListenerAdapter listenerAdapter(Receiver receiver) {
-        return new MessageListenerAdapter(receiver, "workQueueTask");
+    public MessageListenerAdapter listenerAdapter(WorkQueueConsumer workQueueConsumer) {
+        return new MessageListenerAdapter(workQueueConsumer, "workQueueTask");
     }
 
 }

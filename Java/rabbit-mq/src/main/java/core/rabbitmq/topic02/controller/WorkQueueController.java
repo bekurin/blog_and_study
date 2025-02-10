@@ -1,6 +1,5 @@
 package core.rabbitmq.topic02.controller;
 
-import core.rabbitmq.topic02.consumer.WorkQueueConsumer;
 import core.rabbitmq.topic02.producer.WorkQueueProducer;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +17,7 @@ public class WorkQueueController {
     public String workQueue(
             @RequestParam String message,
             @RequestParam int duration
-            ) {
+    ) {
         workQueueProducer.sendWorkQueue(message, duration);
         return "Work queue sent successfully (message=" + message + ", duration=" + duration + ")";
     }
