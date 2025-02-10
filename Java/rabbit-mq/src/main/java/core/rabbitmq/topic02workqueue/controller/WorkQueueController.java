@@ -1,6 +1,6 @@
-package core.rabbitmq.topic02.controller;
+package core.rabbitmq.topic02workqueue.controller;
 
-import core.rabbitmq.topic02.producer.WorkQueueProducer;
+import core.rabbitmq.topic02workqueue.producer.WorkQueueProducer;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

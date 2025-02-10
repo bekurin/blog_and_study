@@ -1,6 +1,6 @@
-package core.rabbitmq.topic01.controller;
+package core.rabbitmq.topic01simplequeue.controller;
 
-import core.rabbitmq.topic01.producer.Sender;
+import core.rabbitmq.topic01simplequeue.producer.Sender;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

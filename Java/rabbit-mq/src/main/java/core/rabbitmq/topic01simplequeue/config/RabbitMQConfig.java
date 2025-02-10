@@ -1,6 +1,6 @@
-package core.rabbitmq.topic01.config;
+package core.rabbitmq.topic01simplequeue.config;
 
-import core.rabbitmq.topic01.consumer.Receiver;
+import core.rabbitmq.topic01simplequeue.consumer.Receiver;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

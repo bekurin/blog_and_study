@@ -1,6 +1,6 @@
-package core.rabbitmq.topic02.producer;
+package core.rabbitmq.topic02workqueue.producer;
 
-import core.rabbitmq.topic02.config.RabbitMQConfig;
+import core.rabbitmq.topic02workqueue.config.RabbitMQConfig;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package core.rabbitmq.topic02.consumer;
+package core.rabbitmq.topic02workqueue.consumer;
 
 import org.springframework.stereotype.Component;
 
