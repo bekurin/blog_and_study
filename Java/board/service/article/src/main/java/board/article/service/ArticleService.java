@@ -16,7 +16,6 @@ import java.util.List;
 
 @Service
 public class ArticleService {
-    private final Snowflake snowflake = new Snowflake();
     private final ArticleRepository articleRepository;
 
     public ArticleService(ArticleRepository articleRepository) {

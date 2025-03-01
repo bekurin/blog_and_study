@@ -1,0 +1,11 @@
+### 무한 스크롤 API
+GET {{host}}/v1/articles/infinite-scroll?
+    boardId=1&
+    pageSize=0
+
+### 단건조회 API
+GET {{host}}/v1/articles/154163258417271694
+
+
+### 다건조회 API
+GET {{host}}/v1/articles?boardId=1&page=3&pageSize=30

@@ -1,7 +1,10 @@
 package board.article.service.response;
 
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public class PageResponse<T> {
     private final List<T> content;
     private final Long totalElements;
