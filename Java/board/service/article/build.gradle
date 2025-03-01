@@ -1,6 +1,8 @@
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation project(':common:exception')
     runtimeOnly 'com.mysql:mysql-connector-j'
     implementation project(':common:snowflake')
+    implementation project(':common:exception')
 }

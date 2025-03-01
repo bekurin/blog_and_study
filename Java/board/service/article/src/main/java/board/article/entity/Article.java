@@ -1,5 +1,6 @@
 package board.article.entity;
 
+import board.article.util.GenerateId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -27,6 +28,7 @@ public class Article {
 
     public static Article create(String title, String content, Long boardId, Long writerId) {
         Article article = new Article();
+        article.articleId = GenerateId.nextId();
         article.title = title;
         article.content = content;
         article.boardId = boardId;
