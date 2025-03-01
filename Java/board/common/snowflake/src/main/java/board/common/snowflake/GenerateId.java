@@ -1,6 +1,4 @@
-package board.article.util;
-
-import board.common.snowflake.Snowflake;
+package board.common.snowflake;
 
 public class GenerateId {
     private static final Snowflake snowflake = new Snowflake();

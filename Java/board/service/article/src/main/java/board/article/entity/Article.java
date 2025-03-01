@@ -1,6 +1,6 @@
 package board.article.entity;
 
-import board.article.util.GenerateId;
+import board.common.snowflake.GenerateId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
