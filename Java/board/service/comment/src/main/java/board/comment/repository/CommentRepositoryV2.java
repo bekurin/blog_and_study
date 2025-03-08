@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface CommentRepositoryV2 extends JpaRepository<CommentV2, Long> {
+public interface CommentRepositoryV2 extends JpaRepository<CommentV2, Long> {
     @Query("select c from CommentV2 c where c.commentPath.path = :path")
     Optional<CommentV2> findByPath(@Param("path") String path);
 
