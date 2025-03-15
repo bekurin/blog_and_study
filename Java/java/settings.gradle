@@ -2,3 +2,4 @@ rootProject.name = 'java'
 
 include("ch1-ex1")
 include("ch1-ex2")
+include("ch3-ex1")
