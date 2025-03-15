@@ -1,4 +1,4 @@
-rootProject.name = 'java'
+rootProject.name = 'troubleshooting'
 
 include("ch1-ex1")
 include("ch1-ex2")
