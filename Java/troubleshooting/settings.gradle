@@ -3,3 +3,4 @@ rootProject.name = 'troubleshooting'
 include("ch1-ex1")
 include("ch1-ex2")
 include("ch3-ex1")
+include("ch4-ex1")
