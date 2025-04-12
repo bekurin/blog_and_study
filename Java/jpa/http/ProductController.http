@@ -1,0 +1,7 @@
+## 제품 등록 API
+POST localhost:8080/api/v1/products
+Content-Type: application/json
+
+{
+    "name": ""
+}
