@@ -21,4 +21,17 @@ public class ProductService {
         Product savedProduct = productRepository.save(product);
         return ProductResponse.from(savedProduct);
     }
+
+    @Transactional
+    public Product updateProduct(final Long productId) {
+        Product foundProduct = productRepository.findById(productId).get();
+        foundProduct.setName("UpdatedProductName");
+        throw new RuntimeException("심심풀이 예외");
+    }
+
+    @Transactional
+    public void test(ProductCreateRequest request) {
+        ProductResponse productResponse = saveProduct(request);
+        updateProduct(productResponse.id());
+    }
 }
