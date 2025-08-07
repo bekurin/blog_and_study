@@ -1,0 +1,4 @@
+stock:
+  api:
+    service-key: ${stock.api.service-key}
+    base-url: https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService

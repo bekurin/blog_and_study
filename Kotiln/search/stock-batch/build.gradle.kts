@@ -3,5 +3,9 @@ tasks.jar {
 }
 
 tasks.bootJar {
-    enabled = true
+    enabled = false
+}
+
+dependencies {
+    implementation("org.springframework.batch:spring-batch-core")
 }
