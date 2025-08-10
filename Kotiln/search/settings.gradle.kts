@@ -6,4 +6,5 @@ include("stock-consumer")
 
 include("stock-modules")
 include("stock-modules:database")
-include("stock-modules:web")
+include("stock-modules:client")
+include("stock-modules:kafka")
