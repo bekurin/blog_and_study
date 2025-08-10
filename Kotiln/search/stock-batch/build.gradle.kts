@@ -3,9 +3,10 @@ tasks.jar {
 }
 
 tasks.bootJar {
-    enabled = false
+    enabled = true
 }
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.batch:spring-batch-core")
 }

@@ -14,11 +14,21 @@ allprojects {
 	version = "0.0.1-SNAPSHOT"
 }
 
+tasks.bootJar {
+    enabled = false
+}
+
 subprojects {
 	apply(plugin = "org.jetbrains.kotlin.jvm")
 	apply(plugin = "org.jetbrains.kotlin.plugin.spring")
 	apply(plugin = "org.springframework.boot")
 	apply(plugin = "io.spring.dependency-management")
+
+	if (project.path.startsWith(":stock-modules")) {
+		tasks.bootJar {
+			enabled = false
+		}
+	}
 
 	java {
 		toolchain {
