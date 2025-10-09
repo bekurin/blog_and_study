@@ -4,6 +4,7 @@ from pydantic import BaseModel
 import time
 import random
 
+
 class DashboardState(BaseModel):
     user_location: str = "서울"
     weather_data: Dict[str, Any] = {}
@@ -12,9 +13,11 @@ class DashboardState(BaseModel):
     dashboard_report: str = ""
     start_time: float = 0.0
 
+
 def coordinator(state: DashboardState) -> Dict[str, Any]:
     print(f"대시보드 생성 시작 - 위치: {state.user_location}")
     return {"start_time": time.time()}
+
 
 def weather_checker(state: DashboardState) -> Dict[str, Any]:
     print("날씨 확인 중...")
@@ -29,6 +32,7 @@ def weather_checker(state: DashboardState) -> Dict[str, Any]:
 
     print(f"날씨: {weather_info['condition']}, {weather_info['temperature']}°C")
     return {"weather_data": weather_info}
+
 
 def news_fetcher(state: DashboardState) -> Dict[str, Any]:
     print("뉴스 수집 중...")
@@ -45,6 +49,7 @@ def news_fetcher(state: DashboardState) -> Dict[str, Any]:
     print(f"뉴스 {news_info['count']}개 수집 완료")
     return {"news_data": news_info}
 
+
 def stock_analyzer(state: DashboardState) -> Dict[str, Any]:
     print("주식 분석 중...")
     time.sleep(random.uniform(2.0, 3.0))
@@ -56,6 +61,7 @@ def stock_analyzer(state: DashboardState) -> Dict[str, Any]:
 
     print("주식 분석 완료")
     return {"stock_data": stock_info}
+
 
 def aggregator(state: DashboardState) -> Dict[str, Any]:
     print("리포트 생성 중...")
@@ -72,6 +78,7 @@ def aggregator(state: DashboardState) -> Dict[str, Any]:
     print(f"대시보드 완료 ({parallel_time:.1f}초)")
     return {"dashboard_report": report}
 
+
 def create_graph():
     workflow = StateGraph(DashboardState)
 
@@ -86,7 +93,7 @@ def create_graph():
     workflow.add_edge("coordinator", "weather")
     workflow.add_edge("coordinator", "news")
     workflow.add_edge("coordinator", "stock")
-    
+
     # edge를 아래와 같이 수행하면 실행이 모두 완료되면 aggregator를 통하게 할 수 있다.
     workflow.add_edge("weather", "aggregator")
     workflow.add_edge("news", "aggregator")
