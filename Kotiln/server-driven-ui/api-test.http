@@ -1,0 +1,69 @@
+### Server-Driven UI API Test
+
+### Layout API - 레이아웃 정보 조회
+GET http://localhost:8080/api/v1/layout
+Accept: application/json
+
+### Page API - 대시보드 페이지 조회
+GET http://localhost:8080/api/v1/pages/dashboard
+Accept: application/json
+
+### Page API - 맵별 통계 페이지 조회
+GET http://localhost:8080/api/v1/pages/stat-map
+Accept: application/json
+
+### Page API - 브롤러 통계 페이지 조회
+GET http://localhost:8080/api/v1/pages/stat-brawler
+Accept: application/json
+
+### Page API - 배치 관리 페이지 조회
+GET http://localhost:8080/api/v1/pages/batch
+Accept: application/json
+
+### Map API - 전체 맵 목록 조회
+GET http://localhost:8080/api/v1/maps
+Accept: application/json
+
+### Map API - 모드별 맵 필터링 (젬그랩)
+GET http://localhost:8080/api/v1/maps?mode=gemGrab
+Accept: application/json
+
+### Map API - 모드별 맵 필터링 (브롤볼)
+GET http://localhost:8080/api/v1/maps?mode=brawlBall
+Accept: application/json
+
+### Map API - 특정 맵 조회
+GET http://localhost:8080/api/v1/maps/map-001
+Accept: application/json
+
+### Brawler API - 전체 브롤러 목록 조회
+GET http://localhost:8080/api/v1/brawlers
+Accept: application/json
+
+### Brawler API - 이름으로 검색
+GET http://localhost:8080/api/v1/brawlers?name=셸리
+Accept: application/json
+
+### Brawler API - 티어로 필터링
+GET http://localhost:8080/api/v1/brawlers?tier=1T
+Accept: application/json
+
+### Brawler API - 이름 + 티어 조합 검색
+GET http://localhost:8080/api/v1/brawlers?name=로&tier=1T
+Accept: application/json
+
+### Brawler API - 특정 브롤러 조회
+GET http://localhost:8080/api/v1/brawlers/brawler-001
+Accept: application/json
+
+### Batch Job API - 전체 배치 작업 목록
+GET http://localhost:8080/api/v1/batch/jobs
+Accept: application/json
+
+### Batch Job API - 특정 배치 작업 조회
+GET http://localhost:8080/api/v1/batch/jobs/job-001
+Accept: application/json
+
+### Batch Job API - 배치 작업 재실행
+POST http://localhost:8080/api/v1/batch/jobs/job-003/restart
+Accept: application/json
