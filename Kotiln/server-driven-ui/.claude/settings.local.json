@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(./gradlew build:*)",
-      "Bash(java:*)"
+      "Bash(java:*)",
+      "Bash(./gradlew compileKotlin:*)"
     ]
   }
 }
