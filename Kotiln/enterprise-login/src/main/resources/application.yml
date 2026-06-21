@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: enterprise-login
+
+  datasource:
+    url: jdbc:h2:mem:logindb;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+
+app:
+  jwt:
+    issuer: https://auth.example.com
+    audience: https://api.example.com
+    access-token-expiry-seconds: 900
+    kms-key-id: ${KMS_KEY_ID:alias/auth-signing-key}
+    jwks-uri: ${JWKS_URI:https://keys.example.com/.well-known/jwks.json}
+
+  refresh-token:
+    expiry-days: 7
+
+  webauthn:
+    rp-id: example.com
+    rp-name: Example Enterprise
+    allowed-origins:
+      - https://example.com
+
+  device-authorization:
+    expires-in: 600
+    interval: 5
+    base-uri: https://example.com/oauth2/device

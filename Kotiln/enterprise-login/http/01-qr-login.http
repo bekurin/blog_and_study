@@ -1,0 +1,62 @@
+### QR 코드 로그인 플로우 (RFC 8628 Device Authorization Grant)
+###
+### 1단계: 웹이 Auth Server에서 device_code 발급
+### 2단계: 웹은 user_code를 QR로 렌더링 + /oauth2/token 폴링 시작
+### 3단계: 모바일 앱이 QR 스캔 → device-authorizations/{userCode} PATCH로 승인
+### 4단계: 웹 폴링이 200 응답 수신 → access_token 저장
+
+@host = http://localhost:8080
+
+### ① 디바이스 코드 발급 (웹 → Auth Server)
+# @name deviceAuth
+POST {{host}}/oauth2/device_authorization
+Content-Type: application/x-www-form-urlencoded
+
+### 응답 예시:
+# {
+#   "device_code": "abc123...",
+#   "user_code": "BCDF-GHJK",
+#   "verification_uri": "https://example.com/oauth2/device",
+#   "verification_uri_complete": "https://example.com/oauth2/device?user_code=BCDF-GHJK",
+#   "expires_in": 600,
+#   "interval": 5
+# }
+
+### ② 웹이 토큰 폴링 (authorization_pending → approved되면 200)
+# device_code는 ① 응답에서 복사
+POST {{host}}/oauth2/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code&device_code=REPLACE_WITH_DEVICE_CODE
+
+### 응답 — 아직 승인 전 (400):
+# {"error": "authorization_pending", "error_description": "User has not yet approved the request"}
+
+### 응답 — 거부됨 (403):
+# {"error": "access_denied", "error_description": "User denied the authorization request"}
+
+### 응답 — 만료됨 (400):
+# {"error": "expired_token", "error_description": "Device code expired or not found"}
+
+### 응답 — 승인 완료 (200):
+# {"access_token": "eyJ...", "token_type": "Bearer", "expires_in": 900}
+# Set-Cookie: refresh_token=...; HttpOnly; Secure; SameSite=Strict; Path=/oauth2/token
+
+### ③ 모바일 앱이 디바이스 승인 (인증된 모바일 Access Token 필요)
+# user_code는 ① 응답에서 복사
+PATCH {{host}}/oauth2/device-authorizations/REPLACE_WITH_USER_CODE
+Authorization: Bearer REPLACE_WITH_MOBILE_ACCESS_TOKEN
+Content-Type: application/json
+
+{"approved": true}
+
+### 응답: 204 No Content
+
+### ③-b 모바일 앱이 디바이스 거부
+PATCH {{host}}/oauth2/device-authorizations/REPLACE_WITH_USER_CODE
+Authorization: Bearer REPLACE_WITH_MOBILE_ACCESS_TOKEN
+Content-Type: application/json
+
+{"approved": false}
+
+### 응답: 204 No Content

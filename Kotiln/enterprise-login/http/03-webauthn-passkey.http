@@ -1,0 +1,70 @@
+### WebAuthn Passkey 로그인 플로우 (Spring Security 6.4+ 자동 생성 엔드포인트)
+###
+### 브라우저의 navigator.credentials.create() / get() API와 연동
+### 아래 엔드포인트는 Spring Security가 자동 생성 (별도 구현 불필요)
+
+@host = http://localhost:8080
+
+### ── 등록 플로우 ──────────────────────────────────────────────
+
+### ① 등록 챌린지 발급 (서버 → 브라우저)
+POST {{host}}/webauthn/register/options
+Content-Type: application/json
+
+### 응답 예시:
+# {
+#   "rp": {"id": "example.com", "name": "Example Enterprise"},
+#   "user": {"id": "...", "name": "user@example.com", "displayName": "User"},
+#   "challenge": "base64url...",
+#   "pubKeyCredParams": [{"type": "public-key", "alg": -7}],
+#   "timeout": 60000,
+#   "authenticatorSelection": {"userVerification": "required"}
+# }
+
+### ② 등록 완료 (브라우저 navigator.credentials.create() 결과 전송)
+POST {{host}}/webauthn/register
+Content-Type: application/json
+
+{
+  "id": "base64url_credential_id",
+  "rawId": "base64url_raw_id",
+  "response": {
+    "attestationObject": "base64url...",
+    "clientDataJSON": "base64url..."
+  },
+  "type": "public-key"
+}
+
+### 응답: 200 OK (등록 성공)
+
+### ── 인증 플로우 ──────────────────────────────────────────────
+
+### ③ 인증 챌린지 발급 (서버 → 브라우저)
+POST {{host}}/login/options
+Content-Type: application/json
+
+### 응답 예시:
+# {
+#   "challenge": "base64url...",
+#   "rpId": "example.com",
+#   "userVerification": "required",
+#   "allowCredentials": []
+# }
+
+### ④ Passkey 로그인 (브라우저 navigator.credentials.get() 결과 전송)
+POST {{host}}/login
+Content-Type: application/json
+
+{
+  "id": "base64url_credential_id",
+  "rawId": "base64url_raw_id",
+  "response": {
+    "authenticatorData": "base64url...",
+    "clientDataJSON": "base64url...",
+    "signature": "base64url...",
+    "userHandle": "base64url..."
+  },
+  "type": "public-key"
+}
+
+### 응답: 200 OK → 이후 /oauth2/token으로 Access Token 발급 필요
